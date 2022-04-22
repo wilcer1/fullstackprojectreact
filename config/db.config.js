@@ -18,4 +18,4 @@ con.connect(function(err) {
 
 con.query(`select * from Gym.customer`, (err, res) => {
     return console.log(res);
-})
+});
