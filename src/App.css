@@ -74,10 +74,12 @@ li a {
 li a:hover {
   background-color: #111;
 }
-body{
-  background-color: darkblue;
-}
+
 div#navbar{
   position: sticky;
   top: 0;
+}
+
+html {
+  background-image: url("./media/fullstack.png");
 }

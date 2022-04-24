@@ -33,6 +33,7 @@ function CinemaRoom(props){
             </tbody>
         </table>
         </div>
+        
     )
 }
 
