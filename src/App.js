@@ -33,14 +33,8 @@ function App() {
         we passes the imported component*/}
         <Route exact path="/" component={Home} />
           
-        {/* This route is for about component 
-        with exact path "/about", in component 
-        props we passes the imported component*/}
         <Route path="/cinemaRoom" component={CinemaRoom} />
           
-        {/* This route is for contactus component
-        with exact path "/contactus", in 
-        component props we passes the imported component*/}
           
         {/* If any route mismatches the upper 
         route endpoints then, redirect triggers 
