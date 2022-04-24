@@ -38,15 +38,17 @@ db.query(`INSERT INTO Movie VALUES((MovieId), "Batman is the best", "Matt Reeve"
 //add values with variables....
 router.post("/insert/variables", (req, send) =>{
 
-    const Description = "tja";
+    const Moviename = "Movie Name"
 
-    const Director = "timmy";
+    const Description = "Description";
 
-    const ReleaseDate = "2 juni 2020";
+    const Director = "Director";
 
-    const Actors = "svampbob";
+    const ReleaseDate = "ReleaseDate";
+
+    const Actors = "Actors";
     
-    db.query(`INSERT INTO Movie (MovieId, Description, Director, ReleaseDate, Actors) VALUES((MovieId), ?, ?, ?, ?);`,
+    db.query(`INSERT INTO Movie (MovieId, MovieName, Description, Director, ReleaseDate, Actors) VALUES((MovieId), ?, ?, ?, ?, ?);`,
     [Description, Director, ReleaseDate, Actors],
     (err, result) => {
         if (err) {
