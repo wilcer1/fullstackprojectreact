@@ -13,17 +13,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -37,5 +26,58 @@
   }
 }
 h1{
-  color:rgb(250, 172, 3)
+  color:red;
+  text-align: center;
+}
+table#CinemaRoom{
+  border: 2px solid black;
+  border-collapse : collapse;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+table#CinemaRoom td{
+  border: 2px solid black;
+  padding: 0
+}
+table#CinemaRoom button{
+  width: 60px;
+  height: 60px;
+  border: hidden;
+  background-color: greenyellow;
+}
+table#CinemaRoom caption{
+color: white;
+}
+table#CinemaRoom button:hover{
+  background-color: red;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+body{
+  background-color: darkblue;
+}
+div#navbar{
+  position: sticky;
+  top: 0;
 }
