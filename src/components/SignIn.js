@@ -21,26 +21,32 @@ function SignIn() {
 
 }
 
-
 function validateSignIn() {
     const email = document.forms["signIn"]["email"].value
     const password = document.forms["signIn"]["password"].value
-
+    const info = {
+        email: email,
+        password: password
+    }
+    
     fetch("http://localhost:5000/api/auth/login", {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: {
-            email: email,
-            password: password
-        }
+        body: JSON.stringify(info)
     })
     .then(res => res.json())
     .then(response => {
-        alert(response)
+        console.log(response);
+        
+        
     });
 
+
 }
+
+
+
 
 export default SignIn
