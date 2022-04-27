@@ -5,8 +5,17 @@ function SignIn() {
     return(
         <div>
             <NavBar/>
-
+            <div class="logIn">
+                <form name = "signIn">
+                    <label>Email</label><br></br>
+                    <input type="text" name="email"></input><br></br><br></br>
+                    <label>Password</label><br></br>
+                    <input type="text" name="password"></input>
+                </form>
+            </div>
         </div>
+
+    
     )
 }
 
