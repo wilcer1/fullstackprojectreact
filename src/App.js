@@ -8,11 +8,13 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-// import Home component
+// Import SignIn component
+import SignIn from "./components/SignIn"
+// Import Home component
 import Home from "./components/Home";
-// import About component
+// Import About component
 import CinemaRoom from './components/CinemaRoom'
-// import ContactUs component
+// Import ContactUs component
 function App() {
   return (
     
@@ -33,7 +35,9 @@ function App() {
         we passes the imported component*/}
         <Route exact path="/" component={Home} />
           
-        <Route path="/cinemaRoom" component={CinemaRoom} />
+        <Route path="/CinemaRoom" component={CinemaRoom} />
+
+        <Route path="/SignIn" component={SignIn} />
           
           
         {/* If any route mismatches the upper 
