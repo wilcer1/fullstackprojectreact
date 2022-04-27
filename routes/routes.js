@@ -17,12 +17,7 @@ router.post("/addMovie", (req, res) =>{
             res.status(201);
             res.send(result);
         });
-                           
-  
-      
-       
-        
-  
+                        
    
 });
 
@@ -51,6 +46,62 @@ router.get("/user/:FirstName/:LastName", (req, res) =>{
         res.send(result);
         
     });
+});
+
+//get a user by first & last name
+router.get("/user/:Email", (req, res) =>{
+    db.query(`select * from User where Email="${req.params.Email}";`,
+
+
+    (err, result) => {
+        if (err) {
+            console.log(err);
+            
+            res.status(400);
+        }
+       
+        res.send(result);
+        
+    });
+    
+});
+
+
+//delete user
+router.delete("/user/:Email", (req, res) =>{
+    db.query(`DELETE FROM User WHERE Email="${req.params.Email}";`,
+
+
+    (err, result) => {
+        if (err) {
+            console.log(err);
+            
+            res.status(400);
+        }
+       
+        res.send(result);
+        
+    });
+    
+});
+
+
+//delete user
+router.patch("/user/:Seatid", (req, res) =>{
+    db.query(`UPDATE Seats SET  booked = true WHERE SeatId = ${req.params.Seatid};`,
+
+
+    (err, result) => {
+        if (err) {
+            console.log(err);
+            
+            res.status(400);
+        }
+       
+        res.send(result);
+        
+    });
+    
 });
     
     
