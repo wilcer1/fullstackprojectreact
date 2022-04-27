@@ -83,3 +83,9 @@ div#navbar{
 html {
   background-image: url("./media/fullstack.png");
 }
+
+.logIn {
+  margin-top: 100px;
+  text-align: center;
+  color: aqua;
+}
