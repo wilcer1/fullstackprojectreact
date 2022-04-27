@@ -1,42 +1,56 @@
 const router = require("express").Router();
-//add values....
-router.post("/insert", (req, send) =>{
+const controller = require("../controllers/controller");
 
+
+//add Movie....
+router.post("/insertMovie", (req, res) =>{
+    try{
+        controller.addMovie(
+            req.body.movieName, req.body.description, req.body.director, 
+            req.body.releaseDate, req.body.actors
+                            );
+            res.status(201);
+    }catch(err){
+        console.log(err);
+        res.status(400);
+        
+    }
    
 });
-    //add values with variables....
-router.post("/insert/variables", (req, send) =>{
-    
-    
-    
-            
-            
+
+router.get("/users", (req, res) => {
+    const users = controller.getUsers();
+    res.send(users);
+
+});
+
+//get a user by first & last name
+router.get("/user/:FirstName/:LastName", (req, res) =>{
+    try{
+    const user = controller.getUser(req.params.FirstName, req.params.LastName);
+    console.log(user);
+    res.send(user);
         
-        
-    });
-    
-    //select values....
-    router.get("/select/:FirstName/:LastName", (req, send) =>{
-    
-        
-        
-    });
+    }catch(err){
+        res.status(400);
+    }
+});
     
     
-    //uppdate values with variables....
-    router.patch("/uppdate/:email", (req, send) =>{
+    // //uppdate values with variables....
+    // router.patch("/uppdate/:email", (req, res) =>{
     
        
         
-    });
+    // });
     
     
     
-    //uppdate values with variables....
-    router.patch("/delete/:MovieId", (req, send) =>{
+    // //uppdate values with variables....
+    // router.patch("/delete/:MovieId", (req, res) =>{
     
        
         
-    });
+    // });
 
 module.exports = router;

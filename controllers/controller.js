@@ -1,11 +1,11 @@
-const db = require("./config/db.config")
+const db = require("../config/db.config")
 
 
 
-exports.addMovie = (Moviename, Description, Director, ReleaseDate, Actors) => {
+exports.addMovie = (movieName, description, director, releaseDate, actors) => {
         
     db.query(`INSERT INTO Movie (MovieId, MovieName, Description, Director, ReleaseDate, Actors) VALUES((MovieId), ?, ?, ?, ?, ?);`,
-    [Moviename, Description, Director, ReleaseDate, Actors],
+    [movieName, description, director, releaseDate, actors],
     (err, result) => {
         if (err) {
             console.log(err)
@@ -21,7 +21,7 @@ exports.getUser = (firstName, lastName) => {
                 console.log(err)
             }
            
-            
+            return result;
             
         });
 
@@ -40,6 +40,16 @@ exports.delMovie = (movieID) => {
             console.log(err)
         }
         
+    });
+}
+exports.getUsers = () => {
+    db.query("select * from User;", 
+    (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(result);
+        return result;
     });
 }
 
