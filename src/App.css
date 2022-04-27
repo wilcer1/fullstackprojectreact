@@ -74,9 +74,7 @@ li a {
 li a:hover {
   background-color: #111;
 }
-body{
-  background-color: darkblue;
-}
+
 div#navbar{
   position: sticky;
   top: 0;
@@ -93,4 +91,13 @@ div#bookTickets button{
   font-size: larger;
   outline: 3px dashed white;
   outline-offset: 3px;
+}
+html {
+  background-image: url("./media/fullstack.png");
+}
+
+.logIn {
+  margin-top: 100px;
+  text-align: center;
+  color: aqua;
 }

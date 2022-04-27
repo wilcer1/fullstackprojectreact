@@ -8,11 +8,13 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-// import Home component
+// Import SignIn component
+import SignIn from "./components/SignIn"
+// Import Home component
 import Home from "./components/Home";
-// import About component
+// Import About component
 import CinemaRoom from './components/CinemaRoom'
-// import ContactUs component
+// Import ContactUs component
 function App() {
   return (
     
@@ -33,14 +35,10 @@ function App() {
         we passes the imported component*/}
         <Route exact path="/" component={Home} />
           
-        {/* This route is for about component 
-        with exact path "/about", in component 
-        props we passes the imported component*/}
-        <Route path="/cinemaRoom" component={CinemaRoom} />
+        <Route path="/CinemaRoom" component={CinemaRoom} />
+
+        <Route path="/SignIn" component={SignIn} />
           
-        {/* This route is for contactus component
-        with exact path "/contactus", in 
-        component props we passes the imported component*/}
           
         {/* If any route mismatches the upper 
         route endpoints then, redirect triggers 

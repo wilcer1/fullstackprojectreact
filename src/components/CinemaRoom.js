@@ -206,6 +206,7 @@ function CinemaRoom(props){
         <button onClick={() => booking()}>Book Tickets</button>
         </div>
         </div>
+        
     )
 }
 
