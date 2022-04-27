@@ -6,9 +6,25 @@ import { useState } from "react"
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
+    const [numberOfRows, setNumberOfRows] = useState()
     useEffect(() => {
-        const numberOfRows = 5
+        fetch("http://localhost:5000/api/1001/seats")
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            setDataTable(res)
+        })
+
+        fetch ("http://localhost:5000/api/1001/rows")
+        .then(res => res.json())
+        .then(res => {
+            // setNumberOfRows(5)
+            console.log(res[0].numOfRows);
+        })
+
+        const numberOfRows = 10
         const rows = []
+        console.log(numberOfRows);
         for (let i = 0; i <= numberOfRows; i++){
             rows.push(i)
         }
@@ -139,21 +155,13 @@ function CinemaRoom(props){
             booked: false
             }
         ]
-        fetch("http://localhost:5000/cinemaRoom/api/1001/seats")
-        .then(res => {
-            // setDataTable(res)
-            console.log(res);
-        })
 
-        fetch ("http://localhost:5000/cinemaRoom/api/1001/rows")
-        .then(res => {
-            // setDataTable(res[0].numOfRows)
-            console.log(res[0].numOfRows);
-        })
-        setDataTable(list)
+        // setDataTable(list)
         setRows(rows)
 
     }, [])
+
+
     const test = (id, booked) => {
         const button = document.getElementById(`${id}`)
         if (!(button.style.backgroundColor == "aqua") && !booked){
@@ -187,14 +195,14 @@ function CinemaRoom(props){
             {rows.map(row => (
             <tr>
                 {dataTable
-                .filter(item => item.row == row)
+                .filter(item => item.SeatRow == row)
                 .map(item => (
                     <td>
                         <button
-                            id={item.id}
-                            style={item.booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"}}
-                            onClick={() => test(item.id, item.booked)}
-                        >{item.id}
+                            id={item.SeatId}
+                            style={item.Booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"}}
+                            onClick={() => test(item.SeatId, item.Booked)}
+                        >{item.SeatId}
                         </button>
                     </td>
                 ))}
