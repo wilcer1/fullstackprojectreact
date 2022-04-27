@@ -60,6 +60,17 @@ function CinemaRoom(props){
             booked: true
             }
         ]
+        fetch("http://localhost:5000/cinemaRoom/api/1001/seats")
+        .then(res => {
+            // setDataTable(res)
+            console.log(res);
+        })
+
+        fetch ("http://localhost:5000/cinemaRoom/api/1001/rows")
+        .then(res => {
+            // setDataTable(res[0].numOfRows)
+            // console.log(res[0].numOfRows);
+        })
         setDataTable(list)
         setRows(rows)
 
