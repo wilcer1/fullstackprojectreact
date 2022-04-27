@@ -56,7 +56,6 @@ router.get("/user/:Email", (req, res) =>{
     (err, result) => {
         if (err) {
             console.log(err);
-            
             res.status(400);
         }
        
@@ -102,6 +101,43 @@ router.patch("/user/:Seatid", (req, res) =>{
         
     });
     
+});
+
+router.get("/:cinemaroom/seats", (req, res) => {
+    db.query(`select * from Seats where CinemaRoom_Roomid = ${req.params.cinemaroom};`,
+        (err, result) => {
+            if(err){
+                console.log(err);
+                res.status(400);
+            }
+            res.send(result);
+        });
+    
+
+});
+
+router.get("/:cinemaroom/rows", (req, res) => {
+    db.query(`select numOfRows from CinemaRoom where Roomid = ${req.params.cinemaroom};`,
+        (err, result) => {
+            if(err){
+                console.log(err);
+                res.status(400);
+            }
+            res.send(result);
+        });
+
+});
+
+router.get("/user", (req, res) => {
+    db.query(`select Email, Password from User where Email = "booty69@gmail.com";`,
+        (err, result) => {
+            if(err){
+                console.log(err);
+                res.status(400);
+            }
+            res.send(result);
+        });
+
 });
     
     
