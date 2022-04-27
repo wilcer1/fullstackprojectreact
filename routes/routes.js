@@ -1,56 +1,59 @@
 const router = require("express").Router();
-const controller = require("../controllers/controller");
+const db = require("../config/db.config");
+
 
 
 //add Movie....
-router.post("/insertMovie", (req, res) =>{
-    try{
-        controller.addMovie(
-            req.body.movieName, req.body.description, req.body.director, 
-            req.body.releaseDate, req.body.actors
-                            );
+router.post("/addMovie", (req, res) =>{
+   
+
+        db.query(`INSERT INTO Movie (MovieId, MovieName, Description, Director, ReleaseDate, Actors) VALUES((MovieId), ?, ?, ?, ?, ?);`,
+        [req.body.movieName, req.body.description, req.body.director,req.body.releaseDate, req.body.actors],
+        (err, result) => {
+            if (err) {
+                console.log(err)
+                res.status(400);
+            }
             res.status(201);
-    }catch(err){
-        console.log(err);
-        res.status(400);
+            res.send(result);
+        });
+                           
+  
+      
+       
         
-    }
+  
    
 });
 
 router.get("/users", (req, res) => {
-    const users = controller.getUsers();
-    res.send(users);
+    db.query("select * from User;",
+    (err, result) => {
+        if (err) {
+            console.log(err)
+            res.status(400);
+        }
+        res.send(result);
+
+    }
 
 });
 
 //get a user by first & last name
 router.get("/user/:FirstName/:LastName", (req, res) =>{
-    try{
-    const user = controller.getUser(req.params.FirstName, req.params.LastName);
-    console.log(user);
-    res.send(user);
+    db.query(`select * from User where FirstName="${req.params.FirstName}" && LastName="${req.params.LastName}";`,
+    (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(400);
+        }
+       
+        res.send(result);
         
-    }catch(err){
-        res.status(400);
-    }
+    });
 });
     
     
-    // //uppdate values with variables....
-    // router.patch("/uppdate/:email", (req, res) =>{
-    
-       
-        
-    // });
-    
-    
-    
-    // //uppdate values with variables....
-    // router.patch("/delete/:MovieId", (req, res) =>{
-    
-       
-        
-    // });
+
 
 module.exports = router;
