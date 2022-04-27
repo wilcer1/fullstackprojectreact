@@ -66,8 +66,8 @@ function CinemaRoom(props){
     }, [])
     const test = (id, booked) => {
         const button = document.getElementById(`${id}`)
-        if (button.style.backgroundColor != "lightblue" && !booked){
-            button.style.backgroundColor = "lightblue"
+        if (!(button.style.backgroundColor == "aqua") && !booked){
+            button.style.backgroundColor = "aqua"
         } else {
             button.style.backgroundColor = booked ? "red" :  "yellowgreen"
         }
