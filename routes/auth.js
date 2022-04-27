@@ -46,7 +46,7 @@ router.post("/register", async (req, res) => {
 });
 
 
-router.get("/login",  (req, res) => {
+router.post("/login",  (req, res) => {
     const email = req.body.email;
     const pswrd = req.body.password;
     var status1 = "Success";
