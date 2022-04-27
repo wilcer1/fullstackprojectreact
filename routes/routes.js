@@ -35,7 +35,7 @@ router.get("/users", (req, res) => {
         }
         res.send(result);
 
-    }
+    });
 
 });
 
