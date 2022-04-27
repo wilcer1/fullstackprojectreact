@@ -29,3 +29,6 @@ const token = jwt.sign({user: "user id here"}) //also need token secret here lat
 // if everything is successful, redirect. else error
 
 });
+
+
+module.exports = router;
