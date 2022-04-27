@@ -49,24 +49,23 @@ router.post("/register", async (req, res) => {
 router.get("/login",  (req, res) => {
     const email = req.body.email;
     const pswrd = req.body.password;
+    var status1 = "Success";
     db.query(`select Email, Password from User where Email = "${email}";`,
     async (err, result) => {
-      
-        if(err){
-            console.log(err);  
-        };
         if(result.length === 0){
-            res.send({error: "email does not exist"});
+            status1 = "incorrect email"
+            res.status(404);
+
         }else{
             const validPassword = await bcrypt.compare(pswrd, result[0].Password);
-            console.log(validPassword);
             if(!validPassword){
-                res.send({error: "incorrect password"});
+                status1 = "incorrect password"
+                res.status(404);
             };
         };
       
              
-        res.send({success: "logged in"});
+        res.send({status: status1});
     });
    
     // const token = jwt.sign({user: response.em ail}) //also need token secret here later
