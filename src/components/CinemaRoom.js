@@ -6,6 +6,7 @@ import { useState } from "react"
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
+    // const [color, setColor] = useState([])
     useEffect(() => {
         const numberOfRows = 3
         const rows = []
@@ -63,8 +64,13 @@ function CinemaRoom(props){
         setRows(rows)
 
     }, [])
-    const test = (id) => {
-        alert(`Clicked button with id ${id}`)
+    const test = (id, booked) => {
+        const button = document.getElementById(`${id}`)
+        if (button.style.backgroundColor != "lightblue" && !booked){
+            button.style.backgroundColor = "lightblue"
+        } else {
+            button.style.backgroundColor = booked ? "red" :  "yellowgreen"
+        }
     }
     return(
         <div>
@@ -79,10 +85,13 @@ function CinemaRoom(props){
                 {dataTable
                 .filter(item => item.row == row)
                 .map(item => (
-                    <td id={item.id}>
-                        <button 
-                            style={item.booked ? {backgroundColor: "red"}: {backgroundColor: "yellowgreen"}} 
-                            onClick={() => test(item.id)}
+                    <td>
+                        <button
+                            id={item.id}
+                            style={item.booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"}}
+                            onClick={() => test(item.id, item.booked)}
+                            // onMouseEnter={() => setColor("blue")}
+                            // onMouseLeave={() => setColor(item.booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"})}
                         >{item.id}
                         </button>
                     </td>
