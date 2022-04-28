@@ -140,24 +140,19 @@ router.get("/user", (req, res) => {
 
 });
 
-router.post("/addseats", async (req, res) => {
- 
-
-
-    for (let i = 91; i <= 100; i++){
-        db.query(`INSERT INTO Seats (SeatId, CinemaRoom_Roomid, booked, SeatRow) VALUES(${i}, "1001", false, "10");`,
+router.get("/movie", (req, res) => {
+    db.query(`select * from Movie;`,
         (err, result) => {
-
             if(err){
-               console.log(err);
+                console.log(err);
+                res.status(400);
             }
-            if(result.length > 0){
-                res.send({error: "email already in use"});
-            }
-
+            res.send(result);
         });
-    }
+
 });
+
+
     
     
 
