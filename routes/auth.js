@@ -68,16 +68,16 @@ router.post("/login",  (req, res) => {
         res.send({status: status1});
     });
    
-    // const token = jwt.sign({user: response.em ail}) //also need token secret here later
+        const token = jwt.sign({user: email});//also need token secret here later
  
 
-        // if everything is successful, redirect. else error
+        res.header('auth-token', token).json({token: token, redirect: 'securePage'});
 
-    })
+    });
 
     
 
-// });
+
 
 
 module.exports = router;
