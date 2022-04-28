@@ -38,10 +38,10 @@ function validateSignIn() {
     })
     .then(res => res.json())
     .then(response => {
-        console.log(response)
+        console.log(response.status)
         
         
-    });
+    })
 
 
 }

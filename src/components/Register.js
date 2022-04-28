@@ -50,8 +50,7 @@ function sendRegister() {
     .then(response => {
         console.log(response)
         
-        
-    });
+    })
 }
 
 
