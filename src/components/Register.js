@@ -30,6 +30,28 @@ function sendRegister() {
     const lastname = document.forms["register"]["lastname"].value
     const birthday = document.forms["register"]["birthday"].value
     const password = document.forms["register"]["password"].value
+
+    const info = {
+        email: email,
+        firstname: firstname,
+        lastname: lastname,
+        birthday: birthday,
+        password: password
+    }
+
+    fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(info)
+    })
+    .then(res => res.json())
+    .then(response => {
+        console.log(response)
+        
+        
+    });
 }
 
 
