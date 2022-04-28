@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+const { TokenExpiredError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 const db = require("../config/db.config");
 
@@ -63,21 +64,27 @@ router.post("/login",  (req, res) => {
                 res.status(404);
             };
         };
-      
-             
-        res.send({status: status1});
+        const token = jwt.sign({email: email}, process.env.SECRET_KEY, {expiresIn: "1800s"});             
+        res.send({"authToken": token, "status": status1});
     });
-   
-    // const token = jwt.sign({user: response.em ail}) //also need token secret here later
- 
 
-        // if everything is successful, redirect. else error
+    });
 
-    })
+    router.get("/user", (req, res) => {
+        // return user based on token
 
-    
+        const token = req.body.token;
+        console.log(token);
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        res.send(decoded.email);
 
-// });
+
+
+
+
+    });
+
+
 
 
 module.exports = router;
