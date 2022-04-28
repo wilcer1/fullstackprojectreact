@@ -71,7 +71,7 @@ router.post("/login",  (req, res) => {
         const token = jwt.sign({user: email});//also need token secret here later
  
 
-        res.header('auth-token', token).json({token: token, redirect: 'securePage'});
+        res.header('auth-token', token).json({token: token, redirect: '../src/components/Home.js'});
 
     });
 
