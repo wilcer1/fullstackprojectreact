@@ -49,30 +49,35 @@ router.post("/register", async (req, res) => {
 router.post("/login",  (req, res) => {
     const email = req.body.email;
     const pswrd = req.body.password;
-    var status = "Login Successful";
     db.query(`select Email, Password from User where Email = "${email}";`,
     async (err, result) => {
+        
         if(result.length === 0){
-            status="Incorrect email";
+            
+            res.send("Incorrect email");
             res.status(404);
+            
 
-        }else{
+        }else {
             const validPassword = await bcrypt.compare(pswrd, result[0].Password);
             if(!validPassword){
-                status="Incorrect password";
+                res.send("incorrect password");
                 res.status(404);
-            };
+                
+            }else{
+                const token = jwt.sign({email: email}, process.env.SECRET_KEY, {expiresIn: "1800s"});
+                res.header('auth-token', token).json({msg: "Logged in successfuly"});   
+        
+            }
+         
+            
         };
-      
+    
              
     
     });
    
-        const token = jwt.sign({email: email}, process.env.SECRET_KEY, {expiresIn: "1800s"});
-    
-        
-        res.header('auth-token', token).json({status: status});
-
+       
     });
 
     router.get("/user", (req, res) => {
