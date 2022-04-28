@@ -18,7 +18,7 @@ function CinemaRoom(props){
         fetch ("http://localhost:5000/api/1001/rows")
         .then(res => res.json())
         .then(res => {
-            // setNumberOfRows(5)
+            // setNumberOfRows(5) Bugged need to fix, doesnt work, fml, please help.
             console.log(res[0].numOfRows);
         })
 

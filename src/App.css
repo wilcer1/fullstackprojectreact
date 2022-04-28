@@ -101,6 +101,21 @@ html {
   text-align: center;
   color: aqua;
 }
-div#movies h1{
+div#movies *{
   color: white;
+  text-align: center;
+}
+div#movies img{
+  height: 400px;
+  width: 300px;
+}
+div#movies button{
+    background-image: linear-gradient(to right, rgb(209, 26, 26), rgb(88, 6, 6));
+    color: white;
+    border: 1px solid white;
+    border-radius: 10%;
+    padding: 10px;
+    font-size: larger;
+    outline: 3px dashed white;
+    outline-offset: 3px;
 }
