@@ -139,6 +139,25 @@ router.get("/user", (req, res) => {
         });
 
 });
+
+router.post("/addseats", async (req, res) => {
+ 
+
+
+    for (let i = 91; i <= 100; i++){
+        db.query(`INSERT INTO Seats (SeatId, CinemaRoom_Roomid, booked, SeatRow) VALUES(${i}, "1001", false, "10");`,
+        (err, result) => {
+
+            if(err){
+               console.log(err);
+            }
+            if(result.length > 0){
+                res.send({error: "email already in use"});
+            }
+
+        });
+    }
+});
     
     
 
