@@ -48,7 +48,6 @@ router.get("/user/:FirstName/:LastName", (req, res) =>{
     });
 });
 
-//get a user by first & last name
 router.get("/user/:Email", (req, res) =>{
     db.query(`select * from User where Email="${req.params.Email}";`,
 
