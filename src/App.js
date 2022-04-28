@@ -9,9 +9,11 @@ import {
   Redirect,
 } from "react-router-dom";
 // Import SignIn component
+import Register from "./components/Register"
+// Import Home component
 import SignIn from "./components/SignIn"
 // Import Home component
-import Home from "./components/Home";
+import Home from "./components/Home"
 // Import About component
 import CinemaRoom from './components/CinemaRoom'
 
@@ -42,6 +44,7 @@ function App() {
         <Route path="/SignIn" component={SignIn} />
 
         <Route path="/Movies" component={Movies} />
+        <Route path="/Register" component={Register} />
           
           
         {/* If any route mismatches the upper 

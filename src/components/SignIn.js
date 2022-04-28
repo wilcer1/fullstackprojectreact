@@ -1,11 +1,11 @@
 import React from "react"
-import NavBar from "./Navbar"
+import Navbar from "./Navbar"
 
 function SignIn() {
     return(
         <div>
-            <NavBar/>
-            <div class="logIn">
+            <Navbar/>
+            <div class="account">
                 <form name = "signIn">
                     <label>Email</label><br></br>
                     <input type="text" name="email"></input><br></br><br></br>
@@ -39,9 +39,15 @@ function validateSignIn() {
     .then(res => res.json())
     .then(response => {
         console.log(response);
+        if(response.status === "Success")
+        {
+            localStorage.setItem("auth-token", response.authToken);
+        }else{
+            alert(response.status);
+        }
         
         
-    });
+    })
 
 
 }

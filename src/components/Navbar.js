@@ -12,6 +12,7 @@ function Navbar(props){
             <li><a href="/CinemaRoom">CinemaRoom</a></li>
             <li><a href="/SignIn">SignIn</a></li>
             <li><a href="/Movies">Movies</a></li>
+            <li><a href="/Register">Register</a></li>
         </ul>
         </div>
         </>
