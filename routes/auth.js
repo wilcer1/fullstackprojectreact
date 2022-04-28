@@ -8,7 +8,6 @@ const db = require("../config/db.config");
 router.post("/register", async (req, res) => {
     const email = req.body.email;
 
-
     const salt = await bcrypt.genSalt(5);
     const pswrd = await bcrypt.hash(req.body.password, salt);
     // const link = await bcrypt.hash(req.body.email, salt)
@@ -32,18 +31,7 @@ router.post("/register", async (req, res) => {
                 console.log(err);
             }
             res.send(result)
-
-
-
         });
-    
-    
-    
-    
-
-
-
-
 });
 
 

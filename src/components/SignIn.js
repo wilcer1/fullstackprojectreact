@@ -13,12 +13,9 @@ function SignIn() {
                     <input type="text" name="password"></input>
                 </form>
                 <button onClick={validateSignIn}>Log in</button>
-            
             </div>
         </div>
-
     )
-
 }
 
 function validateSignIn() {
@@ -39,20 +36,14 @@ function validateSignIn() {
     .then(res => res.json())
     .then(response => {
         console.log(response);
-        if(response.status === "Success")
-        {
-            localStorage.setItem("auth-token", response.authToken);
-        }else{
-            alert(response.status);
+        if (response.status === "Success") {
+            localStorage.setItem("auth-token", response.authToken)
+            window.location.href = "/";
+        } else {
+            alert(response.status)
         }
-        
-        
     })
-
-
 }
-
-
 
 
 export default SignIn
