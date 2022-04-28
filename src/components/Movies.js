@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
   
 function Movies(){
+
+
   return (
-    <div id="movies">
+    <div>
       <Navbar/>
+      <div id="movies">
       <h1>Movies</h1>
+      </div>
     </div>
   );
 };
