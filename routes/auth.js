@@ -7,10 +7,9 @@ const db = require("../config/db.config");
 
 router.post("/register", async (req, res) => {
     const email = req.body.email;
-    const pswrd = req.body.password;
 
-    // const salt = await bcrypt.genSalt(5);
-    // const pswrd = await bcrypt.hash(req.body.password, salt);
+    const salt = await bcrypt.genSalt(5);
+    const pswrd = await bcrypt.hash(req.body.password, salt);
     // const link = await bcrypt.hash(req.body.email, salt)
     // const replaced = link.replace(/[^a-z0-9]/gi, '');
 
@@ -74,6 +73,7 @@ router.post("/login",  (req, res) => {
     });
 
     router.get("/user", (req, res) => {
+        // return user based on token
         
         const token = req.body.token;
         console.log(token);
