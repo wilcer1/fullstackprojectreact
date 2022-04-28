@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const db = require("../config/db.config");
 
 
+
 router.post("/register", async (req, res) => {
     const email = req.body.email;
     const pswrd = req.body.password;
@@ -65,10 +66,10 @@ router.post("/login",  (req, res) => {
         };
       
              
-        res.send({status: status1});
+        // res.send({status: status1});
     });
    
-        const token = jwt.sign({user: email});//also need token secret here later
+        const token = jwt.sign({user: email}, process.env.SECRET_KEY);//also need token secret here later
  
 
         res.header('auth-token', token).json({token: token, redirect: '../src/components/Home.js'});
