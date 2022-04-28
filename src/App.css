@@ -78,6 +78,7 @@ li a:hover {
 div#navbar{
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 div#bookTickets{
   text-align: center;
@@ -118,4 +119,8 @@ div#movies button{
     font-size: larger;
     outline: 3px dashed white;
     outline-offset: 3px;
+}
+.currentUser {
+  position: absolute;
+  right: 10px;
 }

@@ -5,7 +5,7 @@ function Register() {
     return(
         <div>
             <Navbar/>
-            <div class="account">
+            <div className="account">
             <form name = "register">
                 <label>Email</label><br></br>
                 <input type="text" name="email"></input><br></br><br></br>
