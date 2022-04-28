@@ -58,21 +58,13 @@ router.post("/login",  (req, res) => {
 
     });
 
-    router.get("/user", (req, res) => {
+    router.post("/user", (req, res) => {
         // return user based on token
 
         const token = req.body.token;
-        console.log(token);
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        res.send(decoded.email);
-
-
-
-
-
+        res.json(decoded.email);
     });
-
-
 
 
 module.exports = router;
