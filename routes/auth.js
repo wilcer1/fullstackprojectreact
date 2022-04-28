@@ -6,10 +6,10 @@ const db = require("../config/db.config");
 
 router.post("/register", async (req, res) => {
     const email = req.body.email;
+    const pswrd = req.body.password;
 
-
-    const salt = await bcrypt.genSalt(5);
-    const pswrd = await bcrypt.hash(req.body.password, salt);
+    // const salt = await bcrypt.genSalt(5);
+    // const pswrd = await bcrypt.hash(req.body.password, salt);
     // const link = await bcrypt.hash(req.body.email, salt)
     // const replaced = link.replace(/[^a-z0-9]/gi, '');
 
@@ -56,12 +56,12 @@ router.post("/login",  (req, res) => {
             status1 = "incorrect email"
             res.status(404);
 
-        }else{
-            const validPassword = await bcrypt.compare(pswrd, result[0].Password);
-            if(!validPassword){
-                status1 = "incorrect password"
-                res.status(404);
-            };
+        // }else{
+        //     const validPassword = await bcrypt.compare(pswrd, result[0].Password);
+        //     if(!validPassword){
+        //         status1 = "incorrect password"
+        //         res.status(404);
+        //     };
         };
       
              
