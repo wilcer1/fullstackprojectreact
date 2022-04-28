@@ -50,29 +50,39 @@ router.post("/register", async (req, res) => {
 router.post("/login",  (req, res) => {
     const email = req.body.email;
     const pswrd = req.body.password;
-    var status1 = "Success";
     db.query(`select Email, Password from User where Email = "${email}";`,
     async (err, result) => {
         if(result.length === 0){
-            status1 = "incorrect email"
             res.status(404);
 
-        // }else{
-        //     const validPassword = await bcrypt.compare(pswrd, result[0].Password);
-        //     if(!validPassword){
-        //         status1 = "incorrect password"
-        //         res.status(404);
-        //     };
+        }else{
+            const validPassword = await bcrypt.compare(pswrd, result[0].Password);
+            if(!validPassword){
+                res.status(404);
+            };
         };
       
              
-        // res.send({status: status1});
+    
     });
    
-        const token = jwt.sign({user: email}, process.env.SECRET_KEY);//also need token secret here later
- 
+        const token = jwt.sign({email: email}, process.env.SECRET_KEY, {expiresIn: "1800s"});
+    
+        
+        res.header('auth-token', token).json({token: token});
 
-        res.header('auth-token', token).json({token: token, redirect: '../src/components/Home.js'});
+    });
+
+    router.get("/user", (req, res) => {
+        
+        const token = req.body.token;
+        console.log(token);
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        res.send(decoded.email);
+      
+         
+        
+
 
     });
 

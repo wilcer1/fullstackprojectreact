@@ -39,6 +39,7 @@ function validateSignIn() {
     .then(res => res.json())
     .then(response => {
         console.log(response);
+        localStorage.setItem("auth-token", response.token)
         
         
     });
