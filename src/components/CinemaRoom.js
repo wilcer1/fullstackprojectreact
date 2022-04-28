@@ -52,6 +52,7 @@ function CinemaRoom(props){
             }
         }
         if(!(bookedSeats.length == 0)){
+            //Booking number, seatId, cinemaroom_id, movie_id, email 
             alert(`Booked seats ${bookedSeats}`)
         }else{
             alert("No seats booked")
