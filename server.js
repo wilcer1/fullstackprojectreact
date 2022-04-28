@@ -9,5 +9,5 @@ app.use(express.static("build"));
 app.use("/api", routes);
 app.use("/api/auth", authRoute);
 app.listen(PORT, () => {
-    console.log("server running on port" + PORT);
+    console.log("server running on port " + PORT);
 });
