@@ -23,10 +23,7 @@ function Navbar(props){
     })
     .then(res => res.json())
     .then(response => {
-        setUser(response)
-        
-        console.log(user);
-        
+        setUser(response)       
         
     }).catch(err => console.log(err))
 
@@ -48,7 +45,7 @@ function Navbar(props){
             <li><a href="/Movies">Movies</a></li>
             {signIn}
             {register}
-            <li className="currentUser"><a>{signedIn ? `Signed in as: ${user}`: "Not signed in"}</a></li>
+            <li className="currentUser"><a href="/user">{signedIn ? `Signed in as: ${user}`: "Not signed in"}</a></li>
         </ul>
         </div>
         </>
