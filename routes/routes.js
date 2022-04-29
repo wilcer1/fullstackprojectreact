@@ -123,7 +123,7 @@ router.get("/:cinemaroom/rows", (req, res) => {
                 console.log(err);
                 res.status(400);
             }
-            res.send(result);
+            res.json(result);
         });
 
 });
@@ -142,6 +142,18 @@ router.get("/user", (req, res) => {
 
 router.get("/movie", (req, res) => {
     db.query(`select * from Movie;`,
+        (err, result) => {
+            if(err){
+                console.log(err);
+                res.status(400);
+            }
+            res.send(result);
+        });
+
+});
+
+router.get("/movie/:id", (req, res) => {
+    db.query(`select * from Movie where MovieId = ${req.params.id};`,
         (err, result) => {
             if(err){
                 console.log(err);
