@@ -66,6 +66,26 @@ router.post("/user", (req, res) => {
     res.json(decoded.email);
 });
 
+router.post("/user", (req, res) => {
+    // check if user is admin
+    var userstatus = "";
+    const token = req.body.token;
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    db.query(`select admin from User where Email = "${decoded}";`,
+        async (err, result) => {
+            if(result === 1){
+                userstatus = "admin";
+
+            }else{
+                userstatus = "noadmin";
+            }
+
+            res.send(userstatus);
+
+        }
+    )
+});
+
 
 
 module.exports = router;
