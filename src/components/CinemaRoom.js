@@ -6,64 +6,35 @@ import { useState } from "react"
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
-    // const [color, setColor] = useState([])
+    const [numberOfRows, setNumberOfRows] = useState()
     useEffect(() => {
-        const numberOfRows = 3
+        fetch("http://localhost:5000/api/1001/seats")
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            setDataTable(res)
+        })
+
+        fetch ("http://localhost:5000/api/1001/rows")
+        .then(res => res.json())
+        .then(res => {
+            // setNumberOfRows(5) Bugged need to fix, doesnt work, fml, please help.
+            console.log(res[0].numOfRows);
+        })
+
+        const numberOfRows = 10
         const rows = []
+        console.log(numberOfRows);
         for (let i = 0; i <= numberOfRows; i++){
             rows.push(i)
         }
-        const list = [
-            {
-            id: 1, 
-            row: 1,
-            booked: false
-            },
-            {
-            id: 2, 
-            row: 1,
-            booked: false
-            },
-            {
-            id: 3,
-            row: 1,
-            booked: false
-            },
-            {
-            id: 4, 
-            row: 2,
-            booked: false
-            },
-            {
-            id: 5, 
-            row: 2,
-            booked: false
-            },
-            {
-            id: 6, 
-            row: 2,
-            booked: false
-            },
-            {
-            id: 7, 
-            row: 3,
-            booked: true
-            },
-            {
-            id: 8, 
-            row: 3,
-            booked: true
-            },
-            {
-            id: 9, 
-            row: 3,
-            booked: true
-            }
-        ]
-        setDataTable(list)
+       
+        // setDataTable(list)
         setRows(rows)
 
     }, [])
+
+
     const test = (id, booked) => {
         const button = document.getElementById(`${id}`)
         if (!(button.style.backgroundColor == "aqua") && !booked){
@@ -72,27 +43,40 @@ function CinemaRoom(props){
             button.style.backgroundColor = booked ? "red" :  "yellowgreen"
         }
     }
+    const booking = () => {
+        const bookedSeats = []
+        for (let i = 1; i <= dataTable.length; i++){
+            const button = document.getElementById(`${i}`)
+            if (button.style.backgroundColor == "aqua"){
+                bookedSeats.push(i)
+            }
+        }
+        if(!(bookedSeats.length == 0)){
+            //Booking number, seatId, cinemaroom_id, movie_id, email 
+            alert(`Booked seats ${bookedSeats}`)
+        }else{
+            alert("No seats booked")
+        }
+    }
     return(
         <div>
         <Navbar/>
+        <h1 style={{color: "white"}}>Booking</h1>
         <table id="CinemaRoom">
-            <caption> Chair booking</caption>
             <thead>
             </thead>
             <tbody>
             {rows.map(row => (
             <tr>
                 {dataTable
-                .filter(item => item.row == row)
+                .filter(item => item.SeatRow == row)
                 .map(item => (
                     <td>
                         <button
-                            id={item.id}
-                            style={item.booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"}}
-                            onClick={() => test(item.id, item.booked)}
-                            // onMouseEnter={() => setColor("blue")}
-                            // onMouseLeave={() => setColor(item.booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"})}
-                        >{item.id}
+                            id={item.SeatId}
+                            style={item.Booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"}}
+                            onClick={() => test(item.SeatId, item.Booked)}
+                        >{item.SeatId}
                         </button>
                     </td>
                 ))}
@@ -100,6 +84,9 @@ function CinemaRoom(props){
           ))}
             </tbody>
         </table>
+        <div id="bookTickets">
+        <button onClick={() => booking()}>Book Tickets</button>
+        </div>
         </div>
         
     )

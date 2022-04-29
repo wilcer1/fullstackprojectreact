@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+const { TokenExpiredError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 const db = require("../config/db.config");
-
 
 
 router.post("/register", async (req, res) => {
@@ -30,73 +30,41 @@ router.post("/register", async (req, res) => {
             if(err){
                 console.log(err);
             }
-            res.send(result);
-
-
-
+            res.send(result)
         });
-    
-    
-    
-    
-
-
-
-
 });
 
 
 router.post("/login",  (req, res) => {
     const email = req.body.email;
     const pswrd = req.body.password;
+    var status1 = "Success";
     db.query(`select Email, Password from User where Email = "${email}";`,
     async (err, result) => {
-        
         if(result.length === 0){
-            
-            res.send("Incorrect email");
+            status1 = "incorrect email"
             res.status(404);
-            
 
-        }else {
+        }else{
             const validPassword = await bcrypt.compare(pswrd, result[0].Password);
             if(!validPassword){
-                res.send("incorrect password");
+                status1 = "incorrect password"
                 res.status(404);
-                
-            }else{
-                const token = jwt.sign({email: email}, process.env.SECRET_KEY, {expiresIn: "1800s"});
-                res.header('auth-token', token).json({msg: "Logged in successfuly"});   
-        
-            }
-         
-            
+            };
         };
-    
-             
-    
-    });
-   
-       
+        const token = jwt.sign({email: email}, process.env.SECRET_KEY, {expiresIn: "1800s"});             
+        res.send({"authToken": token, "status": status1});
     });
 
-    router.get("/user", (req, res) => {
+    });
+
+    router.post("/user", (req, res) => {
         // return user based on token
-        
+
         const token = req.body.token;
-        console.log(token);
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        res.send(decoded.email);
-      
-         
-        
-
-
+        res.json(decoded.email);
     });
-
-    
-
-
 
 
 module.exports = router;

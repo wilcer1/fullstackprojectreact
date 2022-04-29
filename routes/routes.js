@@ -138,6 +138,20 @@ router.get("/user", (req, res) => {
         });
 
 });
+
+router.get("/movie", (req, res) => {
+    db.query(`select * from Movie;`,
+        (err, result) => {
+            if(err){
+                console.log(err);
+                res.status(400);
+            }
+            res.send(result);
+        });
+
+});
+
+
     
     
 

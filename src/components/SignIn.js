@@ -5,7 +5,7 @@ function SignIn() {
     return(
         <div>
             <Navbar/>
-            <div class="account">
+            <div className="account">
                 <form name = "signIn">
                     <label>Email</label><br></br>
                     <input type="text" name="email"></input><br></br><br></br>
@@ -13,12 +13,9 @@ function SignIn() {
                     <input type="text" name="password"></input>
                 </form>
                 <button onClick={validateSignIn}>Log in</button>
-            
             </div>
         </div>
-
     )
-
 }
 
 function validateSignIn() {
@@ -39,15 +36,14 @@ function validateSignIn() {
     .then(res => res.json())
     .then(response => {
         console.log(response);
-        localStorage.setItem("auth-token", response.token)
-        
-        
+        if (response.status === "Success") {
+            localStorage.setItem("auth-token", response.authToken)
+            window.location.href = "/";
+        } else {
+            alert(response.status)
+        }
     })
-
-
 }
-
-
 
 
 export default SignIn

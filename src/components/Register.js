@@ -5,7 +5,7 @@ function Register() {
     return(
         <div>
             <Navbar/>
-            <div class="account">
+            <div className="account">
             <form name = "register">
                 <label>Email</label><br></br>
                 <input type="text" name="email"></input><br></br><br></br>
@@ -49,7 +49,28 @@ function sendRegister() {
     .then(res => res.json())
     .then(response => {
         console.log(response)
-        
+        validateRegister(email, password)
+    })
+}
+
+function validateRegister(email, password) {
+    const info = {
+        email: email,
+        password: password
+    }
+    
+    fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(info)
+    })
+    .then(res => res.json())
+    .then(response => {
+        console.log(response);
+        localStorage.setItem("auth-token", response.authToken)
+        window.location.href = "/";
     })
 }
 
