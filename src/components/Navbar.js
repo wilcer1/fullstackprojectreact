@@ -45,7 +45,6 @@ function Navbar(props){
         <div id="navbar">
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/CinemaRoom">CinemaRoom</a></li>
             <li><a href="/Movies">Movies</a></li>
             {signIn}
             {register}
