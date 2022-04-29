@@ -3,6 +3,10 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 
 function Navbar(props){
+    let signedIn = false
+    var signIn
+    var register
+
     const [user, setUser] = useState([])
     const getToken = localStorage.getItem("auth-token")
     const info = {
@@ -26,12 +30,15 @@ function Navbar(props){
         
     }).catch(err => console.log(err))
 
-   let signedIn = false
-
-   if (user.length != 0) {
-       signedIn = true
-   }
-
+    if (user.length != 0) {
+        signedIn = true
+       
+    } else {
+        signIn = <li><a href="/SignIn">Sign in</a></li>
+        register = <li><a href="/Register">Register</a></li>
+    }
+    
+   
     return(
         <>
         <h1>PERFECT MOVIES</h1>
@@ -40,8 +47,8 @@ function Navbar(props){
             <li><a href="/">Home</a></li>
             <li><a href="/CinemaRoom">CinemaRoom</a></li>
             <li><a href="/Movies">Movies</a></li>
-            <li><a href="/SignIn">Sign in</a></li>
-            <li><a href="/Register">Register</a></li>
+            {signIn}
+            {register}
             <li className="currentUser"><a>{signedIn ? `Signed in as: ${user}`: "Not signed in"}</a></li>
         </ul>
         </div>
