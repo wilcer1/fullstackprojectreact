@@ -12,8 +12,10 @@ import {
 import SignIn from "./components/SignIn"
 // Import Home component
 import Home from "./components/Home";
-// Import About component
+// Import Cinemaroom component
 import CinemaRoom from './components/CinemaRoom'
+// Import About component
+import About from './components/About';
 // Import ContactUs component
 function App() {
   return (
@@ -38,7 +40,8 @@ function App() {
         <Route path="/CinemaRoom" component={CinemaRoom} />
 
         <Route path="/SignIn" component={SignIn} />
-          
+        
+        <Route path="/About" component={About} />
           
         {/* If any route mismatches the upper 
         route endpoints then, redirect triggers 
