@@ -7,16 +7,30 @@ const bcrypt = require("bcryptjs");
 router.post("/addmovie", (req, res) => {
     const token = req.body.token;
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    
     if(decoded){
-        db.query("INSERT INTO Movie VALUES((MovieId), ?, ?, ?, ?, ?, ?",
-        [req.body.moviename, req.body.description, req.body.director, req.body.releasedate, req.body.actors, req.body.poster],
+        db.query("INSERT INTO Movie VALUES((MovieId), ?, ?, ?, ?, ?, ?, ?)",
+        [req.body.moviename, req.body.description, req.body.director, req.body.releasedate, req.body.actors, req.body.poster, req.body.trailer],
         (err, result) => {
-            res.status(201);
+            if(err){
+                
+                
+                res.status(400).end("error");
+                
+            }
+            res.status(201).end("Success");
+             
+           
+            
+        });
 
-        }
-        );
-    res.send({error: "insert failed"});
+        // res.send("success")
+    }else{
+        res.status(400).end("webtoken expired")
     }
+
+    
+    
 
 });
 
