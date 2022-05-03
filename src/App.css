@@ -28,6 +28,8 @@
 h1{
   color:red;
   text-align: center;
+ 
+  
 }
 table#CinemaRoom{
   border: 2px solid black;
@@ -124,6 +126,9 @@ div#homepage h1{
   color: white;
   text-align: center;
   padding-top: 70px;
+  font-family: 'Allerta Stencil';font-size: 22px;
+  
+
 }
 
 div#showcase{

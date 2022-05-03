@@ -24,7 +24,7 @@ function Home(){
       <Navbar/>
       <div id="homepage">
 
-      <h1>Movies right now!</h1>  
+      <h1>Top 3 movies right now!</h1>  
       <div id = "showcase">
           {movies.slice(0,3).map(movie => (
             
