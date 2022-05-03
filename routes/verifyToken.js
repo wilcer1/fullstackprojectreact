@@ -10,10 +10,6 @@ module.exports = function (req, res, next) {
         console.log(token);
         const verified = jwt.verify(token, process.env.TOKEN_SECRET);
         req.user = verified;
-    
-        const tokenDecodablePart = token.split('.')[1];
-        const decoded = Buffer.from(tokenDecodablePart, 'base64').toString();
-        console.log(decoded);
        
         next();
     } catch (error) {
