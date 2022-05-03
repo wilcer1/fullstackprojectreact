@@ -18,6 +18,8 @@ import Home from "./components/Home"
 import CinemaRoom from './components/CinemaRoom'
 
 import Movies from './components/Movies';
+
+import User from "./components/User"
 // Import ContactUs component
 function App() {
   return (
@@ -44,7 +46,10 @@ function App() {
         <Route path="/SignIn" component={SignIn} />
 
         <Route path="/Movies" component={Movies} />
+
         <Route path="/Register" component={Register} />
+
+        <Route path="/User" component={User} />
           
           
         {/* If any route mismatches the upper 
