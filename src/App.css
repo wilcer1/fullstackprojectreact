@@ -110,6 +110,10 @@ div#movies img{
   height: 400px;
   width: 300px;
 }
+
+div#movies video{
+  width: 400px;
+}
 div#movies button{
     background-image: linear-gradient(to right, rgb(209, 26, 26), rgb(88, 6, 6));
     color: white;
@@ -124,3 +128,24 @@ div#movies button{
   position: absolute;
   right: 10px;
 }
+
+div#homepage h1{
+  color: white;
+  text-align: center;
+  padding-top: 70px;
+}
+
+div#showcase{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+div#homepage img{
+ 
+  height: 400px;
+  width: 300px;
+}
+
