@@ -36,7 +36,7 @@ function Home(){
     timeoutRef.current = setTimeout(
       () =>
         setIndex((prevIndex) =>
-          prevIndex === colors.length - 1 ? 0 : prevIndex + 1
+          prevIndex === colors.length -1 ? 0 : prevIndex + 1
         ),
       delay
     );
@@ -62,9 +62,9 @@ function Home(){
         className="slideshowSlider"
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
-             <div id = "showcase">
-          {movies.slice(0,3).map(movie => (
-            <div className="slide">
+          <div>
+          {movies.map(movie => (
+            <div className="slide" key="index">
             
             
             <img src={movie.Poster}></img>

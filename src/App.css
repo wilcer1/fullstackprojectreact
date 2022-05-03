@@ -131,14 +131,6 @@ div#homepage h1{
 
 }
 
-div#showcase{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-
 div#homepage img{
  
   height: 400px;
@@ -189,10 +181,10 @@ div#homepage img{
 
   cursor: pointer;
   margin: 15px 7px 0px;
-
-  background-color: #686868;
+  background-color: #265aca;
+  
 }
 
 .slideshowDot.active {
-  background-color: #3405b5;
+  background-color: #971919;
 }
