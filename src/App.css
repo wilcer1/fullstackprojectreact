@@ -110,6 +110,10 @@ div#movies img{
   height: 400px;
   width: 300px;
 }
+
+div#movies video{
+  width: 400px;
+}
 div#movies button{
     background-image: linear-gradient(to right, rgb(209, 26, 26), rgb(88, 6, 6));
     color: white;
