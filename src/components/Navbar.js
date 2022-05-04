@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 
 function Navbar(props){
-    let signedIn = false
     var signIn
     var register
     var currentUser
@@ -38,7 +37,6 @@ function Navbar(props){
         
     }
 if (user.length != 0) {
-    signedIn = true
     currentUser = <li className="currentUser"><a href="/user">Signed in as: {user}</a></li>
    
 } else {
