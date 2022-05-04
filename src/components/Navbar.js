@@ -8,7 +8,11 @@ function Navbar(props){
     var register
 
     const [user, setUser] = useState([])
+    
     const getToken = localStorage.getItem("auth-token")
+    if(getToken){
+        
+    
     const info = {
     token: getToken
   }
@@ -30,15 +34,16 @@ function Navbar(props){
         
     }).catch(err => console.log(err))
 
-    if (user.length != 0) {
-        signedIn = true
-       
-    } else {
-        signIn = <li><a href="/SignIn">Sign in</a></li>
-        register = <li><a href="/Register">Register</a></li>
-    }
     
+    
+}
+if (user.length != 0) {
+    signedIn = true
    
+} else {
+    signIn = <li><a href="/SignIn">Sign in</a></li>
+    register = <li><a href="/Register">Register</a></li>
+}
     return(
         <>
         <h1>PERFECT MOVIES</h1>
