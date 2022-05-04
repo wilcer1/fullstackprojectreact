@@ -124,3 +124,8 @@ div#movies button{
   position: absolute;
   right: 10px;
 }
+
+#userDate {
+  padding-left: 30px;
+  padding-right: 30px;
+}

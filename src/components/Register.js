@@ -8,15 +8,15 @@ function Register() {
             <div className="account">
             <form name = "register">
                 <label>Email</label><br></br>
-                <input type="text" name="email"></input><br></br><br></br>
+                <input type="email" name="email"></input><br></br><br></br>
                 <label>First name</label><br></br>
                 <input type="text" name="firstname"></input><br></br><br></br>
                 <label>Last name</label><br></br>
                 <input type="text" name="lastname"></input><br></br><br></br>
                 <label>Birthday</label><br></br>
-                <input type="text" name="birthday"></input><br></br><br></br>
+                <input id="userDate" type="date" name="birthday"></input><br></br><br></br>
                 <label>Password</label><br></br>
-                <input type="text" name="password"></input><br></br><br></br>
+                <input type="password" name="password"></input><br></br><br></br>
             </form>
             <button onClick={sendRegister}>Register</button>
             </div>
