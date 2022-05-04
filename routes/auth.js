@@ -1,7 +1,5 @@
 const router = require("express").Router();
-const { getNextKeyDef } = require("@testing-library/user-event/dist/keyboard/getNextKeyDef");
 const bcrypt = require("bcryptjs");
-const { TokenExpiredError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 const db = require("../config/db.config");
 const ApiError = require("../error/ApiError");
@@ -43,25 +41,24 @@ router.post("/register", async (req, res, next) => {
 });
 
 
-router.post("/login",  (req, res) => {
+router.post("/login",  (req, res, next) => {
     const email = req.body.email;
     const pswrd = req.body.password;
-    var status1 = "Success";
     db.query(`select Email, Password from User where Email = "${email}";`,
     async (err, result) => {
         if(result.length === 0){
-            status1 = "incorrect email"
-            res.status(404);
+           next(ApiError.badRequest("Email does not exist"));
+           return;
 
         }else{
             const validPassword = await bcrypt.compare(pswrd, result[0].Password);
             if(!validPassword){
-                status1 = "incorrect password"
-                res.status(404);
+                next(ApiError.badRequest("Incorrect Password"));
+                return;
             };
         };
         const token = jwt.sign({email: email}, process.env.SECRET_KEY, {expiresIn: "1800s"});             
-        res.send({"authToken": token, "status": status1});
+        res.json({"authToken": token});
     });
 
     });

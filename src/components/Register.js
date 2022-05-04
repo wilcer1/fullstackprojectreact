@@ -48,12 +48,11 @@ function sendRegister() {
     })
     .then(res => res.text())
     .then(response => {
-
+        console.log(response);
 
 
         if(response === "Registered Successfully"){
-        console.log("res" + response);
-        validateRegister(email, password);
+            validateRegister(email, password);
             
         }else{
             console.log(response);

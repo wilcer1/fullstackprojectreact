@@ -36,11 +36,11 @@ function validateSignIn() {
     .then(res => res.json())
     .then(response => {
         console.log(response);
-        if (response.status === "Success") {
+        if (response.authToken) {
             localStorage.setItem("auth-token", response.authToken)
             window.location.href = "/";
         } else {
-            alert(response.status)
+            alert(response)
         }
     })
 }
