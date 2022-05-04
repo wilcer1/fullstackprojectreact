@@ -28,13 +28,9 @@ router.post("/addmovie", (req, res, next) => {
             
     });
 
-        // res.send("success")
-    
-
-    
-    
-
 });
+
+
 
 
 
