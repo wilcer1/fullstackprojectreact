@@ -22,7 +22,7 @@ router.post("/addmovie", (req, res, next) => {
               
                 
         }
-        res.sendStatus(201)
+        res.sendStatus(201);
              
            
             
