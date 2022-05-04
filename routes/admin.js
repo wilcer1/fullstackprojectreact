@@ -1,33 +1,35 @@
 const router = require("express").Router();
 const db = require("../config/db.config");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const apiError = require("../error/ApiError");
 
 
-router.post("/addmovie", (req, res) => {
+router.post("/addmovie", (req, res, next) => {
     const token = req.body.token;
+    try{
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    
-    if(decoded){
-        db.query("INSERT INTO Movie VALUES((MovieId), ?, ?, ?, ?, ?, ?, ?)",
-        [req.body.moviename, req.body.description, req.body.director, req.body.releasedate, req.body.actors, req.body.poster, req.body.trailer],
-        (err, result) => {
-            if(err){
+    }catch(err){
+        next(apiError.badRequest(err));
+        return;
+    }
+
+    db.query("INSERT INTO Movie VALUES((MovieId), ?, ?, ?, ?, ?, ?, ?)",
+    [req.body.moviename, req.body.description, req.body.director, req.body.releasedate, req.body.actors, req.body.poster, req.body.trailer],
+    (err, result) => {
+        if(err){
+            next(apiError.badRequest("insert failed"));
+            return;
+              
                 
-                
-                res.status(400).end("error");
-                
-            }
-            res.status(201).end("Success");
+        }
+        res.sendStatus(201)
              
            
             
-        });
+    });
 
         // res.send("success")
-    }else{
-        res.status(400).end("webtoken expired")
-    }
+    
 
     
     
