@@ -141,11 +141,17 @@ div#showcase{
   align-items: center;
 }
 
-
-
 div#homepage img{
  
   height: 400px;
   width: 300px;
+}
+
+.movieDescription img, video {
+  width: 400px;
+}
+
+.movieDescription {
+  color: white;
 }
 

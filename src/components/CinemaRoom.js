@@ -7,15 +7,15 @@ import MovieDescription from "./MovieDescription"
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
-    const [movieId, setMovieId] = useState([])
-    const [movie, setMovie] = useState({MovieName: "fml"})
     useEffect(() => {
         fetch("http://localhost:5000/api/1001/seats")
         .then(res => res.json())
         .then(res => {
             setDataTable(res)
         })
+    }, [])
 
+    useEffect(() => {
         fetch ("http://localhost:5000/api/1001/rows")
         .then(res => res.json())
         .then(res => {
@@ -25,18 +25,8 @@ function CinemaRoom(props){
             }
             setRows(rows)
         })
-
-        fetch(`http://localhost:5000/api/movie/${4}`)
-        .then(res => res.json())
-        .then(response => {
-            console.log("response: " + response[0].MovieName);
-            setMovie(response[0])
-            console.log("movie: " + movie.MovieName);
-        })
-        const elements = window.location.href.split("/")
-        setMovieId(elements[4])
-
     }, [])
+
 
 
     const test = (id, booked) => {
@@ -90,8 +80,7 @@ function CinemaRoom(props){
         </table>
         <div id="bookTickets">
         <button onClick={() => booking()}>Book Tickets</button>
-        <p style={{color: "white"}}>{movieId}</p>
-        <MovieDescription movieId={movieId}/>
+        <MovieDescription/>
         </div>
         </div>
         
