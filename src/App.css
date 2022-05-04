@@ -158,3 +158,12 @@ div#homepage img{
   padding-right: 30px;
 }
 
+.userInfo {
+  margin-top: 50px;
+  color: aqua;
+  text-align: center;
+}
+
+#info {
+  font-size: 23px;
+}
