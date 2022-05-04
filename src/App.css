@@ -37,18 +37,17 @@ h3
 }
 table#CinemaRoom{
   border: 2px solid black;
-  border-collapse : collapse;
   margin: 2rem auto;
   max-width: 900px;
+  border: hidden;
 }
 table#CinemaRoom td{
-  border: 2px solid black;
+  border: hidden;
   padding: 0
 }
 table#CinemaRoom button{
   width: 60px;
   height: 60px;
-  border: hidden;
   background-color: greenyellow;
 }
 table#CinemaRoom caption{
@@ -164,5 +163,23 @@ div#homepage img{
 
 .movieDescription {
   color: white;
+}
+
+#CinemaRoom button{
+  border-radius: 20px
+}
+
+.movieScreen{
+  color: black;
+  background-color: white;
+  text-align: center;
+  border: 2px solid white;
+  margin: auto;
+  width: 450px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.booking {
+  float: left;
 }
 

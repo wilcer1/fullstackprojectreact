@@ -55,7 +55,11 @@ function CinemaRoom(props){
     return(
         <div>
         <Navbar/>
+        <div className="booking">
         <h1 style={{color: "white"}}>Booking</h1>
+        <MovieDescription/>
+        <div className="seats">
+            <div className="movieScreen">Screen</div>
         <table id="CinemaRoom">
             <thead>
             </thead>
@@ -80,7 +84,8 @@ function CinemaRoom(props){
         </table>
         <div id="bookTickets">
         <button onClick={() => booking()}>Book Tickets</button>
-        <MovieDescription/>
+        </div>
+        </div>
         </div>
         </div>
         
