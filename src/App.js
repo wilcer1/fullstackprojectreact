@@ -16,7 +16,7 @@ import SignIn from "./components/SignIn"
 import Home from "./components/Home"
 // Import About component
 import CinemaRoom from './components/CinemaRoom'
-
+ 
 import About from './components/About';
 
 import Movies from './components/Movies';
