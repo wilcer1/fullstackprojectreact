@@ -53,6 +53,7 @@ if (user.length != 0) {
             <li><a href="/Movies">Movies</a></li>
             {signIn}
             {register}
+            <li><a href="/About">About</a></li>
             {currentUser}
         </ul>
         </div>
