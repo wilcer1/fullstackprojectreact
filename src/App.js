@@ -16,6 +16,8 @@ import SignIn from "./components/SignIn"
 import Home from "./components/Home"
 // Import About component
 import CinemaRoom from './components/CinemaRoom'
+ 
+import About from './components/About';
 
 import Movies from './components/Movies';
 
@@ -50,7 +52,8 @@ function App() {
         <Route path="/Register" component={Register} />
 
         <Route path="/User" component={User} />
-          
+        
+        <Route path="/About" component={About} />
           
         {/* If any route mismatches the upper 
         route endpoints then, redirect triggers 
