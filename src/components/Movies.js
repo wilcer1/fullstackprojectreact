@@ -19,7 +19,7 @@ function Movies(){
     }, [])
 
     const booking = (id) => {
-        history.push("/CinemaRoom")
+        history.push(`/CinemaRoom/${id}`)
         window.location.reload()
     }
 

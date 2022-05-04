@@ -2,37 +2,31 @@ import React from "react"
 import Navbar from "./Navbar"
 import { useEffect } from "react"
 import { useState } from "react"
+import MovieDescription from "./MovieDescription"
 
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
-    const [numberOfRows, setNumberOfRows] = useState()
     useEffect(() => {
         fetch("http://localhost:5000/api/1001/seats")
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             setDataTable(res)
         })
+    }, [])
 
+    useEffect(() => {
         fetch ("http://localhost:5000/api/1001/rows")
         .then(res => res.json())
         .then(res => {
-            // setNumberOfRows(5) Bugged need to fix, doesnt work, fml, please help.
-            console.log(res[0].numOfRows);
+            const rows = []
+            for (let i = 0; i <= res[0].numOfRows; i++){
+                rows.push(i)
+            }
+            setRows(rows)
         })
-
-        const numberOfRows = 10
-        const rows = []
-        console.log(numberOfRows);
-        for (let i = 0; i <= numberOfRows; i++){
-            rows.push(i)
-        }
-       
-        // setDataTable(list)
-        setRows(rows)
-
     }, [])
+
 
 
     const test = (id, booked) => {
@@ -86,6 +80,7 @@ function CinemaRoom(props){
         </table>
         <div id="bookTickets">
         <button onClick={() => booking()}>Book Tickets</button>
+        <MovieDescription/>
         </div>
         </div>
         

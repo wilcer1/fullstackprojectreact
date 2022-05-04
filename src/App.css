@@ -158,3 +158,11 @@ div#homepage img{
   padding-right: 30px;
 }
 
+.movieDescription img, video {
+  width: 400px;
+}
+
+.movieDescription {
+  color: white;
+}
+
