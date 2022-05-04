@@ -1,8 +1,10 @@
 const router = require("express").Router();
+const { getNextKeyDef } = require("@testing-library/user-event/dist/keyboard/getNextKeyDef");
 const bcrypt = require("bcryptjs");
 const { TokenExpiredError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 const db = require("../config/db.config");
+const ApiError = require("../error/ApiError");
 
 
 router.post("/register", async (req, res) => {
@@ -58,33 +60,39 @@ router.post("/login",  (req, res) => {
 
     });
 
-router.post("/user", (req, res) => {
+router.post("/user", (req, res, next) => {
     // return user based on token
-
+    let decoded;
     const token = req.body.token;
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    try{decoded = jwt.verify(token, process.env.SECRET_KEY);}
+    catch(err){
+        next(ApiError.badRequest("Invalid Token"));
+        return;
+
+    }
+    
     res.json(decoded.email);
 });
 
-router.post("/user", (req, res) => {
-    // check if user is admin
-    var userstatus = "";
-    const token = req.body.token;
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    db.query(`select admin from User where Email = "${decoded}";`,
-        async (err, result) => {
-            if(result === 1){
-                userstatus = "admin";
+// router.post("/user", (req, res) => {
+//     // check if user is admin
+//     var userstatus = "";
+//     const token = req.body.token;
+//     const decoded = jwt.verify(token, process.env.SECRET_KEY);
+//     db.query(`select admin from User where Email = "${decoded}";`,
+//         async (err, result) => {
+//             if(result === 1){
+//                 userstatus = "admin";
 
-            }else{
-                userstatus = "noadmin";
-            }
+//             }else{
+//                 userstatus = "noadmin";
+//             }
 
-            res.send(userstatus);
+//             res.send(userstatus);
 
-        }
-    )
-});
+//         }
+//     )
+// });
 
 
 
