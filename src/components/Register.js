@@ -46,11 +46,24 @@ function sendRegister() {
         },
         body: JSON.stringify(info)
     })
-    .then(res => res.json())
+    .then(res => res.text())
     .then(response => {
-        console.log(response)
-        validateRegister(email, password)
-    })
+
+
+
+        if(response === "Registered Successfully"){
+        console.log("res" + response);
+        validateRegister(email, password);
+            
+        }else{
+            console.log(response);
+        }
+            
+
+    }) 
+   
+       
+        
 }
 
 function validateRegister(email, password) {

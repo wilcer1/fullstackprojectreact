@@ -7,9 +7,12 @@ const db = require("../config/db.config");
 const ApiError = require("../error/ApiError");
 
 
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res, next) => {
     const email = req.body.email;
-
+    if(!/[a-ö0-9]+@[a-ö]+\.[a-ö]{2,3}/.test(email)){      
+        next(ApiError.badRequest("Email syntax not correct"));
+        return;
+    }
     const salt = await bcrypt.genSalt(5);
     const pswrd = await bcrypt.hash(req.body.password, salt);
     // const link = await bcrypt.hash(req.body.email, salt)
@@ -19,10 +22,12 @@ router.post("/register", async (req, res) => {
         (err, result) => {
 
             if(err){
-               console.log(err);
+                next(ApiError.badRequest("Query Failed"));
+                return;
             }
             if(result.length > 0){
-                res.send({error: "email already in use"});
+                next(ApiError.badRequest("Email already in use"));
+                return;
             }
             
         });
@@ -30,9 +35,10 @@ router.post("/register", async (req, res) => {
     db.query(`insert into User values(?, ?, ?, ?, ?)`,[ email, req.body.firstname, req.body.lastname, req.body.birthday, pswrd],
         (err, result) => {
             if(err){
-                console.log(err);
+                next(ApiError.badRequest("Birthday input not valid"));
+                return;
             }
-            res.send(result)
+            res.send("Registered Successfully");
         });
 });
 
