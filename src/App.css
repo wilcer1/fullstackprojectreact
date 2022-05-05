@@ -221,4 +221,33 @@ div#homepage img{
 
 .slideshowDot.active {
   background-color: #971919;
+.userInfo {
+  margin-top: 100px;
+  color: aqua;
+  text-align: center;
+}
+
+#info {
+  font-size: 23px;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+
+th {
+  text-align: left;
+  padding-left: 3px;
+  padding-right: 10px;
+}
+
+td {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.centerTable {
+  margin-left: auto;
+  margin-right: auto;
 }
