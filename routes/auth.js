@@ -10,6 +10,7 @@ const ApiError = require("../error/ApiError");
 router.post("/register", async (req, res) => {
     const email = req.body.email;
 
+
     const salt = await bcrypt.genSalt(5);
     const pswrd = await bcrypt.hash(req.body.password, salt);
     // const link = await bcrypt.hash(req.body.email, salt)
@@ -27,7 +28,7 @@ router.post("/register", async (req, res) => {
             
         });
 
-    db.query(`insert into User values(?, ?, ?, ?, ?)`,[ email, req.body.firstname, req.body.lastname, req.body.birthday, pswrd],
+    db.query(`insert into User values(?, ?, ?, ?, ?, ?)`,[ email, req.body.firstname, req.body.lastname, req.body.birthday, pswrd, false],
         (err, result) => {
             if(err){
                 console.log(err);
