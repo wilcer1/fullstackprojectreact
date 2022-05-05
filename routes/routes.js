@@ -230,7 +230,6 @@ router.post("/booking/reg", (req, res) => {
                 console.log(err);
                
             }
-            console.log("fuck of!!!!!!!!!!!!");
             res.send(result)
             
         });    
