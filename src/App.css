@@ -28,6 +28,8 @@
 h1{
   color:red;
   text-align: center;
+ 
+  
 }
 h3
 {
@@ -139,6 +141,9 @@ div#homepage h1{
   color: white;
   text-align: center;
   padding-top: 70px;
+  font-family: 'Allerta Stencil';font-size: 22px;
+  
+
 }
 
 div#showcase{
@@ -166,3 +171,54 @@ div#homepage img{
   color: white;
 }
 
+
+
+/* Slideshow */
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.slideshowSlider {
+  
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slideshowSlider img{
+  height: 400px;
+  width: 300px;
+}
+
+
+.slide {
+  display: inline-block;
+
+  height: 400px;
+  width: 100%;
+  border-radius: 40px;
+}
+
+/* Buttons */
+
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+  background-color: #265aca;
+  
+}
+
+.slideshowDot.active {
+  background-color: #971919;
+}
