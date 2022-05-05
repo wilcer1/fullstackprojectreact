@@ -51,10 +51,20 @@ function User() {
             <Navbar/>
             <div className="userInfo">
                 <h2>User information</h2>
-                <p id="info">Email: {email}</p>
-                <p id="info">First name: {user.FirstName}</p>
-                <p id="info">Last name: {user.LastName}</p>
-                <p id="info">Birthday: {("0" + user.BirthDate).substring(1,11)}</p>
+                <table className="centerTable">
+                <th>Email</th>
+                <td>{email}</td>
+                <tr></tr>
+                <th>First name</th>
+                <td>{user.FirstName}</td>
+                <tr></tr>
+                <th>Last name</th>
+                <td>{user.LastName}</td>
+                <tr></tr>
+                <th>Birthday</th>
+                <td>{("0" + user.BirthDate).substring(1,11)}</td>
+                <tr></tr>
+                </table>
             </div>
         </div>
         
