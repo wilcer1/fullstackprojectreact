@@ -54,7 +54,7 @@ function User() {
                 <p id="info">Email: {email}</p>
                 <p id="info">First name: {user.FirstName}</p>
                 <p id="info">Last name: {user.LastName}</p>
-                <p id="info">Birthday: {user.BirthDate}</p>
+                <p id="info">Birthday: {("0" + user.BirthDate).substring(1,11)}</p>
             </div>
         </div>
         
