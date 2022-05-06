@@ -78,7 +78,7 @@ router.get("/user/:token", (req, res, next) => {
 router.get("/userstatus/:email", (req, res, next) => {
     // check if user is admin
     const email = req.params.email;
-    db.query(`select admin from User where Email = "${email}";`,
+    db.query(`select Admin from User where Email = "${email}";`,
         async (err, result) => {
             if(result.length === 0){
                 next(ApiError.badRequest("Invalid Token"));

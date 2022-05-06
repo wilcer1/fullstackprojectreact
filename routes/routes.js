@@ -2,25 +2,6 @@ const router = require("express").Router();
 const db = require("../config/db.config");
 
 
-
-//add Movie....
-router.post("/addMovie", (req, res) =>{
-   
-
-        db.query(`INSERT INTO Movie (MovieId, MovieName, Description, Director, ReleaseDate, Actors) VALUES((MovieId), ?, ?, ?, ?, ?);`,
-        [req.body.movieName, req.body.description, req.body.director,req.body.releaseDate, req.body.actors],
-        (err, result) => {
-            if (err) {
-                console.log(err)
-                res.status(400);
-            }
-            res.status(201);
-            res.send(result);
-        });
-                        
-   
-});
-
 router.get("/users", (req, res) => {
     db.query("select * from User;",
     (err, result) => {
@@ -32,20 +13,6 @@ router.get("/users", (req, res) => {
 
     });
 
-});
-
-//get a user by first & last name
-router.get("/user/:FirstName/:LastName", (req, res) =>{
-    db.query(`select * from User where FirstName="${req.params.FirstName}" && LastName="${req.params.LastName}";`,
-    (err, result) => {
-        if (err) {
-            console.log(err);
-            res.status(400);
-        }
-       
-        res.send(result);
-        
-    });
 });
 
 router.get("/user/:Email", (req, res) =>{
@@ -64,80 +31,6 @@ router.get("/user/:Email", (req, res) =>{
     
 });
 
-
-//delete user
-router.delete("/user/:Email", (req, res) =>{
-    db.query(`DELETE FROM User WHERE Email="${req.params.Email}";`,
-
-
-    (err, result) => {
-        if (err) {
-            console.log(err);
-            
-            res.status(400);
-        }
-       
-        res.send(result);
-        
-    });
-    
-});
-
-
-//delete user
-router.patch("/user/:Seatid", (req, res) =>{
-    db.query(`UPDATE Seats SET  booked = true WHERE SeatId = ${req.params.Seatid};`,
-
-
-    (err, result) => {
-        if (err) {
-            console.log(err);
-            
-            res.status(400);
-        }
-       
-        res.send(result);
-        
-    });
-    
-});
-
-router.get("/:cinemaroom/seats", (req, res) => {
-    db.query(`select * from Seats where CinemaRoom_Roomid = ${req.params.cinemaroom};`,
-        (err, result) => {
-            if(err){
-                console.log(err);
-                res.status(400);
-            }
-            res.send(result);
-        });
-    
-
-});
-
-router.get("/:cinemaroom/rows", (req, res) => {
-    db.query(`select numOfRows from CinemaRoom where Roomid = ${req.params.cinemaroom};`,
-        (err, result) => {
-            if(err){
-                console.log(err);
-                res.status(400);
-            }
-            res.json(result);
-        });
-
-});
-
-router.get("/user", (req, res) => {
-    db.query(`select Email, Password from User where Email = "booty69@gmail.com";`,
-        (err, result) => {
-            if(err){
-                console.log(err);
-                res.status(400);
-            }
-            res.send(result);
-        });
-
-});
 
 router.get("/movie", (req, res) => {
     db.query(`select * from Movie;`,
@@ -180,7 +73,7 @@ router.get("/booking", (req, res) => {
 
 //get one specific booking....
 router.get("/booking/:bookingnumber", (req, res) => {
-    db.query(`select * from Booking where BookingNumber = ${req.params.bookingnumber};`,
+    db.query(`select * from seat_booked where BookingNumber = ${req.params.bookingnumber};`,
         (err, result) => {
             if(err){
                 console.log(err);
@@ -192,48 +85,56 @@ router.get("/booking/:bookingnumber", (req, res) => {
 });
 
 //make one booking....
-router.post("/booking/reg", (req, res) => {
-
-    const bookingNumber = req.body.bookingNumber;
-
-    const seatId = req.body.seatId;
-
-    const cinemaRoomId = req.body.cinemaRoomId;
-
+router.post("/addbooking", (req, res, next) => {
+    var bookingnumber;
+    // for booking table
     const movieId = req.body.movieId;
 
     const email = req.body.email;
 
+    // for seat_booked table
 
-    console.log("bookingNumber: " + bookingNumber);
-    console.log("seatId: " + seatId);
-    console.log("cinemaRoomId: " + cinemaRoomId);
-    console.log("movieId: " + movieId);
-    console.log("email: " + email);
+    const date = req.body.date;
 
-
-
-
-
-    db.query(`UPDATE Seats SET booked = true WHERE Seatid = "${seatId}" AND CinemaRoom_Roomid = "${cinemaRoomId}";`,
-        (err, result) => {
-            if(err){
-                console.log(err);
-                res.status(400);
-            }
-        });
+    const seatId = req.body.seatId;
     
+
+    db.query(`INSERT INTO Booking VALUES((BookingNumber), ?, ?)`,
+        [movieId, email],
+    (err, result) => {
+        if(err){
+            
+            console.log(err);
+           
+        }
         
-        db.query(`INSERT INTO Booking VALUES(?, ?, ?, ?, ?)`,
-        [bookingNumber, seatId, cinemaRoomId, movieId, email],
+    });
+    
+    db.query(`SELECT BookingNumber from Booking WHERE User_Email = "${email}"`,
         (err, result) => {
             if(err){
                 console.log(err);
-               
             }
-            
+            db.query(`INSERT INTO seat_booked VALUES(?, ?, ?)`,
+                [date, seatId,  result[result.length - 1].BookingNumber],
+                    (err, c) => {
+                        if(err){
+                            console.log(err);
+                        }
+    
+    
         });
-        res.send("Success")  
+
+        }
+    
+    
+    );
+
+   
+
+    res.send("Success");
+        
+        
 
 });
 
