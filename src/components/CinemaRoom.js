@@ -7,8 +7,10 @@ import MovieDescription from "./MovieDescription"
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
+    const [email, setEmail] = useState([])
+
     useEffect(() => {
-        fetch("http://localhost:5000/api/1001/seats")
+        fetch("http://localhost:5000/api/1001/seats/")
         .then(res => res.json())
         .then(res => {
             setDataTable(res)
@@ -25,6 +27,34 @@ function CinemaRoom(props){
             }
             setRows(rows)
         })
+    }, [])
+
+    useEffect(() => {
+        const getToken = localStorage.getItem("auth-token")
+
+        if(getToken){
+            const info = {
+            token: getToken
+        }
+        fetch("http://localhost:5000/api/auth/user", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(info)
+        })
+        .then(res => res.json())
+        .then(response => {
+            if(response !== "Invalid Token") {
+                setEmail(response)
+            }
+            
+            
+        })
+    } else {
+        alert("You need to login, you fucking boomer")
+    }
     }, [])
 
 
@@ -46,7 +76,29 @@ function CinemaRoom(props){
             }
         }
         if(!(bookedSeats.length == 0)){
-            //Booking number, seatId, cinemaroom_id, movie_id, email 
+            //Booking number, seatId, cinemaroom_id, movie_id, email, row_id
+            console.log(bookedSeats);
+            bookedSeats.map(seat => {
+                const details = {
+                    bookingNumber: "351652",
+                    seatId: seat,
+                    cinemaRoomId: "1001",
+                    movieId: window.location.href.split("/")[4],
+                    email: email
+                }
+                
+                fetch("http://localhost:5000/api/booking/reg", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(details)
+                })
+                .then(response => {
+                    window.location.reload()
+                })
+            })
             alert(`Booked seats ${bookedSeats}`)
         }else{
             alert("No seats booked")
@@ -88,7 +140,6 @@ function CinemaRoom(props){
         </div>
         </div>
         </div>
-        
     )
 }
 

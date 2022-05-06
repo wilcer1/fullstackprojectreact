@@ -194,45 +194,46 @@ router.get("/booking/:bookingnumber", (req, res) => {
 //make one booking....
 router.post("/booking/reg", (req, res) => {
 
-    const bookingnumber = req.body.bookingnumber;
+    const bookingNumber = req.body.bookingNumber;
 
-    const seat_seat_id = req.body.seatid;
+    const seatId = req.body.seatId;
 
-    const seat_seat_row = req.body.row;
+    const cinemaRoomId = req.body.cinemaRoomId;
 
-    const seats_cinemaRoom_roomid = req.body.cinemaroomid;
-
-    const movie_id = req.body.movieid;
+    const movieId = req.body.movieId;
 
     const email = req.body.email;
 
 
+    console.log("bookingNumber: " + bookingNumber);
+    console.log("seatId: " + seatId);
+    console.log("cinemaRoomId: " + cinemaRoomId);
+    console.log("movieId: " + movieId);
+    console.log("email: " + email);
 
 
 
 
 
-
-    db.query(`UPDATE Seats SET booked = true WHERE Seatid = "${seat_seat_id}" AND SeatRow = "${seat_seat_row}" AND CinemaRoom_Roomid = "${seats_cinemaRoom_roomid}";`,
+    db.query(`UPDATE Seats SET booked = true WHERE Seatid = "${seatId}" AND CinemaRoom_Roomid = "${cinemaRoomId}";`,
         (err, result) => {
             if(err){
                 console.log(err);
                 res.status(400);
             }
-            res.send(result);
         });
     
         
         db.query(`INSERT INTO Booking VALUES(?, ?, ?, ?, ?)`,
-        [req.body.bookingnumber,  req.body.seatid, req.body.cinemaroomid, req.body.movieid, req.body.email],
+        [bookingNumber, seatId, cinemaRoomId, movieId, email],
         (err, result) => {
             if(err){
                 console.log(err);
                
             }
-            res.send(result)
             
-        });    
+        });
+        res.send("Success")  
 
 });
 
