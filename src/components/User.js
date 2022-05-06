@@ -7,11 +7,13 @@ function User() {
     const [user, setUser] = useState([])
     const getToken = localStorage.getItem("auth-token")
 
+    // Do only if the user is signed in
     if(getToken){
         const info = {
         token: getToken
     }
 
+    // Get email trough sign in token
     fetch("http://localhost:5000/api/auth/user", {
             method: "POST",
             headers: {
@@ -29,7 +31,7 @@ function User() {
             
         }).catch(err => console.log(err))  
     
-
+        // Get user details trough email
         fetch(`http://localhost:5000/api/user/${email}`, {
             method: "GET",
             headers: {
@@ -71,6 +73,7 @@ function User() {
         
     )
 } else {
+    // Send user to homepage if not signed in
     window.location.href = "/"
 }
 }

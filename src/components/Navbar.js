@@ -10,11 +10,13 @@ function Navbar(props){
     const [user, setUser] = useState([])
     const getToken = localStorage.getItem("auth-token")
 
+    // Do only if the user is signed in
     if(getToken){
         const info = {
         token: getToken
     }
 
+    // Get email trough sign in token
     fetch("http://localhost:5000/api/auth/user", {
             method: "POST",
             headers: {
@@ -33,7 +35,7 @@ function Navbar(props){
         }).catch(err => console.log(err))  
     }
 
-
+    // If the response is not 0, we know the user is signed in
     if (user.length != 0) {
         currentUser = <li className="currentUser"><a href="/user">Signed in as: {user}</a></li>
     

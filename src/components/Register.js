@@ -39,6 +39,7 @@ function sendRegister() {
         password: password
     }
 
+    // Create new account
     fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: {
@@ -48,7 +49,6 @@ function sendRegister() {
     })
     .then(res => res.json())
     .then(response => {
-        console.log(response)
         validateRegister(email, password)
     })
 }
@@ -59,6 +59,7 @@ function validateRegister(email, password) {
         password: password
     }
     
+    // Sign in the new user
     fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
@@ -68,9 +69,13 @@ function validateRegister(email, password) {
     })
     .then(res => res.json())
     .then(response => {
-        console.log(response);
-        localStorage.setItem("auth-token", response.authToken)
-        window.location.href = "/";
+        // If email and password is correct, set auth-token
+        if (response.status === "Success") {
+            localStorage.setItem("auth-token", response.authToken)
+            window.location.href = "/"
+        } else {
+            alert(response.status)
+        }
     })
 }
 
