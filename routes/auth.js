@@ -67,7 +67,7 @@ router.get("/user/:token", (req, res, next) => {
     const token = req.params.token;
     try{decoded = jwt.verify(token, process.env.SECRET_KEY);}
     catch(err){
-        next(ApiError.badRequest("Invalid Token"));
+        next(ApiError.badRequest(""));
         return;
 
     }
