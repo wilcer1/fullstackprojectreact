@@ -10,8 +10,9 @@ function SignIn() {
                     <label>Email</label><br></br>
                     <input type="email" name="email"></input><br></br><br></br>
                     <label>Password</label><br></br>
-                    <input type="password" name="password"></input>
+                    <input type="password" name="password"></input> 
                 </form>
+                <br></br>
                 <button onClick={validateSignIn}>Log in</button>
             </div>
         </div>

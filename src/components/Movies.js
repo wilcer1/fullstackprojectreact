@@ -33,12 +33,14 @@ function Movies(){
             <h2>{movie.MovieName}</h2>
             <img src={movie.Poster}></img><br></br>
             <video src={movie.Trailer} controls></video>
-            <p>{movie.Description}<br></br>
+            <p id="descriptionStyle">{movie.Description}<br></br>
                 <p>Director: {movie.Director}</p>
                 <p>Actors: {movie.Actors}</p>
-                <p>Release Date: {movie.ReleaseDate}</p>
+                <p>Release Date: {movie.ReleaseDate}</p><br></br>
             </p>
+            
             <button id={movie.MovieId} onClick={() => {booking(movie.MovieId)}}>Book Tickets</button>
+            <p className="bookingButton"></p>
             <hr></hr>
             
           </div>

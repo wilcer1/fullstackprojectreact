@@ -270,3 +270,13 @@ td {
   margin-left: auto;
   margin-right: auto;
 }
+
+#descriptionStyle {
+  padding-left: 35%;
+  padding-right: 35%;
+  
+}
+
+.bookingButton {
+  padding-bottom: 20px;
+}

@@ -70,6 +70,8 @@ function User() {
         
         
     )
+} else {
+    window.location.href = "/"
 }
 }
 
