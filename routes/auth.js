@@ -30,7 +30,7 @@ router.post("/register", async (req, res, next) => {
             
         });
 
-    db.query(`insert into User values(?, ?, ?, ?, ?)`,[ email, req.body.firstname, req.body.lastname, req.body.birthday, pswrd],
+    db.query(`insert into User values(?, ?, ?, ?, ?, ?)`,[ email, req.body.firstname, req.body.lastname, req.body.birthday, pswrd, false],
         (err, result) => {
             if(err){
                 next(ApiError.badRequest("Birthday input not valid"));

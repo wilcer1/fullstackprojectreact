@@ -28,21 +28,28 @@
 h1{
   color:red;
   text-align: center;
+ 
+  
+}
+h3
+{
+  color: red;
+  text-align: center;
+  font-style: italic;
 }
 table#CinemaRoom{
   border: 2px solid black;
-  border-collapse : collapse;
   margin: 2rem auto;
   max-width: 900px;
+  border: hidden;
 }
 table#CinemaRoom td{
-  border: 2px solid black;
+  border: hidden;
   padding: 0
 }
 table#CinemaRoom button{
   width: 60px;
   height: 60px;
-  border: hidden;
   background-color: greenyellow;
 }
 table#CinemaRoom caption{
@@ -133,6 +140,9 @@ div#homepage h1{
   color: white;
   text-align: center;
   padding-top: 70px;
+  font-family: 'Allerta Stencil';font-size: 22px;
+  
+
 }
 
 div#showcase{
@@ -141,11 +151,122 @@ div#showcase{
   align-items: center;
 }
 
-
-
 div#homepage img{
  
   height: 400px;
   width: 300px;
 }
 
+#userDate {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.movieDescription img, video {
+  width: 400px;
+}
+
+.movieDescription {
+  color: white;
+}
+
+#CinemaRoom button{
+  border-radius: 20px
+}
+
+.movieScreen{
+  color: black;
+  background-color: white;
+  text-align: center;
+  border: 2px solid white;
+  margin: auto;
+  width: 450px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.booking {
+  float: left;
+}
+
+
+
+/* Slideshow */
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.slideshowSlider {
+  
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slideshowSlider img{
+  height: 400px;
+  width: 300px;
+}
+
+
+.slide {
+  display: inline-block;
+
+  height: 400px;
+  width: 100%;
+  border-radius: 40px;
+}
+
+/* Buttons */
+
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+  background-color: #265aca;
+  
+}
+
+.slideshowDot.active {
+  background-color: #971919;
+
+}
+.userInfo {
+  margin-top: 100px;
+  color: aqua;
+  text-align: center;
+}
+
+#info {
+  font-size: 23px;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+
+th {
+  text-align: left;
+  padding-left: 3px;
+  padding-right: 10px;
+}
+
+td {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.centerTable {
+  margin-left: auto;
+  margin-right: auto;
+}

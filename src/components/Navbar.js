@@ -8,11 +8,9 @@ function Navbar(props){
     var currentUser
 
     const [user, setUser] = useState([])
-    
     const getToken = localStorage.getItem("auth-token")
+
     if(getToken){
-    
-    
         const info = {
         token: getToken
     }
@@ -27,23 +25,24 @@ function Navbar(props){
         })
         .then(res => res.json())
         .then(response => {
-            if(response !== "Invalid Token")
-            {setUser(response)}
+            if(response !== "Invalid Token") {
+                setUser(response)
+            }
             
             
-        }).catch(err => console.log(err))
-
-        
-        
+        }).catch(err => console.log(err))  
     }
-if (user.length != 0) {
-    currentUser = <li className="currentUser"><a href="/user">Signed in as: {user}</a></li>
-   
-} else {
-    signIn = <li><a href="/SignIn">Sign in</a></li>
-    register = <li><a href="/Register">Register</a></li>
-    currentUser = <li className="currentUser"><a>Not signed in</a></li>
-}
+
+
+    if (user.length != 0) {
+        currentUser = <li className="currentUser"><a href="/user">Signed in as: {user}</a></li>
+    
+    } else {
+        signIn = <li><a href="/SignIn">Sign in</a></li>
+        register = <li><a href="/Register">Register</a></li>
+        currentUser = <li className="currentUser"><a>Not signed in</a></li>
+    }
+
     return(
         <>
         <h1>PERFECT MOVIES</h1>
@@ -53,13 +52,12 @@ if (user.length != 0) {
             <li><a href="/Movies">Movies</a></li>
             {signIn}
             {register}
+            <li><a href="/About">About</a></li>
             {currentUser}
         </ul>
         </div>
         </>
     )
-
-   
 }
 
 
