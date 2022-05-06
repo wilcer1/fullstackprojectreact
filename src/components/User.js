@@ -26,8 +26,24 @@ function User() {
             }
             
             
-        }).catch(err => console.log(err))  
+        })
     
+
+        fetch(`http://localhost:5000/api/auth/userstatus/${email}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(response => {
+            console.log(response[0].admin);
+            if (response[0].admin === 0) {
+                window.location.href = "/Admin"
+            } 
+        })
+
 
         fetch(`http://localhost:5000/api/user/${email}`, {
             method: "GET",
@@ -41,7 +57,7 @@ function User() {
             setUser(response[0])
         
             
-        }).catch(err => console.log(err))  
+        }) 
 
         
 
