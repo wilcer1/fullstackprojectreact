@@ -63,10 +63,10 @@ router.post("/login",  (req, res, next) => {
 
     });
 
-router.post("/user", (req, res, next) => {
+router.get("/user/:token", (req, res, next) => {
     // return user based on token
     let decoded;
-    const token = req.body.token;
+    const token = req.params.token;
     try{decoded = jwt.verify(token, process.env.SECRET_KEY);}
     catch(err){
         next(ApiError.badRequest("Invalid Token"));
