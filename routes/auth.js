@@ -87,12 +87,11 @@ router.get("/userstatus/:email", (req, res, next) => {
             }
             
 
-            res.send(result);
+            res.json(result);
 
         }
     )
 });
-
 
 
 module.exports = router;
