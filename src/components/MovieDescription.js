@@ -22,14 +22,7 @@ function MovieDescription(props){
   return (
     <div className="movieDescription">
     <h2>{movie.MovieName}</h2>
-    <img src={movie.Poster}></img><br></br>
-    <video src={movie.Trailer} controls></video>
-    <p>{movie.Description}<br></br>
-        <p>Director: {movie.Director}</p>
-        <p>Actors: {movie.Actors}</p>
-        <p>Release Date: {movie.ReleaseDate}</p>
-    </p>
-    
+    <img src={movie.Poster}></img>
   </div>
   );
 };
