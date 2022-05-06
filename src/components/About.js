@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from "./Navbar"
+import Footer from "./Footer"
 
 
 export default function About() {
@@ -17,6 +18,7 @@ export default function About() {
         <h3>API Management</h3>
         <h1>Gonzalo Carrero</h1>
         <h3>UI design</h3>
+        <Footer/>
     </div>
   )
 }

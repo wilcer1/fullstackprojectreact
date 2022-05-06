@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import Footer from "./Footer"
 
 function Navbar(props){
     var signIn
@@ -55,6 +56,7 @@ function Navbar(props){
             <li><a href="/About">About</a></li>
             {currentUser}
         </ul>
+       
         </div>
         </>
     )

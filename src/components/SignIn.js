@@ -1,5 +1,6 @@
 import React from "react"
 import Navbar from "./Navbar"
+import Footer from "./Footer"
 
 function SignIn() {
     return(
@@ -14,6 +15,7 @@ function SignIn() {
                 </form>
                 <button onClick={validateSignIn}>Log in</button>
             </div>
+            <Footer/>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import Navbar from "./Navbar"
+import Footer from "./Footer"
 
   
 function Movies(){
@@ -40,11 +41,13 @@ function Movies(){
             </p>
             <button id={movie.MovieId} onClick={() => {booking(movie.MovieId)}}>Book Tickets</button>
             <hr></hr>
+          
             
           </div>
 
     ))}
       </div>
+      <Footer/>
     </div>
   );
 };
