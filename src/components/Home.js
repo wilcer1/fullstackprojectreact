@@ -5,6 +5,9 @@ import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import Navbar from "./Navbar"
 
+
+const colors = ["https://m.media-amazon.com/images/M/MV5BYTExZTdhY2ItNGQ1YS00NjJlLWIxMjYtZTI1MzNlMzY0OTk4XkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg", "#00C49F", "#FFBB28"];
+const delay = 2500;
   
 function Home(){
     const history = useHistory()
@@ -19,23 +22,73 @@ function Home(){
     }, [])
 
 
+  const [index, setIndex] = React.useState(0);
+  const timeoutRef = React.useRef(null);
+
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
+  React.useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(
+      () =>
+        setIndex((prevIndex) =>
+          prevIndex === colors.length -1 ? 0 : prevIndex + 1
+        ),
+      delay
+    );
+
+    return () => {
+      resetTimeout();
+    };
+  }, [index]);
+
+
+
   return (
     <div>
       <Navbar/>
       <div id="homepage">
 
-      <h1>Movies right now!</h1>  
-      <div id = "showcase">
-          {movies.slice(0,3).map(movie => (
+      <h1>Top 3 movies right now!</h1>  
+
+    </div>
+    <div className="slideshow">
+      
+      <div
+        className="slideshowSlider"
+        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+      >
+          <div>
+          {movies.map(movie => (
+            <div className="slide" key="index">
             
             
             <img src={movie.Poster}></img>
-          
+          </div>
 
             ))}
 
       </div>
+   
+      </div>
+
+      <div className="slideshowDots">
+        {colors.map((_, idx) => (
+          <div
+            key={idx}
+            className={`slideshowDot${index === idx ? " active" : ""}`}
+            onClick={() => {
+              setIndex(idx);
+            }}
+          ></div>
+        ))}
+      </div>
     </div>
+  );
   </div>
 
   );
