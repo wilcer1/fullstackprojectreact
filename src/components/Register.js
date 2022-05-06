@@ -1,11 +1,8 @@
 import React from "react"
-import Navbar from "./Navbar"
-import Footer from "./Footer"
 
 function Register() {
     return(
         <div>
-            <Navbar/>
             <div className="account">
             <form name = "register">
                 <label>Email</label><br></br>
@@ -20,7 +17,6 @@ function Register() {
                 <input type="password" name="password"></input><br></br><br></br>
             </form>
             <button onClick={sendRegister}>Register</button>
-            <Footer/>
             </div>
         </div>
     )

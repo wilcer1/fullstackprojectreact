@@ -2,8 +2,6 @@ import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
-import Navbar from "./Navbar"
-import Footer from "./Footer"
 
   
 function Movies(){
@@ -26,7 +24,6 @@ function Movies(){
 
   return (
     <div>
-      <Navbar/>
       <div id="movies">
       <h1>Movies</h1>
       {movies.map(movie => (
@@ -47,7 +44,6 @@ function Movies(){
 
     ))}
       </div>
-      <Footer/>
     </div>
   );
 };

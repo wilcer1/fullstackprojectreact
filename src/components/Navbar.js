@@ -1,6 +1,5 @@
 import React from "react"
 import { useState } from "react"
-import Footer from "./Footer"
 import { useEffect } from "react"
 
 function Navbar(){
@@ -51,7 +50,6 @@ function Navbar(){
             <li><a href="/About">About</a></li>
             {currentUser}
         </ul>
-       
         </div>
         </>
     )

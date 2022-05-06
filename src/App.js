@@ -1,6 +1,7 @@
 import './App.css'
 
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 import {
   BrowserRouter as Router,
@@ -23,6 +24,7 @@ import User from "./components/User"
 function App() {
   return (
     
+    
     // <div className="App">
     //       <h1>PERFECT MOVIES</h1>
     //   <Navbar/>
@@ -33,6 +35,8 @@ function App() {
     // </div>
     <>
     {/* This is the alias of BrowserRouter i.e. Router */}
+    <Navbar/>
+    
     <Router>
       <Switch>
         {/* This route is for home component 
@@ -60,6 +64,7 @@ function App() {
         <Redirect to="/" />
       </Switch>
     </Router>
+    <Footer/>
   </>
   )
 }

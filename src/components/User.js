@@ -1,5 +1,4 @@
 import React from "react"
-import Navbar from "./Navbar"
 import { useState } from "react"
 
 function User() {
@@ -63,7 +62,6 @@ function User() {
 
     return(
         <div>
-            <Navbar/>
             <div className="userInfo">
                 <h2>User information</h2>
                 <table className="centerTable">

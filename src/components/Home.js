@@ -3,8 +3,6 @@ import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
-import Navbar from "./Navbar"
-import Footer from "./Footer"
 
 
 const colors = ["https://m.media-amazon.com/images/M/MV5BYTExZTdhY2ItNGQ1YS00NjJlLWIxMjYtZTI1MzNlMzY0OTk4XkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg", "#00C49F", "#FFBB28"];
@@ -51,10 +49,7 @@ function Home(){
 
   return (
     <div>
-      <Navbar/>
-      
       <div id="homepage">
-
       <h1>Top 3 movies right now!</h1>  
 
     </div>
@@ -75,7 +70,6 @@ function Home(){
             ))}
 
       </div>
-   
       </div>
 
       <div className="slideshowDots">
@@ -90,8 +84,6 @@ function Home(){
         ))}
       </div>
     </div>
-    <Footer/>
-  
   </div>
 
   );

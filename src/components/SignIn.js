@@ -1,11 +1,9 @@
 import React from "react"
-import Navbar from "./Navbar"
-import Footer from "./Footer"
+
 
 function SignIn() {
     return(
         <div>
-            <Navbar/>
             <div className="account">
                 <form name = "signIn">
                     <label>Email</label><br></br>
@@ -15,7 +13,6 @@ function SignIn() {
                 </form>
                 <button onClick={validateSignIn}>Log in</button>
             </div>
-            <Footer/>
         </div>
     )
 }
