@@ -94,5 +94,4 @@ router.get("/userstatus/:email", (req, res, next) => {
 });
 
 
-
 module.exports = router;
