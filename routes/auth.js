@@ -13,8 +13,6 @@ router.post("/register", async (req, res, next) => {
     }
     const salt = await bcrypt.genSalt(5);
     const pswrd = await bcrypt.hash(req.body.password, salt);
-    // const link = await bcrypt.hash(req.body.email, salt)
-    // const replaced = link.replace(/[^a-z0-9]/gi, '');
 
     db.query(`select * from User where Email = "${email}"`,
         (err, result) => {
