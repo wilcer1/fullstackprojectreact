@@ -1,21 +1,21 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { useState } from "react"
 import Footer from "./Footer"
+import { useEffect } from "react"
 
-function Navbar(props){
-    var signIn
-    var register
-    var currentUser
+function Navbar(){
+    const [signIn, setSignIn] = useState([])
+    const [register, setRegister] = useState([])
+    const [currentUser, setCurrentUser] = useState([])
 
-    const [user, setUser] = useState([])
-    const getToken = localStorage.getItem("auth-token")
-
-    if(getToken){
+    useEffect(() => {
+        const getToken = localStorage.getItem("auth-token")
+    
         const info = {
         token: getToken
     }
 
+    
     fetch(`http://localhost:5000/api/auth/user/${info.token}`, {
             method: "GET",
             headers: {
@@ -26,23 +26,18 @@ function Navbar(props){
         })
         .then(res => res.json())
         .then(response => {
-            if(response !== "Invalid Token") {
-                setUser(response)
-            }
+                if (response.length != 0) {
+                    setCurrentUser(<li className="currentUser"><a href="/user">Signed in as: {response}</a></li>)
+                    
+                }else {
+                    setSignIn(<li><a href="/SignIn">Sign in</a></li>)
+                    setRegister(<li><a href="/Register">Register</a></li>)
+                    setCurrentUser(<li className="currentUser"><a>Not signed in</a></li>)
+                }
             
-            
-        }).catch(err => console.log(err))  
-    }
+        }) 
+    }, [])
 
-
-    if (user.length != 0) {
-        currentUser = <li className="currentUser"><a href="/user">Signed in as: {user}</a></li>
-    
-    } else {
-        signIn = <li><a href="/SignIn">Sign in</a></li>
-        register = <li><a href="/Register">Register</a></li>
-        currentUser = <li className="currentUser"><a>Not signed in</a></li>
-    }
 
     return(
         <>

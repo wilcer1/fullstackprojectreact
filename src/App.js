@@ -8,18 +8,15 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-// Import SignIn component
-import Register from "./components/Register"
-// Import Home component
-import SignIn from "./components/SignIn"
-// Import Home component
-import Home from "./components/Home"
-// Import About component
-import CinemaRoom from './components/CinemaRoom'
- 
-import About from './components/About';
 
-import Movies from './components/Movies';
+
+import Register from "./components/Register"
+import SignIn from "./components/SignIn"
+import Home from "./components/Home"
+import CinemaRoom from './components/CinemaRoom'
+import About from "./components/About"
+import Movies from "./components/Movies"
+import Admin from "./components/Admin"
 
 import User from "./components/User"
 // Import ContactUs component
@@ -54,6 +51,8 @@ function App() {
         <Route path="/User" component={User} />
         
         <Route path="/About" component={About} />
+
+        <Route path="/Admin" component={Admin} />
           
         {/* If any route mismatches the upper 
         route endpoints then, redirect triggers 
