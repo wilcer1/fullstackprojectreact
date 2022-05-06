@@ -14,6 +14,7 @@ class ApiError {
     static internal(msg){
         return new ApiError(500, msg);
     }
+
 }
 
 module.exports = ApiError;
