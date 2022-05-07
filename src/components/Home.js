@@ -62,9 +62,9 @@ function Home(){
           <div>
           {movies.map(movie => (
             <div className="slide" key="index">
-            
-            
-            <img src={movie.Poster}></img>
+              <a href={`http://localhost:3000/Movies#${movie.MovieId}`}>
+                <img src={movie.Poster}></img>
+              </a>
           </div>
 
             ))}
