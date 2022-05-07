@@ -1,6 +1,5 @@
 import React from "react"
 
-
 function SignIn() {
     return(
         <div>
@@ -9,9 +8,8 @@ function SignIn() {
                     <label>Email</label><br></br>
                     <input type="email" name="email"></input><br></br><br></br>
                     <label>Password</label><br></br>
-                    <input type="password" name="password"></input> 
+                    <input type="password" name="password"></input>
                 </form>
-                <br></br>
                 <button onClick={validateSignIn}>Log in</button>
             </div>
         </div>
@@ -26,7 +24,6 @@ function validateSignIn() {
         password: password
     }
     
-    // Sign in by sending email and password
     fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
@@ -36,10 +33,10 @@ function validateSignIn() {
     })
     .then(res => res.json())
     .then(response => {
-        // If email and password is correct, set auth-token
-        if (response.status === "Success") {
+        console.log(response);
+        if (response.authToken) {
             localStorage.setItem("auth-token", response.authToken)
-            window.location.href = "/"
+            window.location.href = "/";
         } else {
             alert(response)
         }
