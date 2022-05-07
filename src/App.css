@@ -349,3 +349,12 @@ height:100%;
 	margin-top:70px;
 	margin-left:40px;
 }
+#descriptionStyle {
+  padding-left: 35%;
+  padding-right: 35%;
+  
+}
+
+.bookingButton {
+  padding-bottom: 20px;
+}

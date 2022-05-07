@@ -8,13 +8,15 @@ function Navbar(){
     const [currentUser, setCurrentUser] = useState([])
 
     useEffect(() => {
-        const getToken = localStorage.getItem("auth-token")
-    
+    const getToken = localStorage.getItem("auth-token")
+
+    // Do only if the user is signed in
+    if(getToken){
         const info = {
         token: getToken
     }
 
-    
+    // Get email and admin trough sign in token
     fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
             method: "GET",
             headers: {
@@ -40,8 +42,9 @@ function Navbar(){
                 }
             
         }) 
-    }, [])
+    }}, [])
 
+    
 
     return(
         <>
