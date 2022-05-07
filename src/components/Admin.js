@@ -2,7 +2,6 @@ import React from "react"
 import { useState } from "react"
 
 function Admin() {
-    const [email, setEmail] = useState([])
     const getToken = localStorage.getItem("auth-token")
 
     if(getToken){
@@ -10,7 +9,7 @@ function Admin() {
         token: getToken
         }
 
-    fetch(`http://localhost:5000/api/auth/user/${info.token}`, {
+        fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -20,27 +19,19 @@ function Admin() {
         .then(res => res.json())
         .then(response => {
             if(response !== "Invalid Token") {
-                setEmail(response)
+                if (response.admin !== 1) {
+                    window.location.href = "/user"
+            } 
             }
+            
             
             
         })
     
 
-        fetch(`http://localhost:5000/api/auth/userstatus/${email}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                'Accept': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(response => {
-            console.log(response[0].admin);
-            if (response[0].admin === 1) {
-                window.location.href = "/"
-            } 
-        })
+        
+    } else {
+        window.location.href = "/"
     }
 
     return(

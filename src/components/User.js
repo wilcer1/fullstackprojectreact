@@ -1,17 +1,18 @@
 import React from "react"
 import { useState } from "react"
+import { useEffect } from "react"
 
 function User() {
-    const [email, setEmail] = useState([])
     const [user, setUser] = useState([])
     const getToken = localStorage.getItem("auth-token")
 
+    useEffect(() => {
     if(getToken){
         const info = {
         token: getToken
         }
 
-    fetch(`http://localhost:5000/api/auth/user/${info.token}`, {
+    fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -20,10 +21,12 @@ function User() {
         })
         .then(res => res.json())
         .then(response => {
-            if(response !== "Invalid Token") {
-                setEmail(response)
+            if (response.admin === 1) {
+                window.location.href = "/admin"
             } 
-            fetch(`http://localhost:5000/api/user/${response}`, {
+            if(response !== "Invalid Token") {
+            } 
+            fetch(`http://localhost:5000/api/user/${response.email}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -35,6 +38,10 @@ function User() {
                 setUser(response[0])
             }) 
         })
+   } else {
+        window.location.href = "/"
+   }
+}, [])
             
 
     return(
@@ -43,7 +50,7 @@ function User() {
                 <h2>User information</h2>
                 <table className="centerTable">
                 <th>Email</th>
-                <td>{email}</td>
+                <td>{user.Email}</td>
                 <tr></tr>
                 <th>First name</th>
                 <td>{user.FirstName}</td>
@@ -61,7 +68,7 @@ function User() {
         
     )
 }
-}
+
 
 
 export default User
