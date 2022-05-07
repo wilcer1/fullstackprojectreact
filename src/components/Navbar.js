@@ -27,6 +27,7 @@ function Navbar(){
         })
         .then(res => res.json())
         .then(response => {
+            alert(response);
                 if (response.length != 0) {
                     if (response.admin === 1) {
                         setCurrentUser(<li className="currentUser"><a href="/admin">Signed in as: {response.email}</a></li>)
@@ -56,11 +57,18 @@ function Navbar(){
             {signIn}
             {register}
             <li><a href="/About">About</a></li>
+            <li><a onClick={logOut}>Log out</a></li>
             {currentUser}
         </ul>
         </div>
         </>
     )
+}
+
+function logOut() {
+    const getToken = localStorage.getItem("auth-token")
+    localStorage.removeItem("auth-token", getToken)
+    window.location.reload()
 }
 
 
