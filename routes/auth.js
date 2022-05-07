@@ -94,4 +94,33 @@ router.get("/userstatus/:email", (req, res, next) => {
 });
 
 
+router.get("/user1/:token", (req, res, next) => {
+    let admin
+    // return user based on token
+    let decoded;
+    const token = req.params.token;
+    try{decoded = jwt.verify(token, process.env.SECRET_KEY);
+        
+    }
+    catch(err){
+        next(ApiError.badRequest(""));
+        return;
+
+    }
+    db.query(`select admin from User where Email = "${decoded.email}";`,
+            async (err, result) => {
+                admin = result
+                if(result.length === 0){
+                    next(ApiError.badRequest("Invalid Token"));
+                    return;
+
+                }
+                res.json({"email": decoded.email, "admin": result[0].admin})
+            }
+        )
+    
+    
+    
+});
+
 module.exports = router;
