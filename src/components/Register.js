@@ -1,5 +1,4 @@
 import React from "react"
-import { useEffect } from "react"
 
 function Register() {
     return(
@@ -17,13 +16,13 @@ function Register() {
                 <label>Password</label><br></br>
                 <input type="password" name="password"></input><br></br><br></br>
             </form>
-            <button onClick={SendRegister}>Register</button>
+            <button onClick={sendRegister}>Register</button>
             </div>
         </div>
     )
 }
 
-function SendRegister() {
+function sendRegister() {
     const email = document.forms["register"]["email"].value
     const firstname = document.forms["register"]["firstname"].value
     const lastname = document.forms["register"]["lastname"].value
@@ -38,7 +37,6 @@ function SendRegister() {
         password: password
     }
 
-    useEffect(() => {
     fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: {
@@ -48,30 +46,25 @@ function SendRegister() {
     })
     .then(res => res.text())
     .then(response => {
-
-
-        if(response === "Registered Successfully"){
-            ValidateRegister(email, password);
+        if (response === "Registered Successfully"){
+            validateRegister(email, password)
             
         }else{
-            console.log(response);
+            console.log(response)
         }
             
 
     }) 
-}, [])
-   
-       
+     
         
 }
 
-function ValidateRegister(email, password) {
+function validateRegister(email, password) {
     const info = {
         email: email,
         password: password
     }
     
-    useEffect(() => {
     fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
@@ -81,12 +74,9 @@ function ValidateRegister(email, password) {
     })
     .then(res => res.json())
     .then(response => {
-        console.log(response);
         localStorage.setItem("auth-token", response.authToken)
-        window.location.href = "/";
+        window.location.href = "/"
     })
-
-}, [])
 }
 
 
