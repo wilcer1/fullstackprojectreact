@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 
 function Navbar(){
+    const [signOut, setSignOut] = useState([])
     const [signIn, setSignIn] = useState([])
     const [register, setRegister] = useState([])
     const [currentUser, setCurrentUser] = useState([])
@@ -26,6 +27,7 @@ function Navbar(){
         .then(res => res.json())
         .then(response => {
                 if (response.length != 0) {
+                    setSignOut(<li><a onClick={logOut}>Log out</a></li>)
                     if (response.admin === 1) {
                         setCurrentUser(<li className="currentUser"><a href="/admin">Signed in as: {response.email}</a></li>)
                     } else {
@@ -53,7 +55,7 @@ function Navbar(){
             {signIn}
             {register}
             <li><a href="/About">About</a></li>
-            <li><a onClick={logOut}>Log out</a></li>
+            {signOut}
             {currentUser}
         </ul>
         </div>
