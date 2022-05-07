@@ -1,4 +1,5 @@
 import React from "react"
+import { useEffect } from "react"
 
 function Register() {
     return(
@@ -16,13 +17,13 @@ function Register() {
                 <label>Password</label><br></br>
                 <input type="password" name="password"></input><br></br><br></br>
             </form>
-            <button onClick={sendRegister}>Register</button>
+            <button onClick={SendRegister}>Register</button>
             </div>
         </div>
     )
 }
 
-function sendRegister() {
+function SendRegister() {
     const email = document.forms["register"]["email"].value
     const firstname = document.forms["register"]["firstname"].value
     const lastname = document.forms["register"]["lastname"].value
@@ -37,6 +38,7 @@ function sendRegister() {
         password: password
     }
 
+    useEffect(() => {
     fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: {
@@ -46,11 +48,10 @@ function sendRegister() {
     })
     .then(res => res.text())
     .then(response => {
-        console.log(response);
 
 
         if(response === "Registered Successfully"){
-            validateRegister(email, password);
+            ValidateRegister(email, password);
             
         }else{
             console.log(response);
@@ -58,17 +59,19 @@ function sendRegister() {
             
 
     }) 
+}, [])
    
        
         
 }
 
-function validateRegister(email, password) {
+function ValidateRegister(email, password) {
     const info = {
         email: email,
         password: password
     }
     
+    useEffect(() => {
     fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
@@ -82,6 +85,8 @@ function validateRegister(email, password) {
         localStorage.setItem("auth-token", response.authToken)
         window.location.href = "/";
     })
+
+}, [])
 }
 
 

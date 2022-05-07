@@ -1,9 +1,11 @@
 import React from "react"
 import { useState } from "react"
+import { useEffect } from "react"
 
 function Admin() {
     const getToken = localStorage.getItem("auth-token")
 
+    useEffect(() => {
     if(getToken){
         const info = {
         token: getToken
@@ -27,12 +29,16 @@ function Admin() {
             
             
         })
-    
-
-        
     } else {
         window.location.href = "/"
     }
+
+
+}, [])
+    
+
+      
+
 
     return(
         <div>

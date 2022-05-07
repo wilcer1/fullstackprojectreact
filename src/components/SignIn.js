@@ -1,4 +1,5 @@
 import React from "react"
+import { useEffect } from "react"
 
 function SignIn() {
     return(
@@ -10,20 +11,21 @@ function SignIn() {
                     <label>Password</label><br></br>
                     <input type="password" name="password"></input>
                 </form>
-                <button onClick={validateSignIn}>Log in</button>
+                <br></br>
+                <button onClick={ValidateSignIn}>Log in</button>
             </div>
         </div>
     )
 }
 
-function validateSignIn() {
+function ValidateSignIn() {
     const email = document.forms["signIn"]["email"].value
     const password = document.forms["signIn"]["password"].value
     const info = {
         email: email,
         password: password
     }
-    
+    useEffect(() => {
     fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
@@ -41,7 +43,9 @@ function validateSignIn() {
             alert(response)
         }
     })
+}, [])
 }
+
 
 
 export default SignIn
