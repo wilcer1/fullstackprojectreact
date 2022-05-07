@@ -15,7 +15,7 @@ function Navbar(){
     }
 
     
-    fetch(`http://localhost:5000/api/auth/user/${info.token}`, {
+    fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -26,9 +26,14 @@ function Navbar(){
         .then(res => res.json())
         .then(response => {
                 if (response.length != 0) {
-                    setCurrentUser(<li className="currentUser"><a href="/user">Signed in as: {response}</a></li>)
+                    if (response.admin === 1) {
+                        setCurrentUser(<li className="currentUser"><a href="/admin">Signed in as: {response.email}</a></li>)
+                    } else {
+                        setCurrentUser(<li className="currentUser"><a href="/user">Signed in as: {response.email}</a></li>)
+                    }
                     
-                }else {
+                    
+                } else {
                     setSignIn(<li><a href="/SignIn">Sign in</a></li>)
                     setRegister(<li><a href="/Register">Register</a></li>)
                     setCurrentUser(<li className="currentUser"><a>Not signed in</a></li>)

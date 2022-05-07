@@ -23,43 +23,20 @@ function User() {
         .then(response => {
             if(response !== "Invalid Token") {
                 setEmail(response)
-            }
-            
-            
-        })
-    
-
-        fetch(`http://localhost:5000/api/auth/userstatus/${email}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                'Accept': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(response => {
-            console.log(response[0].admin);
-            if (response[0].admin === 0) {
-                window.location.href = "/Admin"
             } 
-        })
-
-
-        fetch(`http://localhost:5000/api/user/${email}`, {
+            fetch(`http://localhost:5000/api/user/${response}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 'Accept': 'application/json'
             }
+            })
+            .then(res => res.json())
+            .then(response => {
+                setUser(response[0])
+            }) 
         })
-        .then(res => res.json())
-        .then(response => {
-            setUser(response[0])
-        
             
-        }) 
-
-        
 
     return(
         <div>
