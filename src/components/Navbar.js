@@ -8,15 +8,13 @@ function Navbar(){
     const [currentUser, setCurrentUser] = useState([])
 
     useEffect(() => {
-    const getToken = localStorage.getItem("auth-token")
-
-    // Do only if the user is signed in
-    if(getToken){
+        const getToken = localStorage.getItem("auth-token")
+    
         const info = {
         token: getToken
     }
 
-    // Get email and admin trough sign in token
+    
     fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
             method: "GET",
             headers: {
@@ -27,7 +25,6 @@ function Navbar(){
         })
         .then(res => res.json())
         .then(response => {
-            alert(response);
                 if (response.length != 0) {
                     if (response.admin === 1) {
                         setCurrentUser(<li className="currentUser"><a href="/admin">Signed in as: {response.email}</a></li>)
@@ -43,9 +40,8 @@ function Navbar(){
                 }
             
         }) 
-    }}, [])
+    }, [])
 
-    
 
     return(
         <>
@@ -70,6 +66,5 @@ function logOut() {
     localStorage.removeItem("auth-token", getToken)
     window.location.reload()
 }
-
 
 export default Navbar
