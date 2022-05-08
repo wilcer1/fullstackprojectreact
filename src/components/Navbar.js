@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
+import "../Navbar.css"
 
 function Navbar(){
     const [signOut, setSignOut] = useState([])
@@ -46,19 +47,27 @@ function Navbar(){
 
 
     return(
+        
         <>
-        <h1>PERFECT MOVIES</h1>
-        <div id="navbar">
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/Movies">Movies</a></li>
-            {signIn}
-            {register}
-            <li><a href="/About">About</a></li>
-            {signOut}
-            {currentUser}
-        </ul>
-        </div>
+            <header className="menu">
+                <div className="menu-wrap">
+                <input type="checkbox" id="checkbox"></input>
+                    <nav>
+                        <ul>
+                            <li><a href="/"><h1>PERFECT MOVIES</h1></a></li>
+                            <li><a href="/Movies">Movies</a></li>
+                            {signIn}
+                            {register}
+                            <li><a href="/About">About</a></li>
+                            {signOut}
+                            {currentUser}
+                        </ul>
+                    </nav>
+                <label for="checkbox">
+                <i className="fa fa-bars menu-icon"></i>
+                </label>
+                </div>
+            </header>
         </>
     )
 }
