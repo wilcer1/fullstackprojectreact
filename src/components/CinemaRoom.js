@@ -100,7 +100,7 @@ function CinemaRoom(props){
             })
             alert(`Booked seats ${bookedSeats}`)
         }else{
-            alert("No seats booked")
+            window.location.href = "/SignIn"
         }
     }
     return(
