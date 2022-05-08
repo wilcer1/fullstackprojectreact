@@ -1,9 +1,11 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
+import "../Admin.css"
 
 function Admin() {
     const getToken = localStorage.getItem("auth-token")
+    const [data, setData] = useState([])
 
     useEffect(() => {
     if(getToken){
@@ -33,21 +35,66 @@ function Admin() {
         })
     } else {
         window.location.href = "/"
-    }
+}
 
 
 }, [])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/api/movie`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(response => {
+            console.log(response);
+            setData(response)
+            
+            
+            
+            
+        })
+
+}, [])
+        
+    
+    
+        
     
 
-      
-
-
+        
     return(
         <div>
-
+            <table>
+              {data.map(
+            (myData) => (
+                <table>
+            {Object.entries(myData).map(
+                (dataIsGood) => (
+                
+                        <tr>
+                        <th>{dataIsGood[0]}</th>
+                        <td>{dataIsGood[1]}</td>
+                        </tr>
+                
+                )
+            )}
+            </table>
+           
+              )
+    )}
+                
+            
+                    
+                
+            </table>
+            
         </div>
     )
-}
+    }
 
 
 
