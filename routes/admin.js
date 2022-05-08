@@ -40,7 +40,7 @@ router.delete("/delMovie", (req, res, next) => {
     }
 
     db.query(`DELETE FROM Movie WHERE MovieId = ${req.body.movieId}`, 
-    (err, res) => {
+    (err, result) => {
         if(err) {
             next(apiError.badRequest("Delete failed"));
             return;
@@ -59,8 +59,8 @@ router.patch("/updMovie", (req, res, next) => {
         return;
     }
 
-    db.query(`UPDATE Movie SET ${req.body.column} = ${req.body.updValue} WHERE MovieId = ${req.body.movieId}`, 
-    (err, res) => {
+    db.query(`UPDATE Movie SET ${req.body.column} = "${req.body.updValue}" WHERE MovieId = ${req.body.movieId}`, 
+    (err, result) => {
         if(err) {
             next(apiError.badRequest("Update failed"));
             return;
