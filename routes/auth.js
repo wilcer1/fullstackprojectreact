@@ -109,8 +109,7 @@ router.get("/userstatus/:token", (req, res, next) => {
 
                 }
                 res.json({"email": decoded.email, "admin": result[0].admin})
-            }
-        )
+            })
     
     
     
