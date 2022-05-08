@@ -4,12 +4,13 @@ const jwt = require("jsonwebtoken");
 const apiError = require("../error/ApiError");
 
 
+
 router.post("/addmovie", (req, res, next) => {
     const token = req.body.token;
     try{
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     }catch(err){
-        next(apiError.badRequest(err));
+        next(apiError.badRequest("Invalid Token"));
         return;
     }
 
@@ -27,6 +28,46 @@ router.post("/addmovie", (req, res, next) => {
            
             
     });
+
+});
+router.delete("/delMovie", (req, res, next) => {
+    const token = req.body.token;
+    try{
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    }catch(err){
+        next(apiError.badRequest("Invalid Token"));
+        return;
+    }
+
+    db.query(`DELETE FROM Movie WHERE MovieId = ${req.body.movieId}`, 
+    (err, result) => {
+        if(err) {
+            next(apiError.badRequest("Delete failed"));
+            return;
+        }
+        res.send(`Movie Deleted`);
+    });
+
+});
+
+router.patch("/updMovie", (req, res, next) => {
+    const token = req.body.token;
+    try{
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    }catch(err){
+        next(apiError.badRequest("Invalid Token"));
+        return;
+    }
+
+    db.query(`UPDATE Movie SET ${req.body.column} = "${req.body.updValue}" WHERE MovieId = ${req.body.movieId}`, 
+    (err, result) => {
+        if(err) {
+            next(apiError.badRequest("Update failed"));
+            return;
+        }
+        res.send("Movie Updated");
+    })
+
 
 });
 

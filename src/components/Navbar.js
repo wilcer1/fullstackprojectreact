@@ -13,10 +13,15 @@ function Navbar(){
     
         const info = {
         token: getToken
-    }
+        }
+    if(!getToken){
+        setSignIn(<li><a href="/SignIn">Sign in</a></li>)
+        setRegister(<li><a href="/Register">Register</a></li>)
+        setCurrentUser(<li className="currentUser"><a>Not signed in</a></li>)}
 
+    else{
     
-    fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
+    fetch(`http://localhost:5000/api/auth/userstatus/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +31,7 @@ function Navbar(){
         })
         .then(res => res.json())
         .then(response => {
-                if (response.length != 0) {
+                if (response !== "Email does not exist" && response !== "Invalid Token") {
                     setSignOut(<li><a onClick={logOut}>Log out</a></li>)
                     if (response.admin === 1) {
                         setCurrentUser(<li className="currentUser"><a href="/admin">Signed in as: {response.email}</a></li>)
@@ -35,13 +40,12 @@ function Navbar(){
                     }
                     
                     
-                } else {
-                    setSignIn(<li><a href="/SignIn">Sign in</a></li>)
-                    setRegister(<li><a href="/Register">Register</a></li>)
-                    setCurrentUser(<li className="currentUser"><a>Not signed in</a></li>)
-                }
+                } 
             
-        }) 
+        }) }
+        
+       
+        
     }, [])
 
 
@@ -68,5 +72,6 @@ function logOut() {
     localStorage.removeItem("auth-token", getToken)
     window.location.href = "/"
 }
+
 
 export default Navbar

@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  /* Style the header */
+  .header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Style the top navigation bar */
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  /* Style the topnav links */
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change color on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Create three unequal columns that floats next to each other */
+  .column {
+    float: left;
+    padding: 10px;
+  }
+  
+  /* Left and right column */
+  .column.side {
+    width: 25%;
+  }
+  
+  /* Middle column */
+  .column.middle {
+    width: 50%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .movieScreen{
+    color: black;
+    background-color: white;
+    text-align: center;
+    border: 2px solid white;
+    margin: auto;
+    width: 450px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.movieDescription img {
+width: 75%;
+}
+
+.movieDescription {
+color: white;
+text-align: center;
+}
+table#CinemaRoom{
+border: 2px solid black;
+margin: 2rem auto;
+width: 100%;
+max-width: 600px;
+border: hidden;
+}
+table#CinemaRoom td{
+border: hidden;
+padding: 0;
+height: 60px;
+width: 10%;
+}
+table#CinemaRoom button{
+width: 100%;
+height: 100%;
+background-color: greenyellow;
+border-radius: 20px;
+}
+table#CinemaRoom caption{
+color: white;
+}
+table#CinemaRoom button:hover{
+opacity: 90%
+}
+div#bookTickets{
+    text-align: center;
+}
+div#bookTickets button{
+    background-image: linear-gradient(to right, rgb(209, 26, 26), rgb(88, 6, 6));
+    color: white;
+    border: 1px solid white;
+    border-radius: 10%;
+    padding: 10px;
+    font-size: larger;
+    outline: 3px dashed white;
+    outline-offset: 3px;
+}
+
+  
+  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 1000px) {
+    .column.side, .column.middle {
+      width: 100%;
+    }
+    .movieDescription img {
+        width: 25%;
+        }
+    table#CinemaRoom td{
+        height: 30px;
+
+        }
+  }

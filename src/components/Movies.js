@@ -12,7 +12,6 @@ function Movies(){
         fetch("http://localhost:5000/api/movie")
         .then(res => res.json())
         .then(response => {
-            console.log(response);
             setMovies(response)
         })
     }, [])
