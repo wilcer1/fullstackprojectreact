@@ -203,6 +203,7 @@ router.get("/seats/:date", (req, res, next) => {
             seats.push(element);
         });
         try{ 
+            //check if seat id matches a booked seat, and set booked to true if it does
            for(let seat of seats){
                seat.booked = false;
                for(let bseat of bookedSeats){
