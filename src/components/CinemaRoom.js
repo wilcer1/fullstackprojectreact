@@ -53,7 +53,7 @@ function CinemaRoom(props){
             
         })
     } else {
-        alert("You need to login, you fucking boomer")
+        window.location.href = "/SignIn"
     }
     }, [])
 
