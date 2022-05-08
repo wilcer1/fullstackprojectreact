@@ -74,7 +74,7 @@ router.get("/booking", (req, res) => {
 
 //get one specific booking....
 router.get("/booking/:bookingnumber", (req, res) => {
-    db.query(`select * from seat_booked where BookingNumber = ${req.params.bookingnumber};`,
+    db.query(`select * from seat_booked where Booking_BookingNumber = ${req.params.bookingnumber};`,
         (err, result) => {
             if(err){
                 console.log(err);
@@ -102,7 +102,7 @@ router.post("/addbooking", (req, res, next) => {
 
     db.query(`INSERT INTO Booking VALUES((BookingNumber), ?, ?)`,
         [movieId, email],
-    (err, result) => {
+        (err, result) => {
         if(err){
             
             console.log(err);
@@ -112,7 +112,7 @@ router.post("/addbooking", (req, res, next) => {
     });
     
     db.query(`SELECT BookingNumber from Booking WHERE User_Email = "${email}"`,
-        (err, result) => {
+        (err, result) => {  
             if(err){
                 console.log(err);
             }
@@ -138,6 +138,7 @@ router.post("/addbooking", (req, res, next) => {
         
 
 });
+
 
     
     

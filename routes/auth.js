@@ -11,8 +11,21 @@ router.post("/register", async (req, res, next) => {
         next(ApiError.badRequest("Email syntax not correct"));
         return;
     }
+    
+    if(!req.body.firstname || !req.body.lastname){
+        next(ApiError.badRequest("First or Lastname not entered"));
+        return;
+    }
+
+    if(req.body.password.length < 8){
+        next(ApiError.badRequest("Password must be atleast 8 characters"));
+        return;
+    }
+
     const salt = await bcrypt.genSalt(5);
     const pswrd = await bcrypt.hash(req.body.password, salt);
+
+    
 
     db.query(`select * from User where Email = "${email}"`,
         (err, result) => {
