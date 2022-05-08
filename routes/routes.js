@@ -87,7 +87,6 @@ router.get("/booking/:bookingnumber", (req, res) => {
 
 //make one booking....
 router.post("/addbooking", (req, res, next) => {
-    var bookingnumber;
     // for booking table
     const movieId = req.body.movieId;
 
