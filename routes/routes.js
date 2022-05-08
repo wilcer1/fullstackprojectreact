@@ -104,7 +104,8 @@ router.post("/addbooking", (req, res, next) => {
         (err, result) => {
         if(err){
             
-            console.log(err);
+            next(ApiError.internal("Something went wrong"));
+            return;
            
         }
         
@@ -113,26 +114,25 @@ router.post("/addbooking", (req, res, next) => {
     db.query(`SELECT BookingNumber from Booking WHERE User_Email = "${email}"`,
         (err, result) => {  
             if(err){
-                console.log(err);
+                next(ApiError.internal("Something went wrong"));
+                return;
             }
             db.query(`INSERT INTO seat_booked VALUES(?, ?, ?)`,
                 [date, seatId,  result[result.length - 1].BookingNumber],
                     (err, c) => {
                         if(err){
-                            console.log(err);
+                            next(ApiError.internal("Something went wrong"));
+                            return;
                         }
     
-    
+                        res.send("Success");
         });
-
-        }
-    
-    
-    );
+        
+        });
 
    
 
-    res.send("Success");
+    
         
         
 
