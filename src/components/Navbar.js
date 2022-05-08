@@ -13,8 +13,13 @@ function Navbar(){
     
         const info = {
         token: getToken
-    }
+        }
+    if(!getToken){
+        setSignIn(<li><a href="/SignIn">Sign in</a></li>)
+        setRegister(<li><a href="/Register">Register</a></li>)
+        setCurrentUser(<li className="currentUser"><a>Not signed in</a></li>)}
 
+    else{
     
     fetch(`http://localhost:5000/api/auth/userstatus/${info.token}`, {
             method: "GET",
@@ -35,13 +40,12 @@ function Navbar(){
                     }
                     
                     
-                } else {
-                    setSignIn(<li><a href="/SignIn">Sign in</a></li>)
-                    setRegister(<li><a href="/Register">Register</a></li>)
-                    setCurrentUser(<li className="currentUser"><a>Not signed in</a></li>)
-                }
+                } 
             
-        }) 
+        }) }
+        
+       
+        
     }, [])
 
 
@@ -68,5 +72,6 @@ function logOut() {
     localStorage.removeItem("auth-token", getToken)
     window.location.reload()
 }
+
 
 export default Navbar
