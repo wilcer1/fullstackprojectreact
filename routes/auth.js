@@ -108,7 +108,7 @@ router.get("/userstatus/:email", (req, res, next) => {
 
 
 router.get("/user1/:token", (req, res, next) => {
-    let admin
+    let admin;
     // return user based on token
     let decoded;
     const token = req.params.token;
@@ -122,7 +122,7 @@ router.get("/user1/:token", (req, res, next) => {
     }
     db.query(`select admin from User where Email = "${decoded.email}";`,
             async (err, result) => {
-                admin = result
+                admin = result;
                 if(result.length === 0){
                     next(ApiError.badRequest("Invalid Token"));
                     return;
