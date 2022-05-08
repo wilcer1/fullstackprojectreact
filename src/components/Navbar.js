@@ -1,22 +1,22 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { useState } from "react"
-import Footer from "./Footer"
+import { useEffect } from "react"
 
-function Navbar(props){
-    var signIn
-    var register
-    var currentUser
+function Navbar(){
+    const [signOut, setSignOut] = useState([])
+    const [signIn, setSignIn] = useState([])
+    const [register, setRegister] = useState([])
+    const [currentUser, setCurrentUser] = useState([])
 
-    const [user, setUser] = useState([])
-    const getToken = localStorage.getItem("auth-token")
-
-    if(getToken){
+    useEffect(() => {
+        const getToken = localStorage.getItem("auth-token")
+    
         const info = {
         token: getToken
     }
 
-    fetch(`http://localhost:5000/api/auth/user/${info.token}`, {
+    
+    fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -26,23 +26,24 @@ function Navbar(props){
         })
         .then(res => res.json())
         .then(response => {
-            if(response !== "Invalid Token") {
-                setUser(response)
-            }
+                if (response.length != 0) {
+                    setSignOut(<li><a onClick={logOut}>Log out</a></li>)
+                    if (response.admin === 1) {
+                        setCurrentUser(<li className="currentUser"><a href="/admin">Signed in as: {response.email}</a></li>)
+                    } else {
+                        setCurrentUser(<li className="currentUser"><a href="/user">Signed in as: {response.email}</a></li>)
+                    }
+                    
+                    
+                } else {
+                    setSignIn(<li><a href="/SignIn">Sign in</a></li>)
+                    setRegister(<li><a href="/Register">Register</a></li>)
+                    setCurrentUser(<li className="currentUser"><a>Not signed in</a></li>)
+                }
             
-            
-        }).catch(err => console.log(err))  
-    }
+        }) 
+    }, [])
 
-
-    if (user.length != 0) {
-        currentUser = <li className="currentUser"><a href="/user">Signed in as: {user}</a></li>
-    
-    } else {
-        signIn = <li><a href="/SignIn">Sign in</a></li>
-        register = <li><a href="/Register">Register</a></li>
-        currentUser = <li className="currentUser"><a>Not signed in</a></li>
-    }
 
     return(
         <>
@@ -54,13 +55,18 @@ function Navbar(props){
             {signIn}
             {register}
             <li><a href="/About">About</a></li>
+            {signOut}
             {currentUser}
         </ul>
-       
         </div>
         </>
     )
 }
 
+function logOut() {
+    const getToken = localStorage.getItem("auth-token")
+    localStorage.removeItem("auth-token", getToken)
+    window.location.reload()
+}
 
 export default Navbar

@@ -1,11 +1,8 @@
 import React from "react"
-import Navbar from "./Navbar"
-import Footer from "./Footer"
 
 function Register() {
     return(
         <div>
-            <Navbar/>
             <div className="account">
             <form name = "register">
                 <label>Email</label><br></br>
@@ -20,7 +17,6 @@ function Register() {
                 <input type="password" name="password"></input><br></br><br></br>
             </form>
             <button onClick={sendRegister}>Register</button>
-            <Footer/>
             </div>
         </div>
     )
@@ -50,20 +46,16 @@ function sendRegister() {
     })
     .then(res => res.text())
     .then(response => {
-        console.log(response);
-
-
-        if(response === "Registered Successfully"){
-            validateRegister(email, password);
+        if (response === "Registered Successfully"){
+            validateRegister(email, password)
             
         }else{
-            console.log(response);
+            console.log(response)
         }
             
 
     }) 
-   
-       
+     
         
 }
 
@@ -82,12 +74,10 @@ function validateRegister(email, password) {
     })
     .then(res => res.json())
     .then(response => {
-        console.log(response);
         localStorage.setItem("auth-token", response.authToken)
-        window.location.href = "/";
+        window.location.href = "/"
     })
 }
 
 
 export default Register
-

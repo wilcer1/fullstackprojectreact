@@ -1,11 +1,8 @@
 import React from "react"
-import Navbar from "./Navbar"
-import Footer from "./Footer"
 
 function SignIn() {
     return(
         <div>
-            <Navbar/>
             <div className="account">
                 <form name = "signIn">
                     <label>Email</label><br></br>
@@ -13,9 +10,9 @@ function SignIn() {
                     <label>Password</label><br></br>
                     <input type="password" name="password"></input>
                 </form>
+                <br></br>
                 <button onClick={validateSignIn}>Log in</button>
             </div>
-            <Footer/>
         </div>
     )
 }
@@ -27,7 +24,7 @@ function validateSignIn() {
         email: email,
         password: password
     }
-    
+
     fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
@@ -37,15 +34,16 @@ function validateSignIn() {
     })
     .then(res => res.json())
     .then(response => {
-        console.log(response);
         if (response.authToken) {
             localStorage.setItem("auth-token", response.authToken)
-            window.location.href = "/";
+            window.location.href = "/"
         } else {
             alert(response)
         }
     })
+
 }
+
 
 
 export default SignIn

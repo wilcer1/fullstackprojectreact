@@ -1,5 +1,4 @@
 import React from "react"
-import Navbar from "./Navbar"
 import { useEffect } from "react"
 import { useState } from "react"
 import MovieDescription from "./MovieDescription"
@@ -106,7 +105,6 @@ function CinemaRoom(props){
     }
     return(
         <div>
-        <Navbar/>
         <div className="booking">
         <h1 style={{color: "white"}}>Booking</h1>
         <MovieDescription/>
