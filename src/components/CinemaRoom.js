@@ -2,6 +2,7 @@ import React from "react"
 import { useEffect } from "react"
 import { useState } from "react"
 import MovieDescription from "./MovieDescription"
+import "../CinemaRoom.css"
 
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
@@ -12,7 +13,6 @@ function CinemaRoom(props){
         fetch("http://localhost:5000/api/seats/2000-01-01")
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             setDataTable(res)
         })
     }, [])
@@ -105,9 +105,24 @@ function CinemaRoom(props){
     }
     return(
         <div>
-        <div className="booking">
+        {/* <div class="header">
+        <h1>Header</h1>
+        <p>Resize the browser window to see the responsive effect.</p>
+      </div>
+      
+      <div class="topnav">
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+      </div> */}
+      
+      <div class="row">
+        <div class="column side">
+            <MovieDescription/>
+        </div>
+        
+        <div class="column middle">
         <h1 style={{color: "white"}}>Booking</h1>
-        <MovieDescription/>
         <div className="seats">
             <div className="movieScreen">Screen</div>
         <table id="CinemaRoom">
@@ -137,7 +152,12 @@ function CinemaRoom(props){
         </div>
         </div>
         </div>
+        
+        <div class="column side">
+            <MovieDescription/>
         </div>
+      </div>
+      </div>
     )
 }
 

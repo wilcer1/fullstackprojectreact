@@ -37,27 +37,7 @@ h3
   text-align: center;
   font-style: italic;
 }
-table#CinemaRoom{
-  border: 2px solid black;
-  margin: 2rem auto;
-  max-width: 900px;
-  border: hidden;
-}
-table#CinemaRoom td{
-  border: hidden;
-  padding: 0
-}
-table#CinemaRoom button{
-  width: 60px;
-  height: 60px;
-  background-color: greenyellow;
-}
-table#CinemaRoom caption{
-color: white;
-}
-table#CinemaRoom button:hover{
-  opacity: 90%
-}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -87,19 +67,21 @@ div#navbar{
   top: 0;
   z-index: 1;
 }
-div#bookTickets{
-  text-align: center;
+.currentUser {
+  position: absolute;
+  right: 10px;
 }
-div#bookTickets button{
-  background-image: linear-gradient(to right, rgb(209, 26, 26), rgb(88, 6, 6));
-  color: white;
-  border: 1px solid white;
-  border-radius: 10%;
-  padding: 10px;
-  font-size: larger;
-  outline: 3px dashed white;
-  outline-offset: 3px;
+
+@media screen and (max-width: 800px) {
+  li {
+    float: none;
+  }
+  .currentUser {
+    position: static;
+    right: default;
+  }
 }
+
 html {
   background-image: url("./media/fullstack.png");
 }
@@ -131,10 +113,6 @@ div#movies button{
     outline: 3px dashed white;
     outline-offset: 3px;
 }
-.currentUser {
-  position: absolute;
-  right: 10px;
-}
 
 div#homepage h1{
   color: white;
@@ -160,35 +138,6 @@ div#homepage img{
   padding-left: 30px;
   padding-right: 30px;
 }
-
-.movieDescription img, video {
-  width: 400px;
-}
-
-.movieDescription {
-  color: white;
-}
-
-#CinemaRoom button{
-  border-radius: 20px
-}
-
-.movieScreen{
-  color: black;
-  background-color: white;
-  text-align: center;
-  border: 2px solid white;
-  margin: auto;
-  width: 450px;
-  border-radius: 10px;
-  font-weight: bold;
-}
-.booking {
-  float: left;
-}
-
-
-
 /* Slideshow */
 
 .slideshow {
