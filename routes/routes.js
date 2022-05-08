@@ -203,21 +203,20 @@ router.get("/seats/:date", (req, res, next) => {
             seats.push(element);
         });
         try{ 
-            seats.map(seat => {
-            bookedSeats.map(bookedSeat => {
-                if(seat.SeatId === bookedSeat.Seats_Seatid){
-                    seat.booked = true;
-                }else {seat.booked = false};
-            });
-        
-
-        });
+           for(let seat of seats){
+               seat.booked = false;
+               for(let asshole of bookedSeats){
+                   if(seat.SeatId === asshole.Seats_Seatid){
+                       seat.booked = true;
+                   }
+               }
+           }
     }catch(err){
         next(ApiError.internal("Whoops, internal error"));
         return;
     }
+    res.json(seats)
 
-        res.json(seats)
     });
 
     
