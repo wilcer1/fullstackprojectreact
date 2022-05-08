@@ -20,10 +20,12 @@ function Admin() {
         })
         .then(res => res.json())
         .then(response => {
-            if(response !== "Invalid Token") {
+            if(response !== "Invalid Token" && response !== "") {
                 if (response.admin !== 1) {
                     window.location.href = "/user"
             } 
+            } else {
+                window.location.href = "/"
             }
             
             
