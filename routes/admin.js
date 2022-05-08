@@ -5,7 +5,7 @@ const apiError = require("../error/ApiError");
 
 
 
-router.post("/addmovie", (req, res, next) => {
+router.post("/addMovie", (req, res, next) => {
     const token = req.body.token;
     try{
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
@@ -15,7 +15,7 @@ router.post("/addmovie", (req, res, next) => {
     }
 
     db.query("INSERT INTO Movie VALUES((MovieId), ?, ?, ?, ?, ?, ?, ?)",
-    [req.body.moviename, req.body.description, req.body.director, req.body.releasedate, req.body.actors, req.body.poster, req.body.trailer],
+    [req.body.movieName, req.body.description, req.body.director, req.body.releaseDate, req.body.actors, req.body.poster, req.body.trailer],
     (err, result) => {
         if(err){
             next(apiError.badRequest("insert failed"));
@@ -23,7 +23,7 @@ router.post("/addmovie", (req, res, next) => {
               
                 
         }
-        res.sendStatus(201);
+        res.send("Movie Added");
              
            
             
@@ -62,6 +62,7 @@ router.patch("/updMovie", (req, res, next) => {
     db.query(`UPDATE Movie SET ${req.body.column} = "${req.body.updValue}" WHERE MovieId = ${req.body.movieId}`, 
     (err, result) => {
         if(err) {
+            console.log(err);
             next(apiError.badRequest("Update failed"));
             return;
         }
