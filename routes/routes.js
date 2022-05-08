@@ -205,8 +205,8 @@ router.get("/seats/:date", (req, res, next) => {
         try{ 
            for(let seat of seats){
                seat.booked = false;
-               for(let asshole of bookedSeats){
-                   if(seat.SeatId === asshole.Seats_Seatid){
+               for(let bseat of bookedSeats){
+                   if(seat.SeatId === bseat.Seats_Seatid){
                        seat.booked = true;
                    }
                }
