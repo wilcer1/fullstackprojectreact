@@ -24,9 +24,8 @@ function User() {
             if (response.admin === 1) {
                 window.location.href = "/admin"
             } 
-            if(response !== "Invalid Token") {
-            } 
-            fetch(`http://localhost:5000/api/user/${response.email}`, {
+            if(response !== "Invalid Token" && response !== "") {
+                fetch(`http://localhost:5000/api/user/${response.email}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -37,10 +36,12 @@ function User() {
             .then(response => {
                 setUser(response[0])
             }) 
+            } else {
+                window.location.href = "/"
+           }
+            
         })
-   } else {
-        window.location.href = "/"
-   }
+   } 
 }, [])
             
 
