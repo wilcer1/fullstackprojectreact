@@ -90,7 +90,6 @@ router.get("/user/:token", (req, res, next) => {
 
 
 router.get("/userstatus/:token", (req, res, next) => {
-    let admin;
     // return user based on token
     let decoded;
     const token = req.params.token;
@@ -104,7 +103,6 @@ router.get("/userstatus/:token", (req, res, next) => {
     }
     db.query(`select admin from User where Email = "${decoded.email}";`,
             async (err, result) => {
-                admin = result;
                 if(result.length === 0){
                     next(ApiError.badRequest("Email does not exist"));
                     return;
