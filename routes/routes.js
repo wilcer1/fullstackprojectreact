@@ -139,6 +139,43 @@ router.post("/addbooking", (req, res, next) => {
 
 });
 
+router.get("/seats", (req, res) => {
+    db.query("SELECT * FROM Seats",
+    (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+
+        res.json(result);
+
+
+
+    });
+
+
+});
+
+// create 10 rows, 100 seats (only works if Seats and seat_booked empty)
+router.post("/createseats", (req, res) => {
+    var x = 0;
+    for(let i = 1; i <= 10; i++){
+        for(let c = 1; c <= 10; c++){
+            x++;
+            db.query("INSERT INTO Seats VALUES (?, ?)", 
+            [x, i], 
+            (err, result) =>{
+                if (err){
+                    console.log(err);
+                }
+
+
+                
+            })
+            
+        }
+    }
+    res.send("hello world")
+});
 
     
     
