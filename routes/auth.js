@@ -80,7 +80,7 @@ router.get("/user/:token", (req, res, next) => {
     const token = req.params.token;
     try{decoded = jwt.verify(token, process.env.SECRET_KEY);}
     catch(err){
-        next(ApiError.badRequest(""));
+        next(ApiError.badRequest("Invalid Token"));
         return;
 
     }
@@ -88,27 +88,9 @@ router.get("/user/:token", (req, res, next) => {
     res.json(decoded.email);
 });
 
-router.get("/userstatus/:email", (req, res, next) => {
-    // check if user is admin
-    const email = req.params.email;
-    db.query(`select Admin from User where Email = "${email}";`,
-        async (err, result) => {
-            if(result.length === 0){
-                next(ApiError.badRequest("Invalid Token"));
-                return;
 
-            }
-            
-
-            res.json(result);
-
-        }
-    )
-});
-
-
-router.get("/user1/:token", (req, res, next) => {
-    let admin
+router.get("/userstatus/:token", (req, res, next) => {
+    let admin;
     // return user based on token
     let decoded;
     const token = req.params.token;
@@ -116,15 +98,15 @@ router.get("/user1/:token", (req, res, next) => {
         
     }
     catch(err){
-        next(ApiError.badRequest(""));
+        next(ApiError.badRequest("Invalid Token"));
         return;
 
     }
     db.query(`select admin from User where Email = "${decoded.email}";`,
             async (err, result) => {
-                admin = result
+                admin = result;
                 if(result.length === 0){
-                    next(ApiError.badRequest("Invalid Token"));
+                    next(ApiError.badRequest("Email does not exist"));
                     return;
 
                 }
@@ -135,5 +117,8 @@ router.get("/user1/:token", (req, res, next) => {
     
     
 });
+
+
+
 
 module.exports = router;

@@ -2,6 +2,7 @@ import React from "react"
 import { useEffect } from "react"
 import { useState } from "react"
 import MovieDescription from "./MovieDescription"
+import "../CinemaRoom.css"
 
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
@@ -9,7 +10,7 @@ function CinemaRoom(props){
     const [email, setEmail] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/1001/seats/")
+        fetch("http://localhost:5000/api/seats/2000-01-01")
         .then(res => res.json())
         .then(res => {
             setDataTable(res)
@@ -17,11 +18,11 @@ function CinemaRoom(props){
     }, [])
 
     useEffect(() => {
-        fetch ("http://localhost:5000/api/1001/rows")
+        fetch ("http://localhost:5000/api/rows")
         .then(res => res.json())
         .then(res => {
             const rows = []
-            for (let i = 0; i <= res[0].numOfRows; i++){
+            for (let i = 0; i <= res; i++){
                 rows.push(i)
             }
             setRows(rows)
@@ -35,13 +36,13 @@ function CinemaRoom(props){
             const info = {
             token: getToken
         }
-        fetch("http://localhost:5000/api/auth/user", {
-            method: "POST",
+
+        fetch(`http://localhost:5000/api/auth/user/${getToken}`, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 'Accept': 'application/json'
-            },
-            body: JSON.stringify(info)
+            }
         })
         .then(res => res.json())
         .then(response => {
@@ -76,17 +77,16 @@ function CinemaRoom(props){
         }
         if(!(bookedSeats.length == 0)){
             //Booking number, seatId, cinemaroom_id, movie_id, email, row_id
-            console.log(bookedSeats);
-            bookedSeats.map(seat => {
-                const details = {
-                    bookingNumber: "351652",
-                    seatId: seat,
-                    cinemaRoomId: "1001",
-                    movieId: window.location.href.split("/")[4],
-                    email: email
+            console.log("booked Seats" + bookedSeats);
+                bookedSeats.map(seat => {
+                    const details = {
+                        seatId: seat,
+                        movieId: window.location.href.split("/")[4],
+                        email: email,
+                        date: "2000-01-01"
                 }
                 
-                fetch("http://localhost:5000/api/booking/reg", {
+                fetch("http://localhost:5000/api/addbooking", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -105,9 +105,24 @@ function CinemaRoom(props){
     }
     return(
         <div>
-        <div className="booking">
+        {/* <div class="header">
+        <h1>Header</h1>
+        <p>Resize the browser window to see the responsive effect.</p>
+      </div>
+      
+      <div class="topnav">
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+      </div> */}
+      
+      <div class="row">
+        <div class="column side">
+            <MovieDescription/>
+        </div>
+        
+        <div class="column middle">
         <h1 style={{color: "white"}}>Booking</h1>
-        <MovieDescription/>
         <div className="seats">
             <div className="movieScreen">Screen</div>
         <table id="CinemaRoom">
@@ -122,8 +137,8 @@ function CinemaRoom(props){
                     <td>
                         <button
                             id={item.SeatId}
-                            style={item.Booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"}}
-                            onClick={() => test(item.SeatId, item.Booked)}
+                            style={item.booked ? {backgroundColor: "red"} : {backgroundColor: "yellowgreen"}}
+                            onClick={() => test(item.SeatId, item.booked)}
                         >{item.SeatId}
                         </button>
                     </td>
@@ -137,7 +152,12 @@ function CinemaRoom(props){
         </div>
         </div>
         </div>
+        
+        <div class="column side">
+            <MovieDescription/>
         </div>
+      </div>
+      </div>
     )
 }
 

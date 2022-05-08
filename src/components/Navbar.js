@@ -16,7 +16,7 @@ function Navbar(){
     }
 
     
-    fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
+    fetch(`http://localhost:5000/api/auth/userstatus/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ function Navbar(){
         })
         .then(res => res.json())
         .then(response => {
-                if (response.length != 0) {
+                if (response !== "Email does not exist" && response !== "Invalid Token") {
                     setSignOut(<li><a onClick={logOut}>Log out</a></li>)
                     if (response.admin === 1) {
                         setCurrentUser(<li className="currentUser"><a href="/admin">Signed in as: {response.email}</a></li>)

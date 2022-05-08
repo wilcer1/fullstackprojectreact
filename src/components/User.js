@@ -12,7 +12,7 @@ function User() {
         token: getToken
         }
 
-    fetch(`http://localhost:5000/api/auth/user1/${info.token}`, {
+    fetch(`http://localhost:5000/api/auth/userstatus/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
