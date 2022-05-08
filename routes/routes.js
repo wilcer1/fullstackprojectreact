@@ -177,7 +177,7 @@ router.post("/createseats", (req, res) => {
     res.send("Created");
 });
 
-router.get("/bookedseats/:date", (req, res, next) => {
+router.get("/seats/:date", (req, res, next) => {
     const bookedSeats = [];
     const seats = [];
     db.query(`SELECT Seats_Seatid FROM seat_booked WHERE Date LIKE "${req.params.date}%"`,
@@ -224,6 +224,20 @@ router.get("/bookedseats/:date", (req, res, next) => {
     
     
 
+
+})
+
+
+router.get("/rows", (req, res, next) => {
+    db.query("SELECT MAX(SeatRow) AS seatrow FROM Seats", 
+    (err, result) => {
+        if(err){
+            next(ApiError.internal("Whoopsie, Something went wrong"));
+            return;
+        };
+        res.json(result[0].seatrow);   
+
+    });
 
 })
 
