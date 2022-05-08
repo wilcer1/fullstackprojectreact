@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const db = require("../config/db.config");
-
+const ApiError = require("../error/ApiError");
 
 router.get("/users", (req, res) => {
     db.query("select * from User;",
@@ -174,8 +174,58 @@ router.post("/createseats", (req, res) => {
             
         }
     }
-    res.send("hello world")
+    res.send("Created");
 });
+
+router.get("/bookedseats/:date", (req, res, next) => {
+    const bookedSeats = [];
+    const seats = [];
+    db.query(`SELECT Seats_Seatid FROM seat_booked WHERE Date LIKE "${req.params.date}%"`,
+    (err, result) => {
+        if(err){
+            next(ApiError.internal("Whoops, internal error"));
+            return;
+        }
+        result = JSON.parse(JSON.stringify(result))
+        result.forEach(element => {
+            bookedSeats.push(element);
+        });
+
+    });
+
+    db.query("SELECT * FROM Seats", 
+    (err, result) => {
+        if(err){
+            next(ApiError.internal("Whoops, internal error"));
+            return;
+        }
+        result = JSON.parse(JSON.stringify(result))
+        result.forEach(element => {
+            seats.push(element);
+        });
+        try{ 
+            seats.map(seat => {
+            bookedSeats.map(bookedSeat => {
+                if(seat.SeatId === bookedSeat.Seats_Seatid){
+                    seat.booked = true;
+                }else {seat.booked = false};
+            });
+        
+
+        });
+    }catch(err){
+        next(ApiError.internal("Whoops, internal error"));
+        return;
+    }
+
+        res.json(seats)
+    });
+
+    
+    
+
+
+})
 
     
     
