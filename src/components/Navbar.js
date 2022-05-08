@@ -66,7 +66,7 @@ function Navbar(){
 function logOut() {
     const getToken = localStorage.getItem("auth-token")
     localStorage.removeItem("auth-token", getToken)
-    window.location.reload()
+    window.location.href = "/"
 }
 
 export default Navbar
