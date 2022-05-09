@@ -89,7 +89,7 @@ router.get("/booking/:bookingnumber", (req, res) => {
 router.post("/addbooking", (req, res, next) => {
     // for booking table
     const movieId = req.body.movieId;
-
+    
     const email = req.body.email;
 
     // for seat_booked table
@@ -98,9 +98,11 @@ router.post("/addbooking", (req, res, next) => {
 
     const seatId = req.body.seatId;
     
+    const time = req.body.time; // time format : 1600 (for 16:00)
+    
 
-    db.query(`INSERT INTO Booking VALUES((BookingNumber), ?, ?)`,
-        [movieId, email],
+    db.query(`INSERT INTO Booking VALUES((BookingNumber), ?)`,
+        [email],
         (err, result) => {
         if(err){
             
@@ -117,8 +119,8 @@ router.post("/addbooking", (req, res, next) => {
                 next(ApiError.internal("Something went wrong"));
                 return;
             }
-            db.query(`INSERT INTO seat_booked VALUES(?, ?, ?)`,
-                [date, seatId,  result[result.length - 1].BookingNumber],
+            db.query(`INSERT INTO seat_booked VALUES(?, ?, ?, ?, ?)`,
+                [date, seatId,  result[result.length - 1].BookingNumber, movieId, time],
                     (err, c) => {
                         if(err){
                             next(ApiError.internal("Something went wrong"));
