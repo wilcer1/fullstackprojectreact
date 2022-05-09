@@ -1,31 +1,33 @@
-table, th, td {
+  .admin table, th, td {
     border: 1px solid;
   }
   
-  th {
+  .admin th {
     text-align: left;
 
   }
   
-  td {
+  .admin td {
     text-align: left;
     width: 100%;
   }
   
-  tr, td {
+  .admin tr, td {
     background-color:rgb(52, 29, 89);
     color: white;
     
   
   }
-  .addMovie td{
+  .admin.addMovie td{
     width: 80%;
   }
-  .addMovie button{
+  .admin.addMovie button{
     width: 100%;
   }
 
-  button{
+  .adminbutton{
     background-color: aqua;
     height: 40px
   }
+
+  
