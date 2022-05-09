@@ -68,7 +68,7 @@ function Navbar(){
 function logOut() {
     const getToken = localStorage.getItem("auth-token")
     localStorage.removeItem("auth-token", getToken)
-    window.location.href = "/"
+    window.location.href = "/signIn"
 }
 
 

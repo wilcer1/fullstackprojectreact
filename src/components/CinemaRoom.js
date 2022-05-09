@@ -53,7 +53,7 @@ function CinemaRoom(props){
             
         })
     } else {
-        alert("You need to login, you fucking boomer")
+        window.location.href = "/signIn"
     }
     }, [])
 
@@ -68,7 +68,21 @@ function CinemaRoom(props){
         }
     }
     const booking = () => {
-        const bookedSeats = []
+        let token = localStorage.getItem("auth-token");
+        if(token){
+        fetch(`http://localhost:5000/api/auth/user/${token}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        }).then(res => res.json())
+        .then(response => {
+            if(response === "Invalid Token"){
+                alert("Please Log in")
+                window.location.href = "/signIn";
+            }else{
+                const bookedSeats = []
         for (let i = 1; i <= dataTable.length; i++){
             const button = document.getElementById(`${i}`)
             if (button.style.backgroundColor == "aqua"){
@@ -101,6 +115,14 @@ function CinemaRoom(props){
             alert(`Booked seats ${bookedSeats}`)
         }else{
             alert("No seats booked")
+            
+        }
+
+            }
+
+        })
+        }else {
+            window.location.href = "/signIn"
         }
     }
     return(
