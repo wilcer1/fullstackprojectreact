@@ -10,7 +10,7 @@ function CinemaRoom(props){
     const [email, setEmail] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/seats/2000-01-01")
+        fetch(`http://localhost:5000/api/seats/${window.location.href.split("/")[5]}`)
         .then(res => res.json())
         .then(res => {
             setDataTable(res)
