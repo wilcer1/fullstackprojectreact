@@ -18,6 +18,7 @@ import CinemaRoom from './components/CinemaRoom'
 import About from "./components/About"
 import Movies from "./components/Movies"
 import Admin from "./components/Admin"
+import Screenings from './components/Screenings';
 
 import User from "./components/User"
 // Import ContactUs component
@@ -45,6 +46,8 @@ function App() {
         <Route exact path="/" component={Home} />
           
         <Route path="/CinemaRoom" component={CinemaRoom} />
+        
+        <Route path="/Screenings" component={Screenings} />
 
         <Route path="/SignIn" component={SignIn} />
 

@@ -1,11 +1,9 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
-import { useHistory } from "react-router-dom"
 
   
 function Movies(){
-    const history = useHistory()
     const [movies, setMovies] = useState([])
 
     useEffect(() => {
@@ -28,7 +26,7 @@ function Movies(){
     }, [window.location.hash])
 
     const booking = (id) => {
-        window.location.href = `/CinemaRoom/${id}`
+        window.location.href = `/Screenings/${id}`
     }
 
   return (
@@ -45,9 +43,7 @@ function Movies(){
                 <p>Actors: {movie.Actors}</p>
                 <p>Release Date: {movie.ReleaseDate}</p><br></br>
             </p>
-            <div className="movieDates">
-              <h2 onClick={() => {booking(movie.MovieId)}}>Hello</h2>
-            </div>
+            <button onClick={() => {booking(movie.MovieId)}}>Book Tickets</button>
             <hr></hr>
 
           </div>
