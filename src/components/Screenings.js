@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
+import MovieDescription from "./MovieDescription"
 import "../Screenings.css"
 
 function Screenings(){
@@ -27,13 +28,31 @@ function Screenings(){
     }
 
     return (
+        
         <div className="screenings">
+                <div className="column side">
+                    <MovieDescription/>
+                </div>
+                <div className="column middle">
+                    <h1>Screenings</h1>
+            <table>
+                <th>
             {screenings.map( screening => (
+                <tr>
+                <td>
                 <h2 onClick={() => {booking(screening.ScreeningId)}}>
                     {screening.Date} at {`${screening.Time.substr(0,2)}:${screening.Time.substr(2,3)}`}
                 </h2>
+                </td>
+                </tr>
             )
             )}
+            </th>
+            </table>
+            </div>
+                <div className="column side">
+                    <MovieDescription/>
+                </div>
         </div>
     )
 
