@@ -53,7 +53,7 @@ function CinemaRoom(props){
             
         })
     } else {
-        window.location.href = "/signIn"
+        window.location.href = "/SignIn"
     }
     }, [])
 
@@ -114,15 +114,7 @@ function CinemaRoom(props){
             })
             alert(`Booked seats ${bookedSeats}`)
         }else{
-            alert("No seats booked")
-            
-        }
-
-            }
-
-        })
-        }else {
-            window.location.href = "/signIn"
+            window.location.href = "/SignIn"
         }
     }
     return(
