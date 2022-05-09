@@ -42,7 +42,7 @@ function Admin() {
 }, [])
 
 return(
-    <div>
+    <div className="admin">
         <UpdateMovie token={getToken}/>
         <AddMovie token={getToken}/>
     </div>

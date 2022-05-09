@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
+import "../User.css"
 
 function User() {
     const [user, setUser] = useState([])
