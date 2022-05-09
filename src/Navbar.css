@@ -23,7 +23,7 @@
  }
  nav {
     position: absolute;
-    background:linear-gradient(90deg, Red, Orange, Yellow, Green, Blue, Indigo,violet);
+    background:linear-gradient(90deg, Red, Orange, Yellow, Green, Blue, Indigo,violet);;
     top:30px;
     left:0;
     width: 100%;
@@ -60,7 +60,10 @@
     transition: all 0.5s;
  }
  
- @media (min-width: 768px) {
+ @media (min-width: 800px) {
+   header {
+      height: 70px;
+   }
     .menu h1{
         padding-left: 10px;
     }
