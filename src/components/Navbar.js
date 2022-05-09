@@ -38,14 +38,12 @@ function Navbar(){
                     } else {
                         setCurrentUser(<li className="currentUser"><a href="/user">Signed in as: {response.email}</a></li>)
                     }
-                    
-                    
                 } 
-            
+                else {
+                    logOut()
+                }
         }) }
-        
-       
-        
+
     }, [])
 
 
