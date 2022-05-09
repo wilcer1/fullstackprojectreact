@@ -28,8 +28,7 @@ function Movies(){
     }, [window.location.hash])
 
     const booking = (id) => {
-        history.push(`/CinemaRoom/${id}`)
-        window.location.reload()
+        window.location.href = `/CinemaRoom/${id}`
     }
 
   return (
@@ -46,9 +45,9 @@ function Movies(){
                 <p>Actors: {movie.Actors}</p>
                 <p>Release Date: {movie.ReleaseDate}</p><br></br>
             </p>
-            
-            <button id={movie.MovieId} onClick={() => {booking(movie.MovieId)}}>Book Tickets</button>
-            <p className="bookingButton"></p>
+            <div className="movieDates">
+              <h2 onClick={() => {booking(movie.MovieId)}}>Hello</h2>
+            </div>
             <hr></hr>
 
           </div>
