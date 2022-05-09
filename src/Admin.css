@@ -1,0 +1,31 @@
+table, th, td {
+    border: 1px solid;
+  }
+  
+  th {
+    text-align: left;
+
+  }
+  
+  td {
+    text-align: left;
+    width: 100%;
+  }
+  
+  tr, td {
+    background-color:rgb(52, 29, 89);
+    color: white;
+    
+  
+  }
+  .addMovie td{
+    width: 80%;
+  }
+  .addMovie button{
+    width: 100%;
+  }
+
+  button{
+    background-color: aqua;
+    height: 40px
+  }

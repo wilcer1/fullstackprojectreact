@@ -1,6 +1,9 @@
 import React from "react"
+import "../Admin.css"
 import { useState } from "react"
 import { useEffect } from "react"
+import UpdateMovie from "./UpdateMovie"
+import AddMovie from "./AddMovie"
 
 function Admin() {
     const getToken = localStorage.getItem("auth-token")
@@ -33,20 +36,18 @@ function Admin() {
         })
     } else {
         window.location.href = "/"
-    }
+}
 
 
 }, [])
-    
 
-      
+return(
+    <div>
+        <UpdateMovie token={getToken}/>
+        <AddMovie token={getToken}/>
+    </div>
+)
 
-
-    return(
-        <div>
-
-        </div>
-    )
 }
 
 
