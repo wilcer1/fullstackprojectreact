@@ -184,7 +184,7 @@ router.get("/seats/:screeningid", (req, res, next) => {
             next(ApiError.internal("Whoops, internal error"));
             return;
         }
-        result = JSON.parse(JSON.stringify(result))
+        result = JSON.parse(JSON.stringify(result));
         result.forEach(element => {
             bookedSeats.push(element);
         });
