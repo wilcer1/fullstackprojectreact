@@ -8,9 +8,10 @@ function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
     const [email, setEmail] = useState([])
+    const screeningId = window.location.href.split("/")[5]
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/seats/${window.location.href.split("/")[5]}`)
+        fetch(`http://localhost:5000/api/seats/${screeningId}`)
         .then(res => res.json())
         .then(res => {
             setDataTable(res)
@@ -95,10 +96,8 @@ function CinemaRoom(props){
                 bookedSeats.map(seat => {
                     const details = {
                         seatId: seat,
-                        movieId: window.location.href.split("/")[4],
+                        screeningId: screeningId,
                         email: email,
-                        date: "2000-01-01",
-                        time: "1600"
                 }
                 
                 fetch("http://localhost:5000/api/addbooking", {
@@ -125,18 +124,7 @@ function CinemaRoom(props){
     
     return(
         <div>
-        {/* <div class="header">
-        <h1>Header</h1>
-        <p>Resize the browser window to see the responsive effect.</p>
-      </div>
-      
-      <div class="topnav">
-        <a href="#">Link</a>
-        <a href="#">Link</a>
-        <a href="#">Link</a>
-      </div> */}
-      
-      <div class="row">
+        <div class="row">
         <div class="column side">
             <MovieDescription/>
         </div>
