@@ -12,8 +12,8 @@ router.get("/screenings/:movieid", (req, res, next) => {
             next(ApiError.badRequest("Movie does not exist"));
             return;
         }
-        result = JSON.parse(JSON.stringify(result[0]))
-        result.Date = result.Date.slice(0, 10)
+        result = JSON.parse(JSON.stringify(result))
+        result[0].Date = result[0].Date.slice(0, 10)
         res.json(result);
 
     })
