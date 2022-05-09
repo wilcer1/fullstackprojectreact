@@ -5,7 +5,7 @@ const ApiError = require("../error/ApiError");
 
 // return date and time of screening for specific movie
 router.get("/screenings/:movieid", (req, res, next) => {
-    db.query(`SELECT Date, Time FROM seat_booked WHERE MovieId = ${req.params.movieid}`,
+    db.query(`SELECT Date, Time, ScreeningId FROM Screening WHERE Movie_MovieId = ${req.params.movieid}`,
     (err, result) => {
         if(err){
             console.log(err);

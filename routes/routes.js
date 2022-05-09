@@ -88,17 +88,13 @@ router.get("/booking/:bookingnumber", (req, res) => {
 //make one booking....
 router.post("/addbooking", (req, res, next) => {
     // for booking table
-    const movieId = req.body.movieId;
+    const screeningid = req.body.screeningId;
     
     const email = req.body.email;
 
     // for seat_booked table
-
-    const date = req.body.date;
-
     const seatId = req.body.seatId;
     
-    const time = req.body.time; // time format : 1600 (for 16:00)
     
 
     db.query(`INSERT INTO Booking VALUES((BookingNumber), ?)`,
@@ -119,10 +115,11 @@ router.post("/addbooking", (req, res, next) => {
                 next(ApiError.internal("Something went wrong"));
                 return;
             }
-            db.query(`INSERT INTO seat_booked VALUES(?, ?, ?, ?, ?)`,
-                [date, seatId,  result[result.length - 1].BookingNumber, movieId, time],
+            db.query(`INSERT INTO seat_booked VALUES(?, ?, ?)`,
+                [seatId,  result[result.length - 1].BookingNumber, screeningid],
                     (err, c) => {
                         if(err){
+                            console.log(err);
                             next(ApiError.internal("Something went wrong"));
                             return;
                         }
@@ -178,10 +175,10 @@ router.post("/createseats", (req, res) => {
     res.send("Created");
 });
 
-router.get("/seats/:date", (req, res, next) => {
+router.get("/seats/:screeningid", (req, res, next) => {
     const bookedSeats = [];
     const seats = [];
-    db.query(`SELECT Seats_Seatid FROM seat_booked WHERE Date LIKE "${req.params.date}%"`,
+    db.query(`SELECT Seats_Seatid FROM seat_booked WHERE Screening_ScreeningId = ${req.params.screeningid}`,
     (err, result) => {
         if(err){
             next(ApiError.internal("Whoops, internal error"));
