@@ -3,9 +3,9 @@ const db = require("../config/db.config");
 const ApiError = require("../error/ApiError");
 
 
-// return date and time of screening for specific movie
+// return date and time of screening for specific movie  WHERE Movie_MovieId = ${req.params.movieid}
 router.get("/screenings/:movieid", (req, res, next) => {
-    db.query(`SELECT Date, Time, ScreeningId FROM Screening WHERE Movie_MovieId = ${req.params.movieid}`,
+    db.query(`SELECT Date, Time, ScreeningId FROM Screening`,
     (err, result) => {
         if(err){
             console.log(err);
@@ -14,6 +14,7 @@ router.get("/screenings/:movieid", (req, res, next) => {
         }
         result = JSON.parse(JSON.stringify(result))
         result[0].Date = result[0].Date.slice(0, 10)
+        console.log(typeof(result));
         res.json(result);
 
     })
