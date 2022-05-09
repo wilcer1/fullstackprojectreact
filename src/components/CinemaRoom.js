@@ -97,7 +97,8 @@ function CinemaRoom(props){
                         seatId: seat,
                         movieId: window.location.href.split("/")[4],
                         email: email,
-                        date: "2000-01-01"
+                        date: "2000-01-01",
+                        time: "1600"
                 }
                 
                 fetch("http://localhost:5000/api/addbooking", {
@@ -116,7 +117,12 @@ function CinemaRoom(props){
         }else{
             window.location.href = "/SignIn"
         }
+        }
+    })
+}
+        
     }
+    
     return(
         <div>
         {/* <div class="header">
