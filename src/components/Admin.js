@@ -4,6 +4,9 @@ import { useState } from "react"
 import { useEffect } from "react"
 import UpdateMovie from "./UpdateMovie"
 import AddMovie from "./AddMovie"
+import "@progress/kendo-theme-material/dist/all.css";
+import "hammerjs";
+import Bar from "./charts/Bar";
 
 function Admin() {
     const getToken = localStorage.getItem("auth-token")
@@ -45,6 +48,7 @@ return(
     <div className="admin">
         <UpdateMovie token={getToken}/>
         <AddMovie token={getToken}/>
+        <Bar />
     </div>
 )
 
