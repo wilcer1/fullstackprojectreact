@@ -51,6 +51,19 @@ router.get("/bookings/:email", (req, res) => {
 
 });
 
+router.get("/screening/:screeningId", (req, res) => {
+    db.query(`SELECT * FROM Screening WHERE ScreeningId = ${req.params.screeningId}`,
+    // SHOW COLUMNS FROM Booking
+        (err, result) => {
+            if(err){
+                console.log(err);
+                res.status(400);
+            }
+            res.send(result);
+        });
+
+});
+
 
 
 

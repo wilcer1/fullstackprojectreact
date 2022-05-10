@@ -101,8 +101,6 @@ function CinemaRoom(props){
                 })
                 .then(res => res.json())
                 .then(response => {
-                    console.log("booked Seats" + bookedSeats);
-                    console.log(response[0]);
                     const bookingNumber = response[0].count + 1
                     alert(bookingNumber)
 
@@ -122,8 +120,7 @@ function CinemaRoom(props){
                         body: JSON.stringify(details)
                     })
                     .then(response => {
-                        // window.location.reload()
-                        window.location.href = "/BookingInfo"
+                        window.location.href = `/BookingInfo/${screeningId}`
                     })
 
                 })
