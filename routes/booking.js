@@ -51,4 +51,7 @@ router.get("/bookings/:email", (req, res) => {
 
 });
 
+
+
+
 module.exports = router;
