@@ -50,7 +50,8 @@ function Home(){
   return (
     <div>
       <div id="homepage">
-      <h1>Top 3 movies right now!</h1>  
+      
+      <h2 class= "rainbowText">Top 3 movies right now!</h2>  
 
     </div>
     <div className="slideshow">

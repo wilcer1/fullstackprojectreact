@@ -90,13 +90,9 @@ div#movies button{
     outline-offset: 3px;
 }
 
-div#homepage h1{
-  color: white;
+div#homepage h2{
   text-align: center;
   padding-top: 70px;
-  font-family: 'Allerta Stencil';font-size: 22px;
-  
-
 }
 
 div#showcase{
@@ -123,7 +119,6 @@ div#homepage img{
 }
 
 .slideshowSlider {
-  
   white-space: nowrap;
   transition: ease 1000ms;
 }
@@ -136,7 +131,6 @@ div#homepage img{
 
 .slide {
   display: inline-block;
-
   height: 400px;
   width: 100%;
   border-radius: 40px;
@@ -157,12 +151,10 @@ div#homepage img{
   cursor: pointer;
   margin: 15px 7px 0px;
   background-color: #265aca;
-  
 }
 
 .slideshowDot.active {
   background-color: #971919;
-
 }
 .userInfo {
   margin-top: 100px;
@@ -274,7 +266,7 @@ height:100%;
 	margin-top:70px;
 	margin-left:40px;
 }
-#descriptionStyle {
+.description {
   padding-left: 35%;
   padding-right: 35%;
   
@@ -283,3 +275,24 @@ height:100%;
 .bookingButton {
   padding-bottom: 20px;
 }
+
+.rainbowText {
+  font-family:arial black;
+  font-size:40px;
+  background-image: 
+    linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+  background-clip: text;
+  -webkit-text-fill-color: transparent;  
+  animation: move 35s linear infinite;
+}
+
+@keyframes move {
+	to {
+		background-position: 1500vh;
+	}
+}
+
+.about {
+  margin-top: 100px;
+}
+
