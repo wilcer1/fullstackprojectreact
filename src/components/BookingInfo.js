@@ -6,6 +6,7 @@ import "../BookingInfo.css"
 function BookingInfo(){
     const [email, setEmail] = useState([])
     const [bookedSeats, setBookedSeats] = useState([])
+    const [date, setDate] = useState([])
     const [screening, setScreening] = useState([])
     const screeningId = window.location.href.split("/")[4]
 
@@ -63,10 +64,8 @@ function BookingInfo(){
             })
             .then(res => res.json())
             .then(response => {
-                {   
-                    setScreening(response[0])
-                }
-            
+                setScreening(response[0])
+                setDate(response[0].Date.substring(0,10))
         
     })
         
@@ -82,7 +81,7 @@ function BookingInfo(){
             <h3>{seat.Seats_SeatId}</h3>
         ))}
             <h2>
-                Date: {screening.Date} <br></br>
+                Date: {date} <br></br>
                 Time: {screening.Time}
             
             </h2>
