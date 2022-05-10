@@ -64,7 +64,7 @@ function BookingInfo(){
             })
             .then(res => res.json())
             .then(response => {
-                setScreening(response[0])
+                setScreening(response[0].Time.substring(0,2) + ":" + response[0].Time.substring(2,4))
                 setDate(response[0].Date.substring(0,10))
         
     })
@@ -75,14 +75,15 @@ function BookingInfo(){
     return (
         <div className="bookingInfo">
             <h1>Booked Tickets</h1>
-
+            <br></br>
             <h2>Your booked Seats are:</h2>
             {bookedSeats.map(seat => (
             <h3>{seat.Seats_SeatId}</h3>
         ))}
             <h2>
+                <br></br>
                 Date: {date} <br></br>
-                Time: {screening.Time}
+                Time: {screening}
             
             </h2>
         </div>
