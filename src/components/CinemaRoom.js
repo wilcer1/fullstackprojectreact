@@ -92,27 +92,41 @@ function CinemaRoom(props){
         }
         if(!(bookedSeats.length == 0)){
             //Booking number, seatId, cinemaroom_id, movie_id, email, row_id
-            console.log("booked Seats" + bookedSeats);
-                bookedSeats.map(seat => {
-                    const details = {
-                        seatId: seat,
-                        screeningId: screeningId,
-                        email: email,
-                }
-                
-                fetch("http://localhost:5000/api/addbooking", {
-                    method: "POST",
+            fetch("http://localhost:5000/api/bookingCount", {
+                    method: "GET",
                     headers: {
                         "Content-Type": "application/json",
                         'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(details)
+                    }
                 })
+                .then(res => res.json())
                 .then(response => {
-                    window.location.reload()
+                    console.log("booked Seats" + bookedSeats);
+                    console.log(response[0]);
+                    const bookingNumber = response[0].count + 1
+                    alert(bookingNumber)
+
+                        const details = {
+                            bookedSeats: bookedSeats,
+                            screeningId: screeningId,
+                            email: email,
+                            bookingNumber: bookingNumber
+                    }
+                    
+                    fetch("http://localhost:5000/api/addbooking", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(details)
+                    })
+                    .then(response => {
+                        // window.location.reload()
+                        window.location.href = "/BookingInfo"
+                    })
+
                 })
-            })
-            alert(`Booked seats ${bookedSeats}`)
         }else{
             window.location.href = "/SignIn"
         }

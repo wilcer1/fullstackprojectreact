@@ -8,7 +8,7 @@ import {
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
+} from "react-router-dom"
 
 
 import Register from "./components/Register"
@@ -18,7 +18,8 @@ import CinemaRoom from './components/CinemaRoom'
 import About from "./components/About"
 import Movies from "./components/Movies"
 import Admin from "./components/Admin"
-import Screenings from './components/Screenings';
+import Screenings from './components/Screenings'
+import BookingInfo from './components/BookingInfo'
 
 import User from "./components/User"
 // Import ContactUs component
@@ -49,6 +50,8 @@ function App() {
         
         <Route path="/Screenings" component={Screenings} />
 
+        <Route path="/BookingInfo" component={BookingInfo} />
+
         <Route path="/SignIn" component={SignIn} />
 
         <Route path="/Movies" component={Movies} />
@@ -72,4 +75,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

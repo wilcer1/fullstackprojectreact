@@ -22,4 +22,33 @@ router.get("/screenings/:movieid", (req, res, next) => {
 
 })
 
+router.get("/bookings/:email", (req, res) => {
+    db.query(`SELECT BookingNumber from Booking WHERE User_Email = "${req.params.email}"`,
+    (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        result = JSON.parse(JSON.stringify(result[result.length-1]))
+        console.log(result);
+
+        db.query(`SELECT Seats_SeatId from seat_booked WHERE Booking_BookingNumber = "${result.BookingNumber}"`,
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(result);
+            res.json(result);
+    
+    
+    
+        });
+
+
+
+    });
+    
+
+
+});
+
 module.exports = router;

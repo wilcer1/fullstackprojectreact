@@ -60,7 +60,8 @@ router.get("/movie/:id", (req, res) => {
 
 //get all bookings....
 router.get("/booking", (req, res) => {
-    db.query(`select * from Booking;`,
+    db.query(`SELECT * FROM Booking`,
+    // SHOW COLUMNS FROM Booking
         (err, result) => {
             if(err){
                 console.log(err);
@@ -85,6 +86,19 @@ router.get("/booking/:bookingnumber", (req, res) => {
 
 });
 
+
+router.get("/bookingCount", (req, res) => {
+    db.query(`SELECT IFNULL(MAX(BookingNumber), 1) AS count FROM Booking`,
+        (err, result) => {
+            if(err){
+                console.log(err);
+                res.status(400);
+            }
+            res.json(result);
+        });
+
+});
+
 //make one booking....
 router.post("/addbooking", (req, res, next) => {
     // for booking table
@@ -92,48 +106,49 @@ router.post("/addbooking", (req, res, next) => {
     
     const email = req.body.email;
 
-    // for seat_booked table
-    const seatId = req.body.seatId;
-    
-    
+    const bookingNumber = req.body.bookingNumber
 
-    db.query(`INSERT INTO Booking VALUES((BookingNumber), ?)`,
-        [email],
+    // for seat_booked table
+    const bookedSeats = req.body.bookedSeats;
+
+    bookedSeats.map(seat => {
+    db.query(`SELECT COUNT(BookingNumber) AS count FROM Booking WHERE BookingNumber ="${bookingNumber}"`,
+    (err, result) => {
+    if(err){
+
+        console.log(err);
+        next(ApiError.internal("Something went wrong"));
+        return;
+    }
+    result = JSON.parse(JSON.stringify(result[0]));
+
+    if (result.count === 0){
+        db.query(`INSERT INTO Booking VALUES(?, ?)`,
+        [bookingNumber, email],
         (err, result) => {
         if(err){
             
             next(ApiError.internal("Something went wrong"));
             return;
-           
         }
         
     });
-    
-    db.query(`SELECT BookingNumber from Booking WHERE User_Email = "${email}"`,
-        (err, result) => {  
-            if(err){
-                next(ApiError.internal("Something went wrong"));
-                return;
-            }
-            db.query(`INSERT INTO seat_booked VALUES(?, ?, ?)`,
-                [seatId,  result[result.length - 1].BookingNumber, screeningid],
-                    (err, c) => {
-                        if(err){
-                            console.log(err);
-                            next(ApiError.internal("Something went wrong"));
-                            return;
-                        }
-    
-                        res.send("Success");
-        });
-        
-        });
+    }
 
-   
+    db.query(`INSERT INTO seat_booked VALUES(?, ?, ?)`,
+        [seat, bookingNumber, screeningid],
+            (err, c) => {
+                if(err){
+                    console.log(err);
+                    next(ApiError.internal("Something went wrong"));
+                    return;
+                }
+            });
 
     
-        
-        
+        });
+    })
+    res.send("Success");
 
 });
 
@@ -152,6 +167,8 @@ router.get("/seats", (req, res) => {
 
 
 });
+
+
 
 // create 10 rows, 100 seats (only works if Seats and seat_booked empty)
 router.post("/createseats", (req, res) => {
