@@ -7,7 +7,7 @@ import {
   } from "@progress/kendo-react-charts";
   import { COLORS } from "../../constants";
   import "hammerjs";
-  
+
   // Graph data
   const series = [];
   
@@ -38,7 +38,7 @@ import {
       style: "percent",
       minimumFractionDigits: 2,
     });
-    return `${props.dataItem.category} Bookings Percentage: ${formatedNumber}`;
+    return `${props.dataItem.category} Bookings Percentage: ${formatedNumber}, `;
   };
   
   const ChartContainer = () => (
