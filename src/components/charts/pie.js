@@ -9,41 +9,41 @@ import {
   import "hammerjs";
   
   // Graph data
-  const series = [
-    {
-      category: "Movie 1",
-      value: 0.2545,
-    },
-    {
-      category: "Movie 2",
-      value: 0.1552,
-    },
-    {
-      category: "Movie 3",
-      value: 0.4059,
-    },
-    {
-      category: "Movie 4",
-      value: 0.0911,
-    },
-    {
-      category: "Movie 5",
-      value: 0.0933,
-    },
-  ];
-  series.push({category: "movie 3", value: 10})
+  const series = [];
+  
+  fetch("http://localhost:5000/api/admin/statistics", {
+      method:"GET",
+      headers:{
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      }
+  })
+  .then(res => res.json())
+  .then(response => {
+    var total = 0;
+    response.forEach(element => {
+      total += element.Total;
+      
+    });
+
+
+    response.map((element) => {
+      series.push({"category": element.Name, "value": element.Total / total })
+      
+    })
+  })
   
   const labelContent = (props) => {
     let formatedNumber = Number(props.dataItem.value).toLocaleString(undefined, {
       style: "percent",
       minimumFractionDigits: 2,
     });
-    return `${props.dataItem.category} years old: ${formatedNumber}`;
+    return `${props.dataItem.category} Bookings Percentage: ${formatedNumber}`;
   };
   
   const ChartContainer = () => (
     <Chart>
-      <ChartTitle text="World Population by Broad Age Groups" />
+      <ChartTitle text="Movie Percentages of total bookings" />
       <ChartLegend position="bottom" />
       <ChartSeries>
         <ChartSeriesItem

@@ -6,7 +6,7 @@ import UpdateMovie from "./UpdateMovie"
 import AddMovie from "./AddMovie"
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
-import ChartContainer from "./charts/Bar";
+import ChartContainer from "./charts/pie";
 
 function Admin() {
     const getToken = localStorage.getItem("auth-token")
