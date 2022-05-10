@@ -22,4 +22,7 @@ router.get("/screenings/:movieid", (req, res, next) => {
 
 })
 
+
+
+
 module.exports = router;

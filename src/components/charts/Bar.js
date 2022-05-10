@@ -1,79 +1,62 @@
 import {
-    Chart,
-    ChartTitle,
-    ChartLegend,
-    ChartSeries,
-    ChartSeriesItem,
-    ChartCategoryAxis,
-    ChartCategoryAxisTitle,
-    ChartCategoryAxisItem,
+  Chart,
+  ChartLegend,
+  ChartSeries,
+  ChartSeriesItem,
+  ChartTitle,
   } from "@progress/kendo-react-charts";
   import { COLORS } from "../../constants";
+  import "hammerjs";
   
   // Graph data
   const series = [
     {
-      status: "Total",
-      data: [43, 30, 59],
-      color: COLORS.total,
+      category: "Movie 1",
+      value: 0.2545,
     },
     {
-      status: "Pending",
-      data: [25, 15, 30],
-      color: COLORS.pending,
+      category: "Movie 2",
+      value: 0.1552,
     },
     {
-      status: "Interviewed",
-      data: [3, 5, 1],
-      color: COLORS.interviewed,
+      category: "Movie 3",
+      value: 0.4059,
     },
     {
-      status: "Rejected",
-      data: [14, 10, 25],
-      color: COLORS.rejected,
+      category: "Movie 4",
+      value: 0.0911,
     },
     {
-      status: "Accepted",
-      data: [1, 3, 2],
-      color: COLORS.accepted,
+      category: "Movie 5",
+      value: 0.0933,
     },
   ];
+  series.push({category: "movie 3", value: 10})
   
-  const categories = ["Jan", "Feb", "Mar"];
-  
-  const seriesLabels = {
-    visible: true,
-    padding: 3,
-    font: "normal 16px Arial, sans-serif",
-    position: "center",
+  const labelContent = (props) => {
+    let formatedNumber = Number(props.dataItem.value).toLocaleString(undefined, {
+      style: "percent",
+      minimumFractionDigits: 2,
+    });
+    return `${props.dataItem.category} years old: ${formatedNumber}`;
   };
   
-  const Bar = props => {
-    return (
-      <Chart>
-        <ChartTitle text="Applications status - last 3 months" />
-        <ChartLegend visible={true} />
-        <ChartCategoryAxis>
-          <ChartCategoryAxisItem categories={categories}>
-            <ChartCategoryAxisTitle text="Months" />
-          </ChartCategoryAxisItem>
-        </ChartCategoryAxis>
-        <ChartSeries>
-          {series.map((item, idx) => (
-            <ChartSeriesItem
-              key={idx}
-              type="bar"
-              gap={2}
-              spacing={0.25}
-              labels={seriesLabels}
-              data={item.data}
-              name={item.status}
-              color={item.color}
-            />
-          ))}
-        </ChartSeries>
-      </Chart>
-    );
-  };
-  
-  export default Bar;
+  const ChartContainer = () => (
+    <Chart>
+      <ChartTitle text="World Population by Broad Age Groups" />
+      <ChartLegend position="bottom" />
+      <ChartSeries>
+        <ChartSeriesItem
+          type="pie"
+          data={series}
+          field="value"
+          categoryField="category"
+          labels={{
+            visible: true,
+            content: labelContent,
+          }}
+        />
+      </ChartSeries>
+    </Chart>
+  );
+  export default ChartContainer;

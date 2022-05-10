@@ -82,6 +82,20 @@ router.patch("/updMovie", (req, res, next) => {
 });
 
 
+router.get("/statistics", (req, res, next) => {
+    db.query("SELECT Seats_SeatId, Movie_MovieId, MovieName, ScreeningId FROM seat_booked INNER JOIN Screening ON Screening_ScreeningId = ScreeningId INNER JOIN Movie on Movie_MovieId = MovieId", //COUNT(Seats_SeatId)
+    (err, result) => {
+        if(err){
+            console.log(err);
+            next(apiError.internal("Whoopsie, the query sucks"));
+            return;
+        }
+        res.json(result)
+    })
+
+})
+
+
 
 
 
