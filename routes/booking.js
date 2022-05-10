@@ -64,6 +64,28 @@ router.get("/screening/:screeningId", (req, res) => {
 
 });
 
+router.delete("/delScreening", (req, res, next) => {
+    const date = req.body.date;
+    db.query("DELETE FROM seat_booked WHERE Screening_ScreeningId in (SELECT ScreeningId FROM Screening WHERE Date between '2009-01-01' and curdate())",
+
+    (err, result)=>{
+        if(err){
+            console.log(err);
+            next(ApiError.badRequest("No Screening on this date"));
+            return;
+        }
+        db.query(`DELETE from Screening where Date between '2001-01-01' and curdate()`,
+        (err, result)=>{
+            if(err){
+                console.log(err);
+                next(ApiError.badRequest("No Screening on this date"));
+                return;
+            }
+        
+        
+    })     
+    })
+})
 
 
 

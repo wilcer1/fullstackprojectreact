@@ -256,6 +256,18 @@ router.get("/rows", (req, res, next) => {
 
 })
 
+router.get("/screeningdates", (req, res, next) => {
+    db.query("SELECT Date, Time FROM Screening",
+    (err, result) => {
+        if(err){
+            next(ApiError.badRequest("Select Failed"));
+            return;
+        }
+        res.json(result);
+    })
+
+})
+
     
     
 

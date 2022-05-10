@@ -7,6 +7,7 @@ function Movies(){
     const [movies, setMovies] = useState([])
 
     useEffect(() => {
+      movieExpired();
         fetch("http://localhost:5000/api/movie")
         .then(res => res.json())
         .then(response => {
@@ -53,5 +54,50 @@ function Movies(){
     </div>
   );
 };
-  
+
+//check if date is past or future
+function isInThePast(date) {
+  const today = new Date();
+
+  return date < today;
+}
+
+//check if screenings have happened and delete them if they have
+function movieExpired(){
+  var dateTime = new Date();
+  var day = ("0" + dateTime.getDate()).slice(-2);
+  var month = ("0" + (dateTime.getMonth() + 1)).slice(-2);
+  var year = dateTime.getFullYear();
+  fetch("http://localhost:5000/api/screeningdates", {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          'Accept': 'application/json'
+        }
+      })
+  .then(res => res.json())
+  .then(response => {
+    response.forEach(element => {
+      element.Date = element.Date.slice(0, 10);
+      if(isInThePast(new Date(element.Date))){
+        
+        fetch("http://localhost:5000/api/booking/delScreening", {
+          method: "DELETE",
+          headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json'
+            }
+          
+          })
+          .then(res => res.text())
+          .then(response => {
+            console.log(response);
+          })
+      }
+    });
+    
+   
+
+  })
+}
 export default Movies;
