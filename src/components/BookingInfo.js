@@ -1,10 +1,13 @@
 import React from "react"
 import { useEffect } from "react"
 import { useState } from "react"
+import "../BookingInfo.css"
 
 function BookingInfo(){
     const [email, setEmail] = useState([])
     const [bookedSeats, setBookedSeats] = useState([])
+    const [screening, setScreening] = useState([])
+    const screeningId = window.location.href.split("/")[4]
 
     useEffect(() => {
         const getToken = localStorage.getItem("auth-token")
@@ -35,7 +38,7 @@ function BookingInfo(){
                 .then(res => res.json())
                 .then(response => {
                     {
-                        console.log(response);
+                        setBookedSeats(response)
                         
                     }
                 
@@ -50,9 +53,39 @@ function BookingInfo(){
     }
     }, [])
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/api/booking/screening/${screeningId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Accept': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(response => {
+                {   
+                    setScreening(response[0])
+                }
+            
+        
+    })
+        
+
+    }, [])
+
     return (
-        <div>
-            <h1>Hello</h1>
+        <div className="bookingInfo">
+            <h1>Booked Tickets</h1>
+
+            <h2>Your booked Seats are:</h2>
+            {bookedSeats.map(seat => (
+            <h3>{seat.Seats_SeatId}</h3>
+        ))}
+            <h2>
+                Date: {screening.Date} <br></br>
+                Time: {screening.Time}
+            
+            </h2>
         </div>
     )
 }
