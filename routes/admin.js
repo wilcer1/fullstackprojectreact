@@ -38,10 +38,19 @@ router.delete("/delMovie", (req, res, next) => {
         next(apiError.badRequest("Invalid Token"));
         return;
     }
+        db.query(`DELETE FROM Screening WHERE Movie_MovieId = ${req.body.movieId}`, 
+    (err, result) => {
+        if(err) {
+            console.log(err);
+            next(apiError.badRequest("Delete failed"));
+            return;
+        }
+    });
 
     db.query(`DELETE FROM Movie WHERE MovieId = ${req.body.movieId}`, 
     (err, result) => {
         if(err) {
+            console.log(err);
             next(apiError.badRequest("Delete failed"));
             return;
         }
