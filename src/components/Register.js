@@ -1,10 +1,12 @@
 import React from "react"
+import ReactDOM from "react-dom/client"
 
 function Register() {
     return(
         <div>
             <div className="account">
             <form name = "register">
+                <p id="error"></p><br></br>
                 <label>Email</label><br></br>
                 <input type="email" name="email"></input><br></br><br></br>
                 <label>First name</label><br></br>
@@ -50,7 +52,9 @@ function sendRegister() {
             validateRegister(email, password)
             
         }else{
-            console.log(response)
+            const error = <p>{response}</p>
+            const currentError = ReactDOM.createRoot(document.getElementById('error'))
+            currentError.render(error)
         }
             
 

@@ -1,10 +1,12 @@
 import React from "react"
+import ReactDOM from "react-dom/client"
 
 function SignIn() {
     return(
         <div>
             <div className="account">
                 <form name = "signIn">
+                    <p id="error"></p><br></br>
                     <label>Email</label><br></br>
                     <input type="email" name="email"></input><br></br><br></br>
                     <label>Password</label><br></br>
@@ -38,7 +40,9 @@ function validateSignIn() {
             localStorage.setItem("auth-token", response.authToken)
             window.location.href = "/"
         } else {
-            alert(response)
+            const error = <p>"{response}"</p>
+            const currentError = ReactDOM.createRoot(document.getElementById('error'))
+            currentError.render(error)
         }
     })
 
