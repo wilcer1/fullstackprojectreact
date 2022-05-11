@@ -38,15 +38,34 @@ router.delete("/delMovie", (req, res, next) => {
         next(apiError.badRequest("Invalid Token"));
         return;
     }
-
-    db.query(`DELETE FROM Movie WHERE MovieId = ${req.body.movieId}`, 
-    (err, result) => {
-        if(err) {
-            next(apiError.badRequest("Delete failed"));
-            return;
-        }
-        res.send(`Movie Deleted`);
+    db.query(`DELETE FROM seat_booked WHERE ${req.body.movieId}`,
+        (err, result) =>{
+            if(err) {
+                console.log(err);
+                next(apiError.badRequest("Delete failed"));
+                return;
+            }
+            db.query(`DELETE FROM Screening WHERE Movie_MovieId = ${req.body.movieId}`, 
+            (err, result) => {
+            if(err) {
+                console.log(err);
+                next(apiError.badRequest("Delete failed"));
+                return;
+            }
+                db.query(`DELETE FROM Movie WHERE MovieId = ${req.body.movieId}`, 
+                (err, result) => {
+                    if(err) {
+                        console.log(err);
+                        next(apiError.badRequest("Delete failed"));
+                        return;
+                    }
+                    res.send(`Movie Deleted`);
+            });
     });
+        })
+      
+
+    
 
 });
 
@@ -71,6 +90,20 @@ router.patch("/updMovie", (req, res, next) => {
 
 
 });
+
+
+router.get("/statistics", (req, res, next) => {
+    db.query("SELECT COUNT(seat_booked.Seats_SeatId) AS Total, MovieName AS Name FROM seat_booked INNER JOIN Screening ON Screening_ScreeningId = ScreeningId INNER JOIN Movie on MovieId = Movie_MovieId  GROUP BY MovieName", //COUNT(Seats_SeatId)
+    (err, result) => {
+        if(err){
+            console.log(err);
+            next(apiError.internal("Whoopsie, the query sucks"));
+            return;
+        }
+        res.json(result)
+    })
+
+})
 
 
 
