@@ -32,17 +32,17 @@ function Movies(){
   return (
     <div>
       <div id="movies">
-      <h1>Movies</h1>
+      <h1>The current movies</h1>
       {movies.map(movie => (
           <div className="moviePresentation" id={movie.MovieId}>
             <br></br>
             <img src={movie.Poster}></img>
-            <h2 class="rainbowText">{movie.MovieName}</h2><br></br>
+            <h1 class="rainbowText">{movie.MovieName}</h1><br></br>
             <video src={movie.Trailer} controls></video><br></br>
-            <p id="descriptionStyle">{movie.Description}</p><br></br>
-            <p id="descriptionStyle"><strong>Director: </strong>{movie.Director}</p><br></br>
-            <p id="descriptionStyle"><strong>Actors: </strong>{movie.Actors}</p><br></br>
-            <p id="descriptionStyle"><strong>Release Date: </strong>{movie.ReleaseDate}</p><br></br>
+            <p>{movie.Description}</p><br></br>
+            <p><strong>Director: </strong>{movie.Director}</p><br></br>
+            <p><strong>Actors: </strong>{movie.Actors}</p><br></br>
+            <p><strong>Release Date: </strong>{movie.ReleaseDate}</p><br></br>
             <button onClick={() => {booking(movie.MovieId)}}>Book Tickets</button>
             <hr></hr>
 

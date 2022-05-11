@@ -42,11 +42,12 @@
     padding: 12px;
     /* Add your custom styles below to change appearance of links */
     color: #0a0a0a;
+    font-weight: bold;
     text-decoration: none;
     letter-spacing: 0.05em;
  }
  nav ul li a:hover, nav ul li a:focus {
-    color: #eb6f4a;
+    color: white;
  }
 .fa.fa-bars.menu-icon{
     color: white;
