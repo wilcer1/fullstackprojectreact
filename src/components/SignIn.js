@@ -3,6 +3,7 @@ import React from "react"
 function SignIn() {
     return(
         <div>
+            <p id="goToSignIn">New to Perfect Movies? <a href="/Register">Create an account</a></p>
             <div className="account">
                 <form name = "signIn">
                     <label>Email</label><br></br>
