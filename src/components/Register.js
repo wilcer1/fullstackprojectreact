@@ -3,6 +3,7 @@ import React from "react"
 function Register() {
     return(
         <div>
+            <p id="goToSignIn">Already have an account? <a href="/SignIn">Sign In</a></p>
             <div className="account">
             <form name = "register">
                 <label>Email</label><br></br>
