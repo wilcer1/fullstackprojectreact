@@ -34,8 +34,6 @@ function addMovie(){
     })
     .then(res => res.text())
     .then(response => {
-        console.log(response);
-        alert(response)
     })
 }
 

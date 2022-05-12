@@ -2,6 +2,7 @@ const router = require("express").Router();
 const db = require("../config/db.config");
 const jwt = require("jsonwebtoken");
 const apiError = require("../error/ApiError");
+const ApiError = require("../error/ApiError");
 
 
 
@@ -102,6 +103,23 @@ router.get("/statistics", (req, res, next) => {
         }
         res.json(result)
     })
+
+})
+
+router.post("/addScreening", (req, res, next) => {
+    db.query("INSERT INTO Screening VALUES((ScreeningId), ?, ? , ?)",
+     [req.body.time, req.body.date, req.body.movieId], 
+     (err, result) => {
+        if(err) {
+            console.log(err);
+            next(ApiError.internal("Something went wrong"));
+            return;
+        }
+        res.send(result);
+
+
+     })
+
 
 })
 

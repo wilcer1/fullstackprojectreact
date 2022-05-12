@@ -80,7 +80,6 @@ function CinemaRoom(props){
         }).then(res => res.json())
         .then(response => {
             if(response === "Invalid Token"){
-                alert("Please Log in")
                 window.location.href = "/signIn";
             }else{
                 const bookedSeats = []
@@ -102,7 +101,6 @@ function CinemaRoom(props){
                 .then(res => res.json())
                 .then(response => {
                     const bookingNumber = response[0].count + 1
-                    alert(bookingNumber)
 
                         const details = {
                             bookedSeats: bookedSeats,
