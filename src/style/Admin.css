@@ -1,0 +1,42 @@
+  .admin table, th, td {
+    border: 1px solid;
+  }
+  
+  .admin th {
+    text-align: left;
+  }
+  
+  .admin td {
+    text-align: left;
+    width: 100%;
+  }
+  
+  .admin td {
+    background-color:rgb(52, 29, 89);
+    color: white;
+  }
+
+  .admin tr {
+    background-color:rgb(52, 29, 89);
+    color: white;
+  }
+
+  .admin.addMovie td{
+    width: 80%;
+  }
+
+  .admin.addMovie button{
+    width: 100%;
+  }
+
+  .adminbutton{
+    background-color: aqua;
+    height: 40px
+  }
+
+  .chart{
+    padding-bottom: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  

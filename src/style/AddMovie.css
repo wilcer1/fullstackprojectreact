@@ -1,15 +1,17 @@
-  .admin table, th, td {
+.admin table{
     border: 1px solid;
   }
   
   .admin th {
     text-align: left;
+    border: 1px solid;
 
   }
   
   .admin td {
     text-align: left;
     width: 100%;
+    border: 1px solid;
   }
   
   .admin td {
@@ -44,4 +46,3 @@
     padding-right: 50px;
 
   }
-  

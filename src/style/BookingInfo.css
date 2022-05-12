@@ -1,0 +1,19 @@
+.bookingInfo h1{
+    color:red;
+    text-align: center;
+  }
+
+.bookingInfo h2{
+    color: white;
+    text-align: center;
+}
+
+.bookingInfo h3{
+    color: white;
+    text-align: center;
+}
+
+.bookingInfo {
+    margin-top: 100px;
+}
+  

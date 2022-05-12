@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
-import "../Admin.css"
+import "../style/UpdateMovie.css"
 
 function UpdateMovie(props){
 const [data, setData] = useState([])

@@ -1,13 +1,16 @@
 .screenings {
     color: white;
 }
+
 .screenings table {
     margin-left: auto;
     margin-right: auto;
 }
+
 .screenings th {
     text-align: center;
 }
+
 .screenings h2{
     cursor: pointer;
 }

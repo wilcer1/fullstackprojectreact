@@ -1,5 +1,5 @@
 import React from "react"
-import "../Admin.css"
+import "../style/Admin.css"
 import { useState } from "react"
 import { useEffect } from "react"
 import UpdateMovie from "./UpdateMovie"
