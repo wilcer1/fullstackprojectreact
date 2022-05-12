@@ -4,6 +4,9 @@ import { useState } from "react"
 import { useEffect } from "react"
 import UpdateMovie from "./UpdateMovie"
 import AddMovie from "./AddMovie"
+import "@progress/kendo-theme-material/dist/all.css";
+import "hammerjs";
+import ChartContainer from "./charts/pie";
 
 function Admin() {
     const getToken = localStorage.getItem("auth-token")
@@ -42,9 +45,12 @@ function Admin() {
 }, [])
 
 return(
-    <div>
+    <div className="admin">
         <UpdateMovie token={getToken}/>
         <AddMovie token={getToken}/>
+        <div className="chart">
+        <ChartContainer />
+        </div>
     </div>
 )
 

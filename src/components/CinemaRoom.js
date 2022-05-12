@@ -8,9 +8,10 @@ function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
     const [email, setEmail] = useState([])
+    const screeningId = window.location.href.split("/")[5]
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/seats/2000-01-01")
+        fetch(`http://localhost:5000/api/seats/${screeningId}`)
         .then(res => res.json())
         .then(res => {
             setDataTable(res)
@@ -68,7 +69,21 @@ function CinemaRoom(props){
         }
     }
     const booking = () => {
-        const bookedSeats = []
+        let token = localStorage.getItem("auth-token");
+        if(token){
+        fetch(`http://localhost:5000/api/auth/user/${token}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        }).then(res => res.json())
+        .then(response => {
+            if(response === "Invalid Token"){
+                alert("Please Log in")
+                window.location.href = "/signIn";
+            }else{
+                const bookedSeats = []
         for (let i = 1; i <= dataTable.length; i++){
             const button = document.getElementById(`${i}`)
             if (button.style.backgroundColor == "aqua"){
@@ -77,46 +92,50 @@ function CinemaRoom(props){
         }
         if(!(bookedSeats.length == 0)){
             //Booking number, seatId, cinemaroom_id, movie_id, email, row_id
-            console.log("booked Seats" + bookedSeats);
-                bookedSeats.map(seat => {
-                    const details = {
-                        seatId: seat,
-                        movieId: window.location.href.split("/")[4],
-                        email: email,
-                        date: "2000-01-01"
-                }
-                
-                fetch("http://localhost:5000/api/addbooking", {
-                    method: "POST",
+            fetch("http://localhost:5000/api/bookingCount", {
+                    method: "GET",
                     headers: {
                         "Content-Type": "application/json",
                         'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(details)
+                    }
                 })
+                .then(res => res.json())
                 .then(response => {
-                    window.location.reload()
+                    const bookingNumber = response[0].count + 1
+                    alert(bookingNumber)
+
+                        const details = {
+                            bookedSeats: bookedSeats,
+                            screeningId: screeningId,
+                            email: email,
+                            bookingNumber: bookingNumber
+                    }
+                    
+                    fetch("http://localhost:5000/api/addbooking", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(details)
+                    })
+                    .then(response => {
+                        window.location.href = `/BookingInfo/${screeningId}`
+                    })
+
                 })
-            })
-            alert(`Booked seats ${bookedSeats}`)
         }else{
             window.location.href = "/SignIn"
         }
+        }
+    })
+}
+        
     }
+    
     return(
         <div>
-        {/* <div class="header">
-        <h1>Header</h1>
-        <p>Resize the browser window to see the responsive effect.</p>
-      </div>
-      
-      <div class="topnav">
-        <a href="#">Link</a>
-        <a href="#">Link</a>
-        <a href="#">Link</a>
-      </div> */}
-      
-      <div class="row">
+        <div class="row">
         <div class="column side">
             <MovieDescription/>
         </div>

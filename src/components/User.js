@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
+import "../User.css"
 
 function User() {
     const [user, setUser] = useState([])
@@ -26,16 +27,16 @@ function User() {
             } 
             if(response !== "Invalid Token" && response !== "") {
                 fetch(`http://localhost:5000/api/user/${response.email}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                'Accept': 'application/json'
-            }
-            })
-            .then(res => res.json())
-            .then(response => {
-                setUser(response[0])
-            }) 
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Accept': 'application/json'
+                    }
+                    })
+                    .then(res => res.json())
+                    .then(response => {
+                        setUser(response[0])
+                    }) 
             } else {
                 window.location.href = "/"
            }
@@ -49,6 +50,7 @@ function User() {
         <div>
             <div className="userInfo">
                 <h2>User information</h2>
+                <br></br>
                 <table className="centerTable">
                 <th>Email</th>
                 <td>{user.Email}</td>

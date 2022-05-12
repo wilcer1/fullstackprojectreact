@@ -16,7 +16,6 @@ useEffect(() => {
     })
     .then(res => res.json())
     .then(response => {
-        console.log(response);
         setData(response)
         
         
@@ -44,12 +43,32 @@ function update(id, header, data){
     })
     .then(res => res.text())
     .then(response => {
-        console.log(response);
         alert(response)
     })
 }
 
+function del(id){
+    
+    const details = {
+        movieId: id,
+        token: props.token
+    }
 
+    fetch("http://localhost:5000/api/admin/delMovie", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(details)
+    })
+    .then(res => res.text())
+    .then(response => {
+        console.log(response);
+        alert(response)
+    })
+
+}
 
 return(
     <div>
@@ -65,9 +84,9 @@ return(
                     </tr>
                 )
             )}
+            <button onClick={() => del(myData.MovieId)}>Delete</button>
             <br></br>
             </table>
-            
           )
           
     )}

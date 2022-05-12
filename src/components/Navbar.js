@@ -35,9 +35,9 @@ function Navbar(){
                 if (response !== "Email does not exist" && response !== "Invalid Token") {
                     setSignOut(<li><a onClick={logOut}>Log out</a></li>)
                     if (response.admin === 1) {
-                        setCurrentUser(<li className="currentUser"><a href="/admin">Signed in as: {response.email}</a></li>)
+                        setCurrentUser(<li className="currentUser"><a href="/Admin">Signed in as: {response.email}</a></li>)
                     } else {
-                        setCurrentUser(<li className="currentUser"><a href="/user">Signed in as: {response.email}</a></li>)
+                        setCurrentUser(<li className="currentUser"><a href="/User">Signed in as: {response.email}</a></li>)
                     }
                 } 
                 else {
@@ -77,7 +77,7 @@ function Navbar(){
 function logOut() {
     const getToken = localStorage.getItem("auth-token")
     localStorage.removeItem("auth-token", getToken)
-    window.location.href = "/"
+    window.location.href = "/signIn"
 }
 
 

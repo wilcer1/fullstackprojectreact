@@ -50,7 +50,9 @@ function Home(){
   return (
     <div>
       <div id="homepage">
-      <h1>Top 3 movies right now!</h1>  
+      <h1 class= "rainbowText">Welcome to Perfect Movies!</h1>
+      <p><strong>Perfect Movies closer to the reality.</strong></p>
+      <h3 class= "rainbowText">Top 3 movies right now!</h3>  
 
     </div>
     <div className="slideshow">
@@ -62,7 +64,7 @@ function Home(){
           <div>
           {movies.map(movie => (
             <div className="slide" key="index">
-              <a href={`http://localhost:3000/Movies#${movie.MovieId}`}>
+              <a href={`/Movies#${movie.MovieId}`}>
                 <img src={movie.Poster}></img>
               </a>
           </div>
@@ -83,7 +85,10 @@ function Home(){
           ></div>
         ))}
       </div>
+
+      
     </div>
+    
   </div>
 
   );

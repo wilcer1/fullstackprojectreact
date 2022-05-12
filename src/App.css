@@ -43,10 +43,10 @@ div#navbar{
   top: 0;
   z-index: 1;
 }
-.currentUser {
+/* .currentUser {
   position: absolute;
   right: 10px;
-}
+} */
 
 @media screen and (max-width: 800px) {
   li {
@@ -74,10 +74,14 @@ div#movies *{
 div#movies img{
   height: 400px;
   width: 300px;
+  margin-bottom: 10px;
+  box-shadow: 5px 10px 8px rgb(0, 0, 0);
 }
 
 div#movies video{
   width: 400px;
+  box-shadow: 5px 10px 8px rgb(0, 0, 0);
+  margin-bottom: 15px;
 }
 div#movies button{
     background-image: linear-gradient(to right, rgb(209, 26, 26), rgb(88, 6, 6));
@@ -86,17 +90,27 @@ div#movies button{
     border-radius: 10%;
     padding: 10px;
     font-size: larger;
-    outline: 3px dashed white;
-    outline-offset: 3px;
+    /* outline: 3px dashed white;
+    outline-offset: 3px; */
 }
 
 div#homepage h1{
-  color: white;
   text-align: center;
-  padding-top: 70px;
-  font-family: 'Allerta Stencil';font-size: 22px;
+  margin-top: 40px;
+}
   
 
+div#homepage h5{
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+div#homepage p{
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: rgb(152, 0, 0);
 }
 
 div#showcase{
@@ -123,7 +137,6 @@ div#homepage img{
 }
 
 .slideshowSlider {
-  
   white-space: nowrap;
   transition: ease 1000ms;
 }
@@ -136,7 +149,6 @@ div#homepage img{
 
 .slide {
   display: inline-block;
-
   height: 400px;
   width: 100%;
   border-radius: 40px;
@@ -157,12 +169,10 @@ div#homepage img{
   cursor: pointer;
   margin: 15px 7px 0px;
   background-color: #265aca;
-  
 }
 
 .slideshowDot.active {
   background-color: #971919;
-
 }
 .userInfo {
   margin-top: 100px;
@@ -227,7 +237,7 @@ section{
 	left:0;
 	position:fixed;
     width: 100%;
-    height: 2em;
+    height: 1em;
     overflow:hidden;
     margin:0 auto;
 	-webkit-transition: all 1s ease;
@@ -274,12 +284,73 @@ height:100%;
 	margin-top:70px;
 	margin-left:40px;
 }
-#descriptionStyle {
+.description {
   padding-left: 35%;
   padding-right: 35%;
   
 }
 
+.moviePresentation p{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 .bookingButton {
   padding-bottom: 20px;
+}
+
+.rainbowText {
+  font-family:arial black;
+  background-image: 
+    linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+  background-clip: text;
+  -webkit-text-fill-color: transparent;  
+  animation: move 35s linear infinite;
+}
+
+@keyframes move {
+	to {
+		background-position: 1500vh;
+	}
+}
+
+.about {
+  margin-top: 100px;
+}
+
+#goToSignIn {
+  margin-top: 30px;
+  padding-right: 30px;
+  text-align: right;
+  color: aqua;
+}
+
+hr {
+  margin-left: auto;
+  margin-right: auto;
+  
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 800px) {
+ .moviePresentation p{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+}
+
+
+.bookingInfo {
+  margin-top: 100px;
 }
