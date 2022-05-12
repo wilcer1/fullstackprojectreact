@@ -18,7 +18,7 @@ function BookingInfo(){
             token: getToken
         }
 
-        fetch(`http://localhost:5000/api/auth/user/${getToken}`, {
+        fetch(`/api/auth/user/${getToken}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -29,7 +29,7 @@ function BookingInfo(){
         .then(response => {
             if(response !== "Invalid Token") {
                 setEmail(response)
-                fetch(`http://localhost:5000/api/booking/bookings/${response}`, {
+                fetch(`/api/booking/bookings/${response}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -55,7 +55,7 @@ function BookingInfo(){
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/booking/screening/${screeningId}`, {
+        fetch(`/api/booking/screening/${screeningId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

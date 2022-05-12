@@ -13,7 +13,7 @@ function User() {
         token: getToken
         }
 
-    fetch(`http://localhost:5000/api/auth/userstatus/${info.token}`, {
+    fetch(`/api/auth/userstatus/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ function User() {
                 window.location.href = "/admin"
             } 
             if(response !== "Invalid Token" && response !== "") {
-                fetch(`http://localhost:5000/api/user/${response.email}`, {
+                fetch(`/api/user/${response.email}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

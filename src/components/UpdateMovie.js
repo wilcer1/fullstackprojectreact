@@ -7,7 +7,7 @@ function UpdateMovie(props){
 const [data, setData] = useState([])
 
 useEffect(() => {
-    fetch(`http://localhost:5000/api/movie`, {
+    fetch(`/api/movie`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function update(id, header, data){
         token: props.token
     }
 
-    fetch("http://localhost:5000/api/admin/updMovie", {
+    fetch("/api/admin/updMovie", {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -54,7 +54,7 @@ function del(id){
         token: props.token
     }
 
-    fetch("http://localhost:5000/api/admin/delMovie", {
+    fetch("/api/admin/delMovie", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",

@@ -40,7 +40,7 @@ function sendRegister() {
         password: password
     }
 
-    fetch("http://localhost:5000/api/auth/register", {
+    fetch("/api/auth/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -70,7 +70,7 @@ function validateRegister(email, password) {
         password: password
     }
     
-    fetch("http://localhost:5000/api/auth/login", {
+    fetch("/api/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

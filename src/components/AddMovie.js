@@ -24,7 +24,7 @@ function addMovie(){
         token: props.token
     }
 
-    fetch("http://localhost:5000/api/admin/addMovie", {
+    fetch("/api/admin/addMovie", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

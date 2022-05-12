@@ -8,7 +8,7 @@ function MovieDescription(props){
     const [movie, setMovie] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/movie/${window.location.href.split("/")[4]}`)
+        fetch(`/api/movie/${window.location.href.split("/")[4]}`)
         .then(res => res.json())
         .then(response => {
             //console.log("response MovieDescription: " + response[0].MovieName);

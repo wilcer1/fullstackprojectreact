@@ -22,7 +22,7 @@ function Navbar(){
 
     else{
     
-    fetch(`http://localhost:5000/api/auth/userstatus/${info.token}`, {
+    fetch(`/api/auth/userstatus/${info.token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

@@ -9,7 +9,7 @@ function Screenings(){
     const movieId = window.location.href.split("/")[4]
     useEffect(() => {
 
-        fetch(`http://localhost:5000/api/booking/screenings/${movieId}`, {
+        fetch(`/api/booking/screenings/${movieId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

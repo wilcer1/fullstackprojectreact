@@ -11,7 +11,7 @@ function CinemaRoom(props){
     const screeningId = window.location.href.split("/")[5]
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/seats/${screeningId}`)
+        fetch(`/api/seats/${screeningId}`)
         .then(res => res.json())
         .then(res => {
             setDataTable(res)
@@ -19,7 +19,7 @@ function CinemaRoom(props){
     }, [])
 
     useEffect(() => {
-        fetch ("http://localhost:5000/api/rows")
+        fetch ("/api/rows")
         .then(res => res.json())
         .then(res => {
             const rows = []
@@ -38,7 +38,7 @@ function CinemaRoom(props){
             token: getToken
         }
 
-        fetch(`http://localhost:5000/api/auth/user/${getToken}`, {
+        fetch(`/api/auth/user/${getToken}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -71,7 +71,7 @@ function CinemaRoom(props){
     const booking = () => {
         let token = localStorage.getItem("auth-token");
         if(token){
-        fetch(`http://localhost:5000/api/auth/user/${token}`, {
+        fetch(`/api/auth/user/${token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function CinemaRoom(props){
         }
         if(!(bookedSeats.length == 0)){
             //Booking number, seatId, cinemaroom_id, movie_id, email, row_id
-            fetch("http://localhost:5000/api/bookingCount", {
+            fetch("/api/bookingCount", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -111,7 +111,7 @@ function CinemaRoom(props){
                             bookingNumber: bookingNumber
                     }
                     
-                    fetch("http://localhost:5000/api/addbooking", {
+                    fetch("/api/addbooking", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

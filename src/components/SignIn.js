@@ -28,7 +28,7 @@ function validateSignIn() {
         password: password
     }
 
-    fetch("http://localhost:5000/api/auth/login", {
+    fetch("/api/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
