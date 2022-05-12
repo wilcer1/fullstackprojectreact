@@ -1,0 +1,13 @@
+.about h3{
+    color: white;
+    text-align: center;
+}
+
+.about h1{
+    color:red;
+    text-align: center;  
+}
+
+.about {
+    margin-top: 100px;
+}
