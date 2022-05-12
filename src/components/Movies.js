@@ -8,7 +8,7 @@ function Movies(){
 
     useEffect(() => {
       movieExpired();
-        fetch("http://localhost:5000/api/movie")
+        fetch("/api/movie")
         .then(res => res.json())
         .then(response => {
             setMovies(response)
@@ -68,7 +68,7 @@ function movieExpired(){
   var day = ("0" + dateTime.getDate()).slice(-2);
   var month = ("0" + (dateTime.getMonth() + 1)).slice(-2);
   var year = dateTime.getFullYear();
-  fetch("http://localhost:5000/api/screeningdates", {
+  fetch("/api/screeningdates", {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
@@ -81,7 +81,7 @@ function movieExpired(){
       element.Date = element.Date.slice(0, 10);
       if(isInThePast(new Date(element.Date))){
         
-        fetch("http://localhost:5000/api/booking/delScreening", {
+        fetch("/api/booking/delScreening", {
           method: "DELETE",
           headers: {
               "Content-Type": "application/json",
