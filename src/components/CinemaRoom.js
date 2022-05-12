@@ -92,7 +92,7 @@ function CinemaRoom(props){
         }
         if(!(bookedSeats.length == 0)){
             //Booking number, seatId, cinemaroom_id, movie_id, email, row_id
-            fetch("/api/bookingCount", {
+            fetch("/api/booking/bookingCount", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -111,7 +111,7 @@ function CinemaRoom(props){
                             bookingNumber: bookingNumber
                     }
                     
-                    fetch("/api/addbooking", {
+                    fetch("/api/booking/addbooking", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
