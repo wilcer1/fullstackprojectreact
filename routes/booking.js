@@ -86,6 +86,101 @@ router.delete("/delScreening", (req, res, next) => {
     })
 })
 
+router.post("/addbooking", (req, res, next) => {
+    // for booking table
+    const screeningid = req.body.screeningId;
+    
+    const email = req.body.email;
+
+    const bookingNumber = req.body.bookingNumber
+
+    // for seat_booked table
+    const bookedSeats = req.body.bookedSeats;
+
+    bookedSeats.map(seat => {
+    db.query(`SELECT COUNT(BookingNumber) AS count FROM Booking WHERE BookingNumber ="${bookingNumber}"`,
+    (err, result) => {
+    if(err){
+
+        console.log(err);
+        next(ApiError.internal("Something went wrong"));
+        return;
+    }
+    result = JSON.parse(JSON.stringify(result[0]));
+
+    if (result.count === 0){
+        db.query(`INSERT INTO Booking VALUES(?, ?)`,
+        [bookingNumber, email],
+        (err, result) => {
+        if(err){
+            
+            next(ApiError.internal("Something went wrong"));
+            return;
+        }
+        
+    });
+    }
+
+    db.query(`INSERT INTO seat_booked VALUES(?, ?, ?)`,
+        [seat, bookingNumber, screeningid],
+            (err, c) => {
+                if(err){
+                    console.log(err);
+                    next(ApiError.internal("Something went wrong"));
+                    return;
+                }
+            });
+
+    
+        });
+    })
+    res.send("Success");
+
+});
+
+router.get("/booking", (req, res, next) => {
+    db.query(`SELECT * FROM Booking`,
+    // SHOW COLUMNS FROM Booking
+        (err, result) => {
+            if(err){
+                console.log(err);
+                next(ApiError.badRequest("Something went wrong"));
+                return;
+            }
+            res.send(result);
+        });
+
+});
+
+
+//get one specific booking....
+router.get("/booking/:bookingnumber", (req, res, next) => {
+    db.query(`select * from seat_booked where Booking_BookingNumber = ${req.params.bookingnumber};`,
+        (err, result) => {
+            if(err){
+                console.log(err);
+                next(ApiError.badRequest("Bookingnumber does not exist"));
+                return;
+            }
+            res.send(result);
+        });
+
+});
+
+
+router.get("/bookingCount", (req, res, next) => {
+    db.query(`SELECT IFNULL(MAX(BookingNumber), 1) AS count FROM Booking`,
+        (err, result) => {
+            if(err){
+                console.log(err);
+                next(ApiError.internal("Something went wrong"));
+                return;
+            }
+            res.json(result);
+        });
+
+});
+
 
 
 module.exports = router;

@@ -2,12 +2,13 @@ const router = require("express").Router();
 const db = require("../config/db.config");
 const ApiError = require("../error/ApiError");
 
-router.get("/users", (req, res) => {
+router.get("/users", (req, res, next) => {
     db.query("select * from User;",
     (err, result) => {
         if (err) {
             console.log(err)
-            res.status(400);
+            next(ApiError.badRequest("Something went wrong"));
+            return;
         }
         res.send(result);
 
@@ -16,14 +17,15 @@ router.get("/users", (req, res) => {
 });
 
 
-router.get("/user/:Email", (req, res) =>{
+router.get("/user/:Email", (req, res, next) =>{
     db.query(`select * from User where Email="${req.params.Email}";`,
 
 
     (err, result) => {
         if (err) {
             console.log(err);
-            res.status(400);
+            next(ApiError.internal("Email does not exist"));
+            return;
         }
        
         res.send(result);
@@ -33,24 +35,26 @@ router.get("/user/:Email", (req, res) =>{
 });
 
 
-router.get("/movie", (req, res) => {
+router.get("/movie", (req, res, next) => {
     db.query(`select * from Movie;`,
         (err, result) => {
             if(err){
                 console.log(err);
-                res.status(400);
+                next(ApiError.badRequest("Something went wrong"));
+                return;
             }
             res.send(result);
         });
 
 });
 
-router.get("/movie/:id", (req, res) => {
+router.get("/movie/:id", (req, res, next) => {
     db.query(`select * from Movie where MovieId = ${req.params.id};`,
         (err, result) => {
             if(err){
                 console.log(err);
-                res.status(400);
+                next(ApiError.internal("ID does not exist"));
+                return;
             }
             res.send(result);
         });
@@ -58,105 +62,13 @@ router.get("/movie/:id", (req, res) => {
 });
 
 
-//get all bookings....
-router.get("/booking", (req, res) => {
-    db.query(`SELECT * FROM Booking`,
-    // SHOW COLUMNS FROM Booking
-        (err, result) => {
-            if(err){
-                console.log(err);
-                res.status(400);
-            }
-            res.send(result);
-        });
-
-});
-
-
-//get one specific booking....
-router.get("/booking/:bookingnumber", (req, res) => {
-    db.query(`select * from seat_booked where Booking_BookingNumber = ${req.params.bookingnumber};`,
-        (err, result) => {
-            if(err){
-                console.log(err);
-                res.status(400);
-            }
-            res.send(result);
-        });
-
-});
-
-
-router.get("/bookingCount", (req, res) => {
-    db.query(`SELECT IFNULL(MAX(BookingNumber), 1) AS count FROM Booking`,
-        (err, result) => {
-            if(err){
-                console.log(err);
-                res.status(400);
-            }
-            res.json(result);
-        });
-
-});
-
-//make one booking....
-router.post("/addbooking", (req, res, next) => {
-    // for booking table
-    const screeningid = req.body.screeningId;
-    
-    const email = req.body.email;
-
-    const bookingNumber = req.body.bookingNumber
-
-    // for seat_booked table
-    const bookedSeats = req.body.bookedSeats;
-
-    bookedSeats.map(seat => {
-    db.query(`SELECT COUNT(BookingNumber) AS count FROM Booking WHERE BookingNumber ="${bookingNumber}"`,
-    (err, result) => {
-    if(err){
-
-        console.log(err);
-        next(ApiError.internal("Something went wrong"));
-        return;
-    }
-    result = JSON.parse(JSON.stringify(result[0]));
-
-    if (result.count === 0){
-        db.query(`INSERT INTO Booking VALUES(?, ?)`,
-        [bookingNumber, email],
-        (err, result) => {
-        if(err){
-            
-            next(ApiError.internal("Something went wrong"));
-            return;
-        }
-        
-    });
-    }
-
-    db.query(`INSERT INTO seat_booked VALUES(?, ?, ?)`,
-        [seat, bookingNumber, screeningid],
-            (err, c) => {
-                if(err){
-                    console.log(err);
-                    next(ApiError.internal("Something went wrong"));
-                    return;
-                }
-            });
-
-    
-        });
-    })
-    res.send("Success");
-
-});
-
-router.get("/seats", (req, res) => {
+router.get("/seats", (req, res, next) => {
     db.query("SELECT * FROM Seats",
     (err, result) => {
         if (err) {
             console.log(err);
+            next(ApiError.internal("Something went wrong"));
+            return;
         }
 
         res.json(result);
@@ -168,10 +80,8 @@ router.get("/seats", (req, res) => {
 
 });
 
-
-
 // create 10 rows, 100 seats (only works if Seats and seat_booked empty)
-router.post("/createseats", (req, res) => {
+router.post("/createseats", (req, res, next) => {
     var x = 0;
     for(let i = 1; i <= 10; i++){
         for(let c = 1; c <= 10; c++){
@@ -181,6 +91,8 @@ router.post("/createseats", (req, res) => {
             (err, result) =>{
                 if (err){
                     console.log(err);
+                    next(ApiError.internal("Something went wrong"));
+                    return;
                 }
 
 
