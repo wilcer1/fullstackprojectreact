@@ -107,6 +107,13 @@ router.get("/statistics", (req, res, next) => {
 })
 
 router.post("/addScreening", (req, res, next) => {
+    const token = req.body.token;
+    try{
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    }catch(err){
+        next(apiError.badRequest("Invalid Token"));
+        return;
+    }
     db.query("INSERT INTO Screening VALUES((ScreeningId), ?, ? , ?)",
      [req.body.time, req.body.date, req.body.movieId], 
      (err, result) => {

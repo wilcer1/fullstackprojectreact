@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import UpdateMovie from "./UpdateMovie"
 import AddMovie from "./AddMovie"
+import AddScreening from "./AddScreening"
 import "@progress/kendo-theme-material/dist/all.css";
 import "hammerjs";
 import ChartContainer from "./charts/pie";
@@ -48,6 +49,7 @@ return(
     <div className="admin">
         <UpdateMovie token={getToken}/>
         <AddMovie token={getToken}/>
+        <AddScreening token={getToken}/>
         <div className="chart">
         <ChartContainer />
         </div>
