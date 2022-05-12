@@ -11,7 +11,7 @@ import {
   // Graph data
   const series = [];
   
-  fetch("http://localhost:5000/api/admin/statistics", {
+  fetch("/api/admin/statistics", {
       method:"GET",
       headers:{
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ import {
           type="pie"
           data={series}
           field="value"
-          categoryField="category"
+          categoryField="category"  
           labels={{
             visible: true,
             content: labelContent,
