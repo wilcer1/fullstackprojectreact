@@ -1,10 +1,11 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+import "../style/Register.css"
 
 function Register() {
     return(
         <div>
-            <p id="goToSignIn">Already have an account? <a href="/SignIn">Sign In</a></p>
+            <p id="goToRegister">Already have an account? <a href="/SignIn">Sign In</a></p>
             <div className="account">
             <form name = "register">
                 <p id="error"></p><br></br>

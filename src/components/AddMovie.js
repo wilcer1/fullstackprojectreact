@@ -1,5 +1,5 @@
 import React from "react"
-import "../Admin.css"
+import "../style/AddMovie.css"
 
 function AddMovie(props){
 

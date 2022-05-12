@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
-import "../Navbar.css"
+import "../style/Navbar.css"
 
 function Navbar(){
     const [signOut, setSignOut] = useState([])

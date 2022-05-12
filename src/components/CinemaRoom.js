@@ -2,7 +2,7 @@ import React from "react"
 import { useEffect } from "react"
 import { useState } from "react"
 import MovieDescription from "./MovieDescription"
-import "../CinemaRoom.css"
+import "../style/CinemaRoom.css"
 
 function CinemaRoom(props){
     const [dataTable, setDataTable] = useState([])
