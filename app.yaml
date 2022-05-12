@@ -1,4 +1,4 @@
-runtime: nodejs16 # or another supported version
+runtime: nodejs16 # or another supported ver6sion
 
 instance_class: F2
 
