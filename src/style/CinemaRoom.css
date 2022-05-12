@@ -12,6 +12,7 @@
   .column {
     float: left;
     padding: 10px;
+    text-align: center;
   }
   
   /* Left and right column */
@@ -37,7 +38,8 @@
     text-align: center;
     border: 2px solid white;
     margin: auto;
-    width: 450px;
+    width: 100%;
+    max-width: 500px;
     border-radius: 10px;
     font-weight: bold;
   }
