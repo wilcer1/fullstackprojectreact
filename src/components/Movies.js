@@ -8,7 +8,7 @@ function Movies(){
 
     useEffect(() => {
       movieExpired();
-        fetch("http://localhost:5000/api/movie")
+        fetch("/api/movie")
         .then(res => res.json())
         .then(response => {
             setMovies(response)
