@@ -60,7 +60,6 @@ function Navbar(){
                             <li><a href="/Movies">Movies</a></li>
                             {signIn}
                             {register}
-                            <li><a href="/About">About</a></li>
                             {signOut}
                             {currentUser}
                         </ul>
