@@ -18,12 +18,12 @@ function Movies(){
 
     useEffect(() => {
       const hash = window.location.hash
-      console.log(hash);
+      console.log(hash.substr(1));
     if (hash != "") {
         // Check if there is a hash
         setTimeout(() => {
           document.getElementById(hash.substr(1)).scrollIntoView({behavior: "smooth"})
-        }, 150)
+        }, 200)
 
     }
     }, [window.location.hash])
