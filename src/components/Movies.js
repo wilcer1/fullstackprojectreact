@@ -18,6 +18,7 @@ function Movies(){
 
     useEffect(() => {
       const hash = window.location.hash
+      alert(hash)
     if (hash != "") {
         // Check if there is a hash
         setTimeout(() => {
