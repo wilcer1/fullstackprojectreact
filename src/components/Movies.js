@@ -23,7 +23,7 @@ function Movies(){
         // Check if there is a hash
         setTimeout(() => {
           document.getElementById(hash.substr(1)).scrollIntoView({behavior: "smooth"})
-        }, 100)
+        }, 150)
 
     }
     }, [window.location.hash])
