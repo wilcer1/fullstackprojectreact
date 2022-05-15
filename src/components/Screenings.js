@@ -2,6 +2,7 @@ import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 import MovieDescription from "./MovieDescription"
+import underscore from "underscore"
 import "../style/Screenings.css"
 
 function Screenings(){
@@ -18,6 +19,8 @@ function Screenings(){
         })
         .then(res => res.json())
         .then(response => {
+            // sort screenings by date and render them in order
+            response = sortDates(response)
             setScreenings(response)
         })
     }, [])
@@ -59,9 +62,9 @@ function Screenings(){
 }
 
 function sortDates(screenings) {
-    screenings.sort()
+    const sortedScreenings = underscore.sortBy(screenings, "Date")
   
-    return date < today;
+    return sortedScreenings;
   }
 
 
