@@ -5,7 +5,7 @@ const { application } = require("express");
 var mysql = require('mysql');
 
 var db = mysql.createConnection({
-  host: "34.88.133.113",
+  host: "34.88.214.145",
   user: "root",
   password: process.env.PASSWORD,
   database: "cinema"
