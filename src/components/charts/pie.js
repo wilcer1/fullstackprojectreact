@@ -5,7 +5,6 @@ import {
   ChartSeriesItem,
   ChartTitle,
   } from "@progress/kendo-react-charts";
-  import { COLORS } from "../../constants";
   import "hammerjs";
 
   // Graph data
