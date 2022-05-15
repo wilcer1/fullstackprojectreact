@@ -58,4 +58,11 @@ function Screenings(){
 
 }
 
+function sortDates(screenings) {
+    screenings.sort()
+  
+    return date < today;
+  }
+
+
 export default Screenings;
