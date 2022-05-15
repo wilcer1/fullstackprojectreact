@@ -5,7 +5,6 @@ import MovieDescription from "./MovieDescription"
 import "../style/CinemaRoom.css"
 
 function CinemaRoom(props){
-    window.location.reload()
     const [dataTable, setDataTable] = useState([])
     const [rows, setRows] = useState([])
     const [email, setEmail] = useState([])
