@@ -113,7 +113,7 @@ router.post("/addbooking", (req, res, next) => {
         [bookingNumber, email],
         (err, result) => {
         if(err){
-            
+            console.log(err);
             next(ApiError.internal("Something went wrong"));
             return;
         }
